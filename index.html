@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>Venue e-Valautor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="grid.css" />
-    <link rel="stylesheet" type="text/css" href="style.css " />
+    <link rel="stylesheet" type="text/css" href="/grid.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css " />
     <link href="https://fonts.googleapis.com/css?family=Kanit|Montserrat|Open+Sans:600|Quicksand|Raleway|Roboto:700" rel="stylesheet">
     <link rel="icon" href="http://www.districtconcerts.com/wp-content/uploads/2015/09/Favicon_1.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,9 @@
         <header role="banner">
             <h1 name="top">Venue e-Valuator</h1>
         </header>
+
         <div class="col-12 searchBox">
+            <!-- PULL-DOWN MENUS OF SEARCH/SORT PARAMETERS TO FIND VENUES -->
             <form action="#" class="newLocation">
                 <label for="newLocation"></label>
                 <input type="text" class="js-query" placeholder=" &nbsp; Type a new location to snap">
@@ -27,9 +29,12 @@
         </div>
         <div class="col-12 listBox">
 
+            <!-- RETURN LIST OF SEARCH RESULTS HERE -->
+
         </div>
         <div class="col-12 resultBox">
 
+            <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
 
         </div>
         <!-- *****MARK***** -->
@@ -134,7 +139,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
     <!-- For getting lat & long from address -->
     <script type="text/javascript " src="https://maps.google.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ"></script>
-    <script src="js.js "></script>
+    <script src="/client.js "></script>
 </body>
 
 </html>
