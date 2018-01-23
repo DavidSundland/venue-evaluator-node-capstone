@@ -1,0 +1,111 @@
+* {
+box-sizing: border-box;
+}
+
+.row {
+max-width: 1400px;
+margin: 0 auto;
+}
+
+/* Clearfix */
+
+.row::before,
+.row::after {
+display: table;
+content: '';
+}
+
+.row::after {
+clear: both;
+}
+
+.col-1-no-mobile,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-5-plus,
+.col-6,
+.col-7,
+.col-8,
+.col-12 {
+float: left;
+
+/* Gutters:
+* Each column is padded by half-a-gutter on each side,
+*
+* Half a gutter is 10px, 10/960 (context) = 1.041666%
+*
+*/
+padding-left: 1.04166666%;
+padding-right: 1.04166666%;
+}
+
+/* Mobile defaults */
+
+.col-1-no-mobile .col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-5-plus,
+.col-6,
+.col-7,
+.col-8,
+.col-12 {
+width: 100%;
+}
+
+.col-1-no-mobile {
+display: none;
+}
+
+
+/* Non-mobile, grid */
+
+@media only screen and (min-width: 640px) {
+.col-1-no-mobile {
+display: inline-block;
+width: 8.33%;
+}
+.col-2 {
+width: 16.66%;
+}
+/* 3 columns, 3/12 in % */
+.col-3 {
+width: 25%;
+}
+
+/* 4 columns */
+.col-4 {
+width: 33.33%;
+}
+
+/* 5 columns */
+.col-5 {
+width: 41.67%;
+}
+/* 5.5 columns */
+.col-5-plus {
+display: inline-block;
+width: 45.83%;
+}
+/* 6 columns */
+.col-6 {
+width: 50%;
+}
+
+/* 7 columns */
+.col-7 {
+width: 58.33%;
+}
+
+/* 8 columns */
+.col-8 {
+width: 66.67%;
+}
+
+/* 12 columns */
+.col-12 {
+width: 100%;
+}
+}

@@ -1,0 +1,412 @@
+/* Color palette - http://paletton.com/#uid=33m0u0krxvNh9H2ml-hvyr3z8lg */
+
+body {
+margin: 140px 2% 0 2%;
+font-size: 22px;
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+line-height: 1.5;
+background-color: #202020;
+color: #bdbaba;
+}
+
+header {
+height: 120px;
+position: fixed;
+background-color: #A91000;
+border-bottom: 10px outset #A91000;
+width: 100%;
+margin: 0;
+left: 0;
+top: 0;
+z-index: 2;
+}
+
+@media only screen and (max-width: 640px) {
+body {
+margin: 0px 40px;
+}
+header {
+position: static;
+margin: 0px -40px;
+width: calc(100% + 80px);
+height: 70px;
+}
+}
+
+.landingPage {
+background-color: black;
+position: fixed;
+top: 5%;
+left: 5%;
+width: 90%;
+height: 75%;
+z-index: 1100;
+border: 5px white outset;
+overflow: auto;
+font-size: 1.1em;
+}
+
+.landingPage h2,
+.landingPage p,
+.landingPage ul {
+padding: 0 10%;
+}
+
+.landingPage h2 {
+color: #D89603;
+}
+
+.landingPage p {
+color: #5CB2C2;
+}
+
+.landingPage strong {
+color: #c3f1f9;
+}
+
+li {
+margin-bottom: 6px;
+}
+
+button#doneLanding {
+position: absolute;
+bottom: 5%;
+font-size: 1em;
+height: 80px;
+width: 80px;
+left: 50%;
+transform: translate(-50%, 0);
+}
+
+@media only screen and (max-width: 640px) {
+.landingPage {
+font-size: .9em;
+}
+button#doneLanding {
+height: 70px;
+width: 70px;
+}
+}
+
+.landingPageFrame {
+background: url("images/polaroid_background.jpg");
+background-repeat: repeat;
+position: fixed;
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+z-index: 1000;
+}
+
+.fadeToBlack {
+z-index: 1200;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: black;
+display: none;
+}
+
+.landingHeader {
+height: 80px;
+position: relative;
+margin-top: -30px;
+background-color: #A91000;
+border-bottom: 10px outset #A91000;
+width: 100%;
+margin: 0;
+left: 0;
+top: 0;
+}
+
+h1 {
+font-family: 'Raleway', sans-serif;
+text-align: center;
+font-size: 40px;
+font-weight: 700;
+color: white;
+text-shadow: 2px 2px 4px #202020;
+}
+
+@media (max-width: 1000px) {
+h1 {
+font-size: 32px;
+}
+}
+
+@media (max-width: 630px) {
+.hideNarrow {
+display: none;
+}
+body {
+font-size: 20px;
+}
+}
+
+@media (max-width: 500px) {
+h1 {
+font-size: 24px;
+padding-top: 10px;
+}
+body {
+font-size: 16px;
+}
+}
+
+@media (max-width: 400px) {
+.hideNarrowest {
+display: none;
+}
+}
+
+a {
+text-decoration: none;
+color: #5CB2C2;
+}
+
+a:hover {
+color: #aee7f2;
+text-shadow: 0 0 1px white;
+}
+
+#logo {
+max-width: 9%;
+position: fixed;
+top: 10px;
+/*    opacity: .7;*/
+z-index: 1300;
+}
+
+@media (max-width: 750px) {
+#logo {
+display: none;
+}
+}
+
+#tempBox {
+margin: auto;
+/*    display: block;*/
+/*    background-color: firebrick;*/
+}
+
+#temperature {
+font-size: 60px;
+/*    background-color: aquamarine;*/
+text-align: center;
+width: 100%;
+display: inline-block;
+padding: 20px 0;
+color: #FFD576;
+}
+
+@media (max-width: 1000px) {
+#temperature {
+font-size: 48px;
+}
+}
+
+.secondary {
+font-size: .8em;
+}
+
+.tertiary {
+font-size: .6em;
+}
+
+button {
+cursor: pointer;
+background-color: #FD3823;
+border-radius: 50%;
+height: 50px;
+width: 50px;
+text-align: center;
+color: white;
+margin: 8px;
+}
+
+@media (max-width: 800px) {
+button {
+height: 60px;
+width: 60px;
+}
+}
+
+button:hover {
+background-color: #A91000;
+font-weight: 700;
+}
+
+footer {
+/*    position: fixed;*/
+background-color: #A91000;
+border-top: 10px inset #A91000;
+padding: 10px 0;
+width: 100%;
+margin: 0;
+overflow: auto;
+margin-top: 60px;
+z-index: 2;
+}
+
+@media only screen and (max-width: 640px) {
+footer {
+margin-right: -40px;
+margin-left: -40px;
+width: calc(100% + 80px);
+}
+}
+
+footer i {
+padding-left: 10px;
+padding-right: 10px;
+}
+
+.left {
+float: left;
+padding: 5px 20px 5px 7%;
+width: 49%;
+}
+
+.right {
+float: right;
+padding: 5px 7% 5px 20px;
+width: 49%;
+text-align: right;
+}
+
+.News,
+.Sports,
+.Entertainment,
+.Financial {
+background-color: #025868;
+border: 5px ridge #025868;
+height: 600px;
+overflow: hidden;
+border-radius: 25px;
+margin-top: 35px;
+}
+
+.next {
+float: right;
+padding-left: 10px;
+}
+
+.prev {
+float: left;
+padding-right: 10px;
+}
+
+.weatherContainer {
+background-color: #333534;
+border: 5px ridge #025868;
+overflow: hidden;
+border-radius: 25px;
+margin: 20px auto;
+}
+
+.separator {
+height: 25px;
+}
+
+#tempBox,
+.mainInfo,
+.forecast {
+height: 165px;
+border: 3px ridge #025868;
+overflow: hidden;
+}
+
+.forecast,
+.mainInfo {
+padding: 20px;
+}
+
+.newsHeader,
+.weatherHeader,
+.eventsHeader {
+/*    position: absolute;*/
+padding: 10px 20px;
+margin 0 auto;
+/*    width: 100%;*/
+background-color: #D89603;
+border-radius: 25px 25px 0px 0px;
+color: black;
+}
+
+
+.events {
+height: 400px;
+overflow: hidden;
+border-bottom: 3px ridge #025868;
+padding: 10px 5%;
+}
+
+.eventsBox {
+background-color: #333534;
+border: 5px ridge #025868;
+border-radius: 25px;
+margin: 20px auto;
+padding-bottom: 20px;
+}
+
+.odd {
+background-color: #424242;
+}
+
+form {
+width: 100%;
+display: inline-block;
+text-align: center;
+}
+
+
+input {
+width: 50%;
+box-shadow: 2px 2px 2px black inset;
+/* ADJUST COLOR ONCE COLOR PALATTE FINALIZED */
+height: 35px;
+margin: 5px 5% 10px 5%;
+padding-left: 10px;
+}
+
+.News img,
+.Sports img,
+.Entertainment img,
+.Financial img {
+width: 100%;
+}
+
+.articleText {
+padding: 0 20px 30px 20px;
+}
+
+.title {
+font-size: 1.2em;
+}
+
+.author {
+font-style: italic;
+}
+
+.showMore {
+text-align: center;
+border: 5px outset #19879C;
+background-color: #19879C;
+cursor: pointer;
+margin: 20px auto;
+width: 80%;
+}
+
+.showMore:hover {
+border: 5px outset #5CB2C2;
+background-color: #5CB2C2;
+color: white;
+}
+
+.seeMore {
+overflow: auto;
+}
