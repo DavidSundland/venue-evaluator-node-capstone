@@ -10,7 +10,7 @@ Live preview available soon at: (insert link)
 This app allows users to quickly get information about venues in Washington, DC, that regularly or periodically offer live music.  Users can search for venues by venue type, size, and/or rating, and/or by the type of crowd vybe.  The app returns a list of venues that meet their criteria; the user can select a venue and get information about that venue, including a photo, map, address, description, and reviews.  User can also post their own review.
 
 As a user, I want to quickly find overviews about music venues in Washington, DC, so that I can determine which venues might be of interest:
-![main page wireframe](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/wireframe.jpg?raw=true)
+![main page wireframe](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/wireframe.jpg?raw=true)
 
 The main page:
 * User sees a header, a box with search terms, and a results list. The results initially list venues in order of overall ranking (a mix of popularity and user rating).
@@ -19,7 +19,7 @@ The main page:
 * When a venue is selected, detailed information about that venue is appended to the bottom of the screen (or replaces a previously-selected venue).
 
 As a user, I want an overview about each venue that interests me so that I can determine if I want to visit that venue, and I want to be able to leave reviews so that I can share my experience with others:
-![venue details](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/venue_detail_wireframe.jpg?raw=true)
+![venue details](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/venue_detail_wireframe.jpg?raw=true)
 * Detailed information about an individual venue includes the venue name, a link to the venue's website, a photo, a map, a description, and user reviews (if applicable).
 * Users can leave their own reviews, including providing ratings in pre-selected categories and a text box in which detailed comments can be written.
 
