@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>Venue e-Valautor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/grid.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css " />
+    <link rel="stylesheet" type="text/css" href="grid.css" />
+    <link rel="stylesheet" type="text/css" href="style.css " />
     <link href="https://fonts.googleapis.com/css?family=Kanit|Montserrat|Open+Sans:600|Quicksand|Raleway|Roboto:700" rel="stylesheet">
     <link rel="icon" href="http://www.districtconcerts.com/wp-content/uploads/2015/09/Favicon_1.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +30,11 @@
                 <option value="distracted">Social/Chatty/Distracted</option>
                 <option value="loud">Loud/Partying</option>
             </select>
+            <select id="crowd">
+                <option value="mellow">Mellow/Attentive</option>
+                <option value="distracted">Social/Chatty/Distracted</option>
+                <option value="loud">Loud/Partying</option>
+            </select>
         </div>
         <div class="col-12 listBox">
 
@@ -39,97 +44,6 @@
         <div class="col-12 resultBox">
 
             <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
-
-        </div>
-        <!-- *****MARK***** -->
-
-
-        <div class="row">
-            <div class="col-6">
-                <div class="News">
-                </div>
-                <div id="moreNews" class="showMore">Scroll News</div>
-                <div class="searchBar">
-                    <form action="#" class="newsSearchForm">
-                        <label for="newsQuery"></label>
-                        <input type="text" class="js-query" placeholder=" &nbsp; Enter a news search term to snap.">
-                        <button type="submit">Snap</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="Sports">
-                </div>
-                <div id="moreSports" class="showMore">Scroll Sports</div>
-                <div class="searchBar">
-                    <form action="#" class="sportsSearchForm">
-                        <label for="sportsQuery"></label>
-                        <input type="text" class="js-query" placeholder=" &nbsp; Enter a sports search term to snap.">
-                        <button type="submit">Snap</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="Entertainment">
-                </div>
-                <div id="moreEntertainment" class="showMore">Scroll Entertainment</div>
-                <div class="searchBar">
-                    <form action="#" class="entertainmentSearchForm">
-                        <label for="entertainmentQuery"></label>
-                        <input type="text" class="js-query" placeholder=" &nbsp; Enter an entertainment search term to snap.">
-                        <button type="submit">Snap</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="Financial">
-                </div>
-                <div id="moreFinancial" class="showMore">Scroll Financial</div>
-                <div class="searchBar">
-                    <form action="#" class="financialSearchForm">
-                        <label for="financialQuery"></label>
-                        <input type="text" class="js-query" placeholder=" &nbsp; Enter a financial search term to snap.">
-                        <button type="submit">Snap</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="row eventsBox">
-            <h2 class="row eventsHeader">Events</h2>
-            <div class="events col-12">Please wait a moment as the location is found and the list of events is collected and tidied up.</div>
-            <div class="col-12">
-                <div id="moreEvents" class="showMore">Scroll Events</div>
-            </div>
-            <div class="searchBar col-12">
-                <form action="#" class="eventsSearchForm">
-                    <label for="eventsQuery"></label>
-                    <input type="text" class="js-query" placeholder=" &nbsp; Enter an events search term to snap.">
-                    <button type="submit">Snap</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="landingPage">
-            <div class="landingHeader">
-                <h1>Snapshot</h1>
-            </div>
-            <h2>Welcome to Snapshot!</h2>
-            <p>Snapshot gives you a quick glance at what is happening today - weather, news, and local events - in one compact package.</p>
-            <ul>
-                <li>Weather and events are generated based upon your location or by entering a new location.</li>
-                <li>Today's top stories from news, sports, entertainment, and financial publications* are automatically generated; you can also enter your own search term for each article feed.</li>
-                <li>Only the top of each feed is displayed initially; <strong>if you want to scroll through all of the results, click on the "Scroll..." button</strong> to unlock scrolling of those results.</li>
-                <li><strong>When you're ready to proceed, click the Snap button below!</strong></li>
-            </ul>
-            <p class="secondary">*News publications: <em>The Washington Post</em>, <em>Associated Press</em>, <em>The New York Times</em>, <em>Al Jazeera</em>, <em>BBC News</em>, <em>Politico</em>, and <em>The Economist</em>.<br>Sports publications: <em>Bleacher Report</em>, <em>Talksport</em>, <em>The Sport Bible</em>, <em>NFL News</em>, and <em>NHL News</em>.<br>Entertainment publications: <em>Entertainment Weekly</em> and <em>MTV News</em>.<br>Financial publications: <em>Financial Post</em>, <em>Financial Times</em>, <em>Fortune</em>, and <em>Business Insider</em>.<br>NOTE: Articles are from the publications themselves AND their affiliated bloggers.
-            </p>
-        </div>
-        <div class="landingPageFrame">
-            <button id="doneLanding">Snap</button>
-        </div>
-        <div class="fadeToBlack">
 
         </div>
 
