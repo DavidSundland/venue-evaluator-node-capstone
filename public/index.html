@@ -18,30 +18,67 @@
             <h1 name="top">Venue e-Valuator</h1>
         </header>
 
-        <div class="col-12 searchBox">
+        <div class="row searchBox">
             <!-- PULL-DOWN MENUS OF SEARCH/SORT PARAMETERS TO FIND VENUES -->
-            <select id="size">
+            <h2 class="sorter col-12">Venue Sorter</h2>
+            <div class="col-4">
+                <h3>Venue Type</h3>
+                <select id="venueType">
+                    <option value="all">Any/No Preference</option>
+                    <option value="dedicated">Shhh... music's playing!</option>
+                    <option value="musicFirst">Music + food/drink/socializing</option>
+                    <option value="foodFirst">Food/drink with background music</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <h3>Venue Size</h3>
+                <select id="size">
+                <option value="all">Any/No Preference</option>
                 <option value="small">Small/Intimate</option>
                 <option value="medium">Medium/Comfortable</option>
                 <option value="large">Large/Epic</option>
             </select>
-            <select id="crowd">
+            </div>
+            <div class="col-4">
+                <h3>Crowd Type</h3>
+                <select id="crowd">
+                <option value="all">Any/No Preference</option>
                 <option value="mellow">Mellow/Attentive</option>
                 <option value="distracted">Social/Chatty/Distracted</option>
                 <option value="loud">Loud/Partying</option>
             </select>
-            <select id="crowd">
-                <option value="mellow">Mellow/Attentive</option>
-                <option value="distracted">Social/Chatty/Distracted</option>
-                <option value="loud">Loud/Partying</option>
-            </select>
+            </div>
         </div>
-        <div class="col-12 listBox">
+        <div class="row">
+            <div class="listBox col-7">
+                <h2 class="venueList">Your Venues</h2>
+                <p class="oneVenue"><a href="#" class="venueName">701 Restaurant</a> - <span class="address">701 Pennsylvania Ave. NW.</span> <span class="description">701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience....</span><button>More Info</button></p>
+                <p class="oneVenue"><a href="#" class="venueName">9:30 Club</a> - <span class="address">815 V St. NW</span> <span class="description">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly....</span><button>More Info</button></p>
+                <p class="oneVenue"><a href="#" class="venueName">Museum of American Art</a> - <span class="address">800 G St. NW</span> <span class="description">The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building’s lower level, and the Kogod Courtyard, a covered space in the center of the building....</span><button>More Info</button></p>
+                <p class="oneVenue"><a href="#" class="venueName">American University - Greenberg</a> - <span class="address">4200 Wisconsin Ave. NW</span> <span class="description">American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion....</span><button>More Info</button></p>
 
-            <!-- RETURN LIST OF SEARCH RESULTS HERE -->
+                <!-- RETURN LIST OF SEARCH RESULTS HERE -->
 
+            </div>
+            <div class="col-5 mapBox">
+                <div id="map"></div>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
+
+
+                </script>
+
+                <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
+
+            </div>
         </div>
-        <div class="col-12 resultBox">
+        <div class="row resultBox jsHide">
+            <h2 class="selectedVenue col-12">9:30 Club</h2>
+            <img src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true" class="col-6">
+            <div id="venueMap" class="col-6"></div>
+            <!--      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
+
+
+            </script>  -->
 
             <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
 
@@ -57,7 +94,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
     <!-- For getting lat & long from address -->
     <script type="text/javascript " src="https://maps.google.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ"></script>
-    <script src="/client.js "></script>
+    <script src="client.js "></script>
 </body>
 
 </html>

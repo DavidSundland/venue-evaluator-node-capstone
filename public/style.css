@@ -1,8 +1,8 @@
 /* Color palette - http://paletton.com/#uid=33m0u0krxvNh9H2ml-hvyr3z8lg */
 
 body {
-    margin: 140px 2% 0 2%;
-    width: 100%;
+    margin: 140px 6% 0 6%;
+    /*    width: 100%;*/
     font-size: 22px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -10,7 +10,7 @@ body {
     background-color: #202020;
     color: #bdbaba;
     background-image: url("https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/concert-silhouette.jpg?raw=true");
-    background-size: auto 100%;
+    background-size: contain;
     background-repeat: no-repeat;
 }
 
@@ -26,7 +26,43 @@ header {
     z-index: 2;
 }
 
-https: //github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/concert-silhouette.jpg?raw=true
+select {
+    padding: 2px;
+    margin: 20px 40px;
+}
+
+.listBox {
+    background-color: black;
+    /*    margin-top: 30px;*/
+    margin-bottom: 30px;
+    height: 400px;
+    overflow: auto;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+.jsHide {
+    display: none;
+    z-index: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin: 5%;
+    /*    left: 50%;*/
+    /*    margin-left: -400px;*/
+}
+
+.venueVisible {
+    visibility: visible;
+    display: inline-block;
+    z-index: 100;
+    text-align: center;
+}
+
+
 @media only screen and (max-width: 640px) {
     body {
         margin: 0px 40px;
@@ -38,6 +74,7 @@ https: //github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/publ
         height: 70px;
     }
 }
+
 
 .landingPage {
     background-color: black;
@@ -74,6 +111,7 @@ li {
     margin-bottom: 6px;
 }
 
+/*
 button#doneLanding {
     position: absolute;
     bottom: 5%;
@@ -83,15 +121,18 @@ button#doneLanding {
     left: 50%;
     transform: translate(-50%, 0);
 }
+*/
 
 @media only screen and (max-width: 640px) {
     .landingPage {
         font-size: .9em;
     }
+    /*
     button#doneLanding {
         height: 70px;
         width: 70px;
     }
+*/
 }
 
 .landingPageFrame {
@@ -224,6 +265,9 @@ a:hover {
 
 button {
     cursor: pointer;
+    margin: 2px 10px;
+    padding: 2px 4px;
+    /*
     background-color: #FD3823;
     border-radius: 50%;
     height: 50px;
@@ -231,6 +275,7 @@ button {
     text-align: center;
     color: white;
     margin: 8px;
+*/
 }
 
 @media (max-width: 800px) {
