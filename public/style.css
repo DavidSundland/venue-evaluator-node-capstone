@@ -18,6 +18,7 @@ body {
 }
 
 
+/*  NEEDED ONLY IF CHEERING CROWD ADDED BACK TO BOTTOM
 #concertGoers {
     z-index: 301;
     bottom: 0;
@@ -25,6 +26,7 @@ body {
     width: 100%;
     max-height: 500px;
 }
+*/
 
 .curtainMain {
     z-index: 200;
@@ -53,7 +55,6 @@ body {
 }
 
 .curtainTop {
-    /* adjust to make dynamic - scroll up upon page load */
     /* HIDE ON NARROW SCREENS? */
     position: fixed;
     top: 0;
@@ -62,147 +63,12 @@ body {
     z-index: 202;
 }
 
-.searchBox {
-    border: 7px dotted white;
-    box-shadow: inset 0 -1px 0 0 gold, inset 0 1px 0 0 gold, 0 1px 0 0 gold, 0 -1px 0 0 gold, inset 1px 0 0 0 gold, inset -1px 0 0 0 gold, 1px 0 0 0 gold, -1px 0 0 0 gold;
-    /* creates solid lines inside & outside of dotted border */
-    z-index: 4000;
-    margin: 30px 12%;
-    width: 76%;
-}
-
-select {
-    padding: 2px;
-    margin: 20px 40px;
-}
-
-.listBox {
-    background-color: black;
-    /*    margin-top: 30px;*/
-    margin-bottom: 30px;
-    height: 400px;
-    overflow: auto;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
-}
-
-.jsHide {
-    display: none;
-    z-index: 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    margin: 5%;
-    /*    left: 50%;*/
-    /*    margin-left: -400px;*/
-}
-
-.venueVisible {
-    visibility: visible;
-    display: inline-block;
-    z-index: 100;
-    text-align: center;
-}
-
-
-.landingPage {
-    background-color: black;
-    position: fixed;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 75%;
-    z-index: 1100;
-    border: 5px white outset;
-    overflow: auto;
-    font-size: 1.1em;
-}
-
-.landingPage h2,
-.landingPage p,
-.landingPage ul {
-    padding: 0 10%;
-}
-
-.landingPage h2 {
-    color: #D89603;
-}
-
-.landingPage p {
-    color: #5CB2C2;
-}
-
-.landingPage strong {
-    color: #c3f1f9;
-}
-
-li {
-    margin-bottom: 6px;
-}
-
-/*
-button#doneLanding {
-    position: absolute;
-    bottom: 5%;
-    font-size: 1em;
-    height: 80px;
-    width: 80px;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-*/
-
-@media only screen and (max-width: 640px) {
-    .landingPage {
-        font-size: .9em;
-    }
-    /*
-    button#doneLanding {
-        height: 70px;
-        width: 70px;
-    }
-*/
-}
-
-.landingPageFrame {
-    background: url("images/polaroid_background.jpg");
-    background-repeat: repeat;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1000;
-}
-
-.fadeToBlack {
-    z-index: 1200;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    display: none;
-}
-
-
 header {
-    /*    height: 120px;*/
-    /*    position: fixed;*/
-    /*    background-color: #A91000;*/
-    /*    border-bottom: 10px outset #A91000;*/
     width: 100%;
     margin-top: 20px;
     left: 0;
-    /*    top: 50px;*/
     z-index: 2;
 }
-
-
 
 header div {
     padding: 0;
@@ -243,36 +109,47 @@ h1,
     overflow: hidden;
 }
 
-@media (max-width: 1000px) {
-    h1 {
-        font-size: 32px;
-    }
+.searchBox {
+    border: 7px dotted white;
+    /* creates solid lines inside & outside of dotted border */
+    box-shadow: inset 0 -1px 0 0 gold, inset 0 1px 0 0 gold, 0 1px 0 0 gold, 0 -1px 0 0 gold, inset 1px 0 0 0 gold, inset -1px 0 0 0 gold, 1px 0 0 0 gold, -1px 0 0 0 gold;
+    margin: 30px 12%;
+    width: 76%;
 }
 
-@media (max-width: 630px) {
-    .hideNarrow {
-        display: none;
-    }
-    body {
-        font-size: 20px;
-    }
+.sorter {
+    text-align: center;
+    margin-bottom: 0;
 }
 
-@media (max-width: 500px) {
-    h1 {
-        font-size: 24px;
-        padding-top: 10px;
-    }
-    body {
-        font-size: 16px;
-    }
+.selectCenterer {
+    text-align: center;
+    display: block;
+    margin: 0 auto 50px auto;
 }
 
-@media (max-width: 400px) {
-    .hideNarrowest {
-        display: none;
-    }
+.selectCenterer select {
+    width: 70%;
 }
+
+.searchBox h3 {
+    text-align: center;
+}
+
+
+.listBox {
+    background-color: black;
+    /*    margin-top: 30px;*/
+    margin-bottom: 30px;
+    height: 400px;
+    overflow: auto;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 
 a {
     text-decoration: none;
@@ -355,6 +232,23 @@ button:hover {
     font-weight: 700;
 }
 
+.jsHide {
+    display: none;
+    z-index: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin: 5%;
+}
+
+.venueVisible {
+    visibility: visible;
+    display: inline-block;
+    z-index: 100;
+    text-align: center;
+}
+
+
 footer {
     /*    position: fixed;*/
     /*    background-color: #A91000;*/
@@ -393,84 +287,6 @@ footer i {
     text-align: right;
 }
 
-.News,
-.Sports,
-.Entertainment,
-.Financial {
-    background-color: #025868;
-    border: 5px ridge #025868;
-    height: 600px;
-    overflow: hidden;
-    border-radius: 25px;
-    margin-top: 35px;
-}
-
-.next {
-    float: right;
-    padding-left: 10px;
-}
-
-.prev {
-    float: left;
-    padding-right: 10px;
-}
-
-.weatherContainer {
-    background-color: #333534;
-    border: 5px ridge #025868;
-    overflow: hidden;
-    border-radius: 25px;
-    margin: 20px auto;
-}
-
-.separator {
-    height: 25px;
-}
-
-#tempBox,
-.mainInfo,
-.forecast {
-    height: 165px;
-    border: 3px ridge #025868;
-    overflow: hidden;
-}
-
-.forecast,
-.mainInfo {
-    padding: 20px;
-}
-
-.newsHeader,
-.weatherHeader,
-.eventsHeader {
-    /*    position: absolute;*/
-    padding: 10px 20px;
-    margin 0 auto;
-    /*    width: 100%;*/
-    background-color: #D89603;
-    border-radius: 25px 25px 0px 0px;
-    color: black;
-}
-
-
-.events {
-    height: 400px;
-    overflow: hidden;
-    border-bottom: 3px ridge #025868;
-    padding: 10px 5%;
-}
-
-.eventsBox {
-    background-color: #333534;
-    border: 5px ridge #025868;
-    border-radius: 25px;
-    margin: 20px auto;
-    padding-bottom: 20px;
-}
-
-.odd {
-    background-color: #424242;
-}
 
 form {
     width: 100%;
@@ -486,17 +302,6 @@ input {
     height: 35px;
     margin: 5px 5% 10px 5%;
     padding-left: 10px;
-}
-
-.News img,
-.Sports img,
-.Entertainment img,
-.Financial img {
-    width: 100%;
-}
-
-.articleText {
-    padding: 0 20px 30px 20px;
 }
 
 .title {
