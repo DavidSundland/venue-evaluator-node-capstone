@@ -30,7 +30,7 @@ function initMap() {
         center: mapCenter
     });
     var markers = [];
-    for (x = 0; x < mapPoints.length; x++) {
+    for (let x = 0; x < mapPoints.length; x++) {
         console.log(mapPoints[x].position);
         markers.push(new google.maps.Marker({
             position: mapPoints[x].position,
@@ -56,18 +56,18 @@ function viewVenue() {
 }
 
 //function initVenueMap() {
-        //    console.log("In initVenueMap");
-        //    var venueMap = new google.maps.Map(document.getElementById('venueMap'), {
-        //        zoom: 13,
-        //        center: venueLoc
-        //    });
-        //    //    src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap";
-        //    var marker = new google.maps.Marker({
-        //        position: venueLoc,
-        //        map: venueMap,
-        //        title: "9:30 Club" // MAKE A VARIABLE
-        //    });
-        //}
+//    console.log("In initVenueMap");
+//    var venueMap = new google.maps.Map(document.getElementById('venueMap'), {
+//        zoom: 13,
+//        center: venueLoc
+//    });
+//    //    src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap";
+//    var marker = new google.maps.Marker({
+//        position: venueLoc,
+//        map: venueMap,
+//        title: "9:30 Club" // MAKE A VARIABLE
+//    });
+//}
 
 //var marker = new google.maps.Marker({
 //position: uluru,
