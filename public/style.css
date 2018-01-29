@@ -24,6 +24,14 @@ body {
     max-height: 500px;
 }
 
+.curtainMain {
+    z-index: 200;
+    width: 100%;
+    height: 105%;
+    position: fixed;
+    top: 0;
+}
+
 .curtainRight {
     /* HIDE ON NARROW SCREENS */
     position: fixed;
@@ -42,12 +50,14 @@ body {
     z-index: 201;
 }
 
-.curtainMain {
+.curtainTop {
     /* adjust to make dynamic - scroll up upon page load */
     /* HIDE ON NARROW SCREENS? */
     position: fixed;
-    bottom: 90%;
-    z-index: 200;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 202;
 }
 
 select {
@@ -175,7 +185,7 @@ header {
     /*    background-color: #A91000;*/
     /*    border-bottom: 10px outset #A91000;*/
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     left: 0;
     /*    top: 50px;*/
     z-index: 2;

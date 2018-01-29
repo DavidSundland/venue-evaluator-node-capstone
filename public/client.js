@@ -1,3 +1,7 @@
+function raiseCurtain() {
+    $(".curtainMain").delay(1000).slideUp(4000);
+}
+
 function initMap() {
     var mapPoints = [{
         "id": "club930",
@@ -80,3 +84,4 @@ function viewVenue() {
 //});
 //}
 $(clickVenue);
+$(raiseCurtain);
