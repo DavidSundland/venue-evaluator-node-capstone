@@ -1,8 +1,8 @@
 /* Color palette - http://paletton.com/#uid=33m0u0krxvNh9H2ml-hvyr3z8lg */
 
 body {
-    margin: 140px 6% 0 6%;
-    /*    width: 100%;*/
+    /*    margin: 140px 6% 0 6%;*/
+    width: 100%;
     font-size: 22px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -12,13 +12,49 @@ body {
     background-image: url("https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/concert-silhouette.jpg?raw=true");
     background-size: contain;
     background-repeat: no-repeat;
+    height: 100%;
+}
+
+
+#concertGoers {
+    z-index: 301;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    max-height: 500px;
+}
+
+.curtainRight {
+    /* HIDE ON NARROW SCREENS */
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    z-index: 201;
+}
+
+.curtainLeft {
+    /* HIDE ON NARROW SCREENS */
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 201;
+}
+
+.curtainMain {
+    /* adjust to make dynamic - scroll up upon page load */
+    /* HIDE ON NARROW SCREENS? */
+    position: fixed;
+    bottom: 90%;
+    z-index: 200;
 }
 
 header {
     height: 120px;
     position: fixed;
-    background-color: #A91000;
-    border-bottom: 10px outset #A91000;
+    /*    background-color: #A91000;*/
+    /*    border-bottom: 10px outset #A91000;*/
     width: 100%;
     margin: 0;
     left: 0;
@@ -292,8 +328,8 @@ button:hover {
 
 footer {
     /*    position: fixed;*/
-    background-color: #A91000;
-    border-top: 10px inset #A91000;
+    /*    background-color: #A91000;*/
+    /*    border-top: 10px inset #A91000;*/
     padding: 10px 0;
     width: 100%;
     margin: 0;
