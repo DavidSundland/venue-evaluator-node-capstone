@@ -71,7 +71,7 @@ header {
 }
 
 header div,
-.venueBox div {
+.venueHeader div {
     padding: 0;
     margin: 0;
     text-align: center;
@@ -243,7 +243,6 @@ button:hover {
     display: none;
 }
 
-
 .venueBox {
     width: 100%;
     height: 100%;
@@ -256,7 +255,6 @@ button:hover {
     z-index: 1051;
 }
 
-
 .venueVisible {
     visibility: visible;
     display: inline-block;
@@ -264,6 +262,13 @@ button:hover {
     text-align: center;
 }
 
+.venueInfo {
+    margin-top: 50px;
+}
+
+.venueInfo img {
+    width: 90%;
+}
 
 footer {
     /*    position: fixed;*/

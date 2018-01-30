@@ -95,31 +95,42 @@
             </div>
             <div class="col-5 mapBox">
                 <div id="map"></div>
-                <!--
+
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
                 </script>
--->
+
 
                 <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
 
             </div>
         </div>
         <div class="venueBox jsHide">
-            <div>
-                <p class="hideMe">HIDE ME</p>
-                <h1 class="offScreen">9:30 Club</h1>
-                <!-- providing hidden text for spacing AND off-screen text that will be visible to screen readers -->
+            <div class="row venueHeader">
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+                <div>
+                    <p class="marqueeText">INTRODUCING:</p>
+                </div>
+                <div>
+                    <h1 class="marqueeText">9:30 CLUB</h1>
+                </div>
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
             </div>
-            <div>
-                <p class="marqueeText">9:30 CLUB</p>
-            </div>
-            <div>
-                <p class="hideMe">HIDE ME</p>
-            </div>
-            <img src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true" class="col-6">
-            <div id="venueMap" class="col-6">
-                <!-- NEED TO GENERATE THIS DYNAMICALLY AAAAAAANNNNNNDDDDDD REPLACE WITH API KEY THAT WORKS FOR STATIC SITES / EMBEDDED MAPS - OTHERWISE GET ERROR CODE - "The Google Maps API server rejected your request. This site or IP is not authorized to use this API key." -->
-                <iframe width="100%" height="450px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=9:30 Club, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
+            <div class="row venueInfo">
+                <div class="col-6">
+                    <img src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true">
+
+                    <!-- NEED TO GENERATE THIS DYNAMICALLY AAAAAAANNNNNNDDDDDD REPLACE WITH API KEY THAT WORKS FOR STATIC SITES / EMBEDDED MAPS - OTHERWISE GET ERROR CODE - "The Google Maps API server rejected your request. This site or IP is not authorized to use this API key." -->
+                    <iframe width="90%" height="450px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=9:30 Club, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
+                </div>
+                <div class="col-6">
+                    <h3 class="venueName"><a href="#">9:30 Club</a></h3>
+                    <p class="venueAddress">815 V St. NW, Washington, DC 20001</p>
+                    <p class="venueDescription">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar “Nightclub of the Year” honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District’s premier venue for nationally known touring acts.</p>
+                </div>
             </div>
             <!--      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
 
