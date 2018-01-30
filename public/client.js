@@ -55,6 +55,13 @@ function viewVenue() {
     };
 }
 
+function clickClose() {
+    $('.closeVenue').click(function () {
+        console.log('clicked');
+        $('.jsHide').removeClass('venueVisible');
+    });
+}
+
 function raiseCurtain() {
     $(".curtainMain").delay(1000).slideUp(4000);
 }
@@ -85,4 +92,5 @@ function raiseCurtain() {
 //});
 //}
 $(clickVenue);
+$(clickClose);
 $(raiseCurtain);
