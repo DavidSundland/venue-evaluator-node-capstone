@@ -1,8 +1,4 @@
-function raiseCurtain() {
-    $(".curtainMain").delay(1000).slideUp(4000);
-}
-
-function initMap() {
+window.initMap = function () { // making sure available to global scope (else "initMap is not a function" error possible)
     var mapPoints = [{
         "id": "club930",
         "title": "9:30 Club",
@@ -58,6 +54,11 @@ function viewVenue() {
         lng: -77.023692
     };
 }
+
+function raiseCurtain() {
+    $(".curtainMain").delay(1000).slideUp(4000);
+}
+
 
 //function initVenueMap() {
 //    console.log("In initVenueMap");
