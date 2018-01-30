@@ -97,6 +97,8 @@
                 <div id="map"></div>
 
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
+
+
                 </script>
 
 
@@ -124,14 +126,40 @@
                     <img src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true">
 
                     <!-- NEED TO GENERATE THIS DYNAMICALLY AAAAAAANNNNNNDDDDDD REPLACE WITH API KEY THAT WORKS FOR STATIC SITES / EMBEDDED MAPS - OTHERWISE GET ERROR CODE - "The Google Maps API server rejected your request. This site or IP is not authorized to use this API key." -->
-                    <iframe width="90%" height="450px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=9:30 Club, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
+                    <iframe width="80%" height="400px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=9:30 Club, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
                 </div>
                 <div class="col-6">
                     <h3 class="venueNameHeader"><a href="#">9:30 Club</a></h3>
                     <hr>
                     <p class="venueAddress">815 V St. NW, Washington, DC 20001</p>
                     <p class="venueDescription">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar “Nightclub of the Year” honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District’s premier venue for nationally known touring acts.</p>
+                    <button id="reviewButton">Leave a Review!</button>
                 </div>
+            </div>
+            <hr>
+            <div class="reviews">
+                <div class="oneReview">
+                    <p class="userName row">Joe ConcertGoer</p>
+                    <div class="row userRatings">
+                        <p class="userSound col-6">Sound Quality: ★★★★★</p>
+                        <p class="userVenue col-6">Venue Quality: ★★★★☆</p>
+                        <p class="userMusic col-6">Music Quality: ★★★★☆</p>
+                        <p class="userOther col-6">Food/Beverage Quality: ★★★☆☆</p>
+                    </div>
+                    <p class="userReview col-12">9:30 Club is a cavernous space that is well-worn. It is ugly outside and not terribly attractive inside. Still, it's a great place to hear music - excellent bands, top-notch sound and lighting, and very engaged crowds.</p>
+                </div>
+                <hr>
+                <div class="oneReview">
+                    <p class="userName row">Joanne MusicLover</p>
+                    <div class="row userRatings">
+                        <p class="userSound col-6">Sound Quality: ★★★☆☆</p>
+                        <p class="userVenue col-6">Venue Quality: ★★★☆☆</p>
+                        <p class="userMusic col-6">Music Quality: ★★★★☆</p>
+                        <p class="userOther col-6">Food/Beverage Quality: ★★☆☆☆</p>
+                    </div>
+                    <p class="userReview col-12">I want to like 9:30 Club because it's such a DC institution. But it feels to me like they've been resting on their laurels for far too long and have let the place go. I'd much rather go to a newer place, like Anthem or Union Stage. They do still pull in some great bands, though.</p>
+                </div>
+                <hr>
             </div>
         </div>
         <button id="closeVenue" class="jsHide">Back to Search Page</button>

@@ -264,7 +264,7 @@ button#closeVenue:hover {
     font-size: 1.3em;
     color: #FE6767;
     text-align: left;
-    padding: 20px;
+    padding: 0 40px 0 20px;
 }
 
 .venueDescription {
