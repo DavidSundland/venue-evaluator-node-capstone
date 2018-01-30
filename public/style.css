@@ -208,6 +208,9 @@ button#closeVenue:hover {
     top: 50px;
     right: 50px;
     z-index: 401;
+}
+
+button {
     padding: 15px;
     border-radius: 20px;
     color: white;
@@ -255,7 +258,7 @@ button#closeVenue:hover {
     color: #CC1414;
 }
 
-.venueInfo hr {
+hr {
     border: #A70404 solid 1px;
     /*    width: 90%;*/
 }
@@ -272,6 +275,25 @@ button#closeVenue:hover {
     line-height: 2;
     padding: 20px;
 }
+
+.userName {
+    color: #CC5297;
+}
+
+.userSound,
+.userVenue,
+.userMusic,
+.userOther {
+    padding: 0 20px;
+    margin: 0;
+    color: #FEAB67;
+}
+
+.userReview {
+    text-align: left;
+    padding: 0 40px;
+}
+
 
 footer {
     /*    position: fixed;*/
