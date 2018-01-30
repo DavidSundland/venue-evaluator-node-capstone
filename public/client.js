@@ -56,7 +56,7 @@ function viewVenue() {
 }
 
 function clickClose() {
-    $('.closeVenue').click(function () {
+    $('#closeVenue').click(function () {
         console.log('clicked');
         $('.jsHide').removeClass('venueVisible');
     });
