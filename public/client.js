@@ -14,20 +14,6 @@ function searchNames() {
     }
 }
 
-function clickVenue() {
-    console.log("In viewVenue");
-    $('.listBox').on('click', 'button', viewVenue);
-}
-
-
-function viewVenue() {
-    $('.jsHide').addClass("venueVisible");
-    var venueLoc = {
-        lat: 38.9179969, // MAKE A VARIABLE THAT IS TIED TO DATABASE / 'THIS'
-        lng: -77.023692
-    };
-}
-
 function clickClose() {
     $('#closeVenue').click(function () {
         console.log('clicked');
