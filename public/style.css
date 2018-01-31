@@ -200,15 +200,24 @@ h2 {
     padding: 20px;
 }
 
+.listHolder {
+    border-top: 7px dotted #fed9ba;
+    /* creates solid lines inside & outside of dotted border */
+    box-shadow: inset 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767;
+    padding: 0;
+}
+
+.paddingAdder {  /* adds padding to top and bottom of venue list even when list is scrolled, and visually extends scrollbar */
+    height: 30px;
+    border-right: 16px #f1f1f1 solid;
+}
+
 .listBox {
     /*    margin-top: 30px;*/
     /*    margin-bottom: 30px;*/
     height: 400px;
     overflow-y: scroll;
     padding: 30px;
-    border-top: 7px dotted #fed9ba;
-    /* creates solid lines inside & outside of dotted border */
-    box-shadow: inset 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767;
 }
 
 
