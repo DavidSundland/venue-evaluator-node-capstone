@@ -41,6 +41,22 @@ window.initMap = function () { // making sure available to global scope (else "i
     }
 }
 
+function searchNames() {
+    var input, venueList, venueNames, a, i;
+    input = document.getElementById("nameSearch").value.toUpperCase();
+    venueList = document.getElementById("listBox");
+    venueNames = venueList.getElementsByTagName("p");
+    for (i = 0; i < venueNames.length; i++) {
+        a = venueNames[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
+            venueNames[i].style.display = "";
+        } else {
+            venueNames[i].style.display = "none";
+
+        }
+    }
+}
+
 function clickVenue() {
     console.log("In viewVenue");
     $('.listBox').on('click', 'button', viewVenue);

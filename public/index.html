@@ -44,7 +44,7 @@
                 <h2 class="venueList">Your Venues</h2>
                 <p class="textBlock">Venues in Washington, DC, that offer live music are listed below. The list view is sorted in order of overall review score. In the map view, hover over a pin for the venue name, or click on the pin for more information. If you would like to narrow the list of results, set your search parameters in the "Your Preferences" box farther down on the page.</p>
             </div>
-            <div class="listBox col-7">
+            <div class="listBox col-7" id="listBox">
 
                 <p class="oneVenue"><a href="#" class="venueName">701 Restaurant</a> - <span class="address">701 Pennsylvania Ave. NW</span><br><span class="description"> 701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience....</span><button>More Info</button></p>
                 <p class="oneVenue"><a href="#" class="venueName">9:30 Club</a> - <span class="address">815 V St. NW</span><br><span class="description">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly....</span><button>More Info</button></p>
@@ -58,13 +58,7 @@
                 <div id="map"></div>
 
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
-
-
                 </script>
-
-
-                <!-- RETURN SELECTED VENUE HERE.  DIV HIDDEN (EMPTY) UNTIL VENUE SELECTED -->
-
             </div>
         </div>
 
@@ -104,6 +98,10 @@
                         <option value="loud">Loud/Partying</option>
                     </select>
                 </div>
+            </div>
+            <h3>Limit Results by Venue Name:</h3>
+            <div class="selectCenterer">
+                <input type="text" id="nameSearch" onkeyup="searchNames()" placeholder="Type all or part of venue name">
             </div>
             <div class="col-12">
                 <p>Venue Type: Would you prefer a formal concert experience - people focused on the music, while keeping conversations to a minimum? A music-first experience where it's OK to chat and walk around? Or would you prefer that music be in the background, with eating, drinking, or socializing as the primary activity?</p>

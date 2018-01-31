@@ -204,7 +204,7 @@ h2 {
     /*    margin-top: 30px;*/
     /*    margin-bottom: 30px;*/
     height: 400px;
-    overflow: auto;
+    overflow-y: scroll;
     padding: 30px;
     border-top: 7px dotted #fed9ba;
     /* creates solid lines inside & outside of dotted border */
