@@ -60,6 +60,51 @@
             <div class="col-5 mapBox">
                 <div id="map"></div>
 
+                <script>
+                    <!-- initMap function added here to ensure it loads before Google Maps function tries to call it.  -->
+                    function initMap() { // making sure available to global scope (else "initMap is not a function" error possible)
+                        var mapPoints = [{
+                            "id": "club930",
+                            "title": "9:30 Club",
+                            "position": {
+                                "lat": 38.9179969,
+                                "lng": -77.023692
+                            }
+                        }, {
+                            "id": "restaurant701",
+                            "title": "701 Restaurant",
+                            "position": {
+                                "lat": 38.894292,
+                                "lng": -77.022442
+                            }
+                        }, {
+                            "id": "americanArt",
+                            "title": "Museum of American Art",
+                            "position": {
+                                "lat": 38.8978609,
+                                "lng": -77.0251306
+                            }
+                        }];
+                        var mapCenter = {
+                            lat: 38.9222375,
+                            lng: -77.0093275
+                        };
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 12,
+                            center: mapCenter
+                        });
+                        var markers = [];
+                        for (let x = 0; x < mapPoints.length; x++) {
+                            console.log(mapPoints[x].position);
+                            markers.push(new google.maps.Marker({
+                                position: mapPoints[x].position,
+                                map: map,
+                                title: mapPoints[x].title
+                            }));
+                            markers[x].addListener('click', viewVenue);
+                        }
+                    }
+                </script>
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
                 </script>
             </div>
