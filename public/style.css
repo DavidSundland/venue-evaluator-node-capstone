@@ -196,6 +196,14 @@ h2 {
     padding-bottom: 20px;
 }
 
+.searchDescriptions {
+    padding: 0 30px 30px 30px;
+    font-size: .9em;
+}
+.searchDescriptionTitle {
+    color: #FEAB67;
+}
+
 .textBlock {
     padding: 20px;
 }
