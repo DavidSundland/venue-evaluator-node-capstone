@@ -202,12 +202,15 @@ h2 {
 
 .listBox {
     /*    margin-top: 30px;*/
-    margin-bottom: 30px;
+    /*    margin-bottom: 30px;*/
     height: 400px;
     overflow: auto;
     padding: 30px;
-    border-top: 1px solid #FE6767;
+    border-top: 7px dotted #fed9ba;
+    /* creates solid lines inside & outside of dotted border */
+    box-shadow: inset 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767;
 }
+
 
 .listBox p {
     padding-bottom: 20px;
