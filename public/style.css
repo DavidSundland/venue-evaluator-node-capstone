@@ -88,6 +88,7 @@ body {
     top: 0;
     height: 100%;
     z-index: 301;
+    max-width: 15%
 }
 
 .curtainLeft {
@@ -97,6 +98,7 @@ body {
     top: 0;
     height: 100%;
     z-index: 301;
+    max-width: 15%
 }
 
 .curtainTop {
@@ -106,6 +108,12 @@ body {
     width: 100%;
     height: 60px;
     z-index: 302;
+}
+
+@media (max-width: 500px) {
+    .curtainLeft, .curtainRight {
+        display: none;
+    }
 }
 
 header {
@@ -197,11 +205,15 @@ h2 {
 
 .searchDescriptions {
     padding: 0 30px 30px 30px;
-    font-size: .9em;
+    font-size: .85em;
 }
 
 .searchDescriptionTitle {
     color: #FEAB67;
+}
+
+.searchDescriptions p {
+    padding-top: 20px;
 }
 
 .textBlock {
@@ -224,7 +236,7 @@ h2 {
 .paddingAdder {
     height: 60px;
     background-color: #161616;
-    border-left: 1px solid #FE6767;
+    border: 1px solid #FE6767;
 }
 
 .paddingAdder h3 {
@@ -258,6 +270,13 @@ h2 {
     height: 400px;
     width: 94%;
     margin: 0 3%;
+}
+
+@media (max-width: 1300px) {
+    #map {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 a {
@@ -402,48 +421,86 @@ hr {
     position: fixed;
 }
 
+.userRatings form {
+    margin-top: 20px;
+}
 
-
-.starRating:not(old) {
+/* STYLES FOR POSTING RATINGS */
+.rating {
     display: inline-block;
-    width: 7.5em;
-    height: 1.5em;
-    overflow: hidden;
-    vertical-align: bottom;
-}
-
-.starRating:not(old) > input {
-    margin-right: -100%;
-    opacity: 0;
-}
-
-.starRating:not(old) > label {
-    display: block;
-    float: right;
     position: relative;
-    background: url('star-off.svg');
-    background-size: contain;
+    height: 50px;
+    line-height: 50px;
+    font-size: 40px;
+    margin-left: 200px;
 }
 
-.starRating:not(old) > label:before {
-    content: '';
-    display: block;
-    width: 1.5em;
-    height: 1.5em;
-    background: url('star-on.svg');
-    background-size: contain;
+.rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+}
+
+.rating label:last-child {
+    position: static;
+}
+
+.rating label:nth-child(1) {
+    z-index: 505;
+}
+
+.rating label:nth-child(2) {
+    z-index: 504;
+}
+
+.rating label:nth-child(3) {
+    z-index: 503;
+}
+
+.rating label:nth-child(4) {
+    z-index: 502;
+}
+
+.rating label:nth-child(5) {
+    z-index: 501;
+}
+
+.rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
-    transition: opacity 0.2s linear;
 }
 
-.starRating:not(old) > label:hover:before,
-.starRating:not(old) > label:hover ~ label:before,
-.starRating:not(:hover) > :checked ~ label:before {
-    opacity: 1;
+.rating label .icon {
+    float: left;
+    color: transparent;
+}
+
+.rating label:last-child .icon {
+    color: white;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+    color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: white;
+    text-shadow: 0 0 5px #09f;
 }
 
 
 
+
+textarea {
+    width: 50%;
+    height: 150px;
+    margin-top: 30px;
+}
 
 
 

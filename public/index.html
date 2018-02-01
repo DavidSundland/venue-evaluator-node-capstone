@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Venue e-Valautor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="grid.css" />
     <link rel="stylesheet" type="text/css" href="style.css " />
     <link href="https://fonts.googleapis.com/css?family=Kanit|Montserrat|Open+Sans:600|Quicksand|Raleway|Roboto:700" rel="stylesheet">
@@ -99,18 +99,18 @@
                 </div>
             </div>
             <div class="col-4">
-                <h3>Crowd Type:</h3>
+                <h3>Free or Ticketed**:</h3>
                 <div class="selectCenterer">
                     <select id="crowd">
                         <option value="all">Any/No Preference</option>
-                        <option value="mellow">Mellow/Attentive</option>
-                        <option value="distracted">Social/Chatty/Distracted</option>
-                        <option value="loud">Loud/Partying</option>
+                        <option value="free">Free/No Cover</option>
+                        <option value="ticketed">Ticketed or Cover Charge</option>
                     </select>
                 </div>
             </div>
             <div class="col-12 searchDescriptions">
-                <p><span class="searchDescriptionTitle">*Venue Type:</span> Would you prefer a formal concert experience - people focused on the music, while keeping conversations to a minimum? A music-first experience where it's OK to chat and walk around? Or would you prefer that music be in the background, with eating, drinking, or socializing as the primary activity?</p>
+                <p><span class="searchDescriptionTitle">*Venue Type:</span> Would you prefer a formal concert experience - people focused on the music, while keeping conversations to a minimum? A music-first experience where it's nonetheless OK to chat and walk around? Or would you prefer that music be in the background, with eating, drinking, or socializing as the primary activity?</p>
+                <p><span class="searchDescriptionTitle">**Free/Ticketed:</span> Venues which regularly offer free shows AND regularly offer ticketed shows will show up in both lists. Venues which offer free shows on rare occasion will show up <em>only</em> in the "ticketed" list, and venues which are usually free but occasionally charge will <em>only</em> show up in the "free" list.  Don't forget, though, free isn't always free - <span class="searchDescriptionTitle">if there's a tip jar, tip generously!</span></p>
             </div>
         </div>
 
@@ -149,10 +149,12 @@
                 <div class="oneReview">
                     <p class="userName row">Joe ConcertGoer</p>
                     <div class="row userRatings">
-                        <p class="userSound col-6">Sound Quality: ★★★★★</p>
-                        <p class="userVenue col-6">Venue Quality: ★★★★☆</p>
-                        <p class="userMusic col-6">Music Quality: ★★★★☆</p>
-                        <p class="userOther col-6">Food/Beverage Quality: ★★★☆☆</p>
+                        <p class="userSound col-6">Listening Experience: ★★★★★</p>
+                        <p class="userVenue col-6">Venue Feel: ★★★★☆</p>
+                        <p class="userMusic col-6">Music Value: ★★★★☆</p>
+                        <p class="userOther col-6">Band Quality: ★★★☆☆</p>
+                        <p class="userOther col-6">Food/Beverage Quality: ★★★★☆</p>
+                        <p class="userOther col-6">Food/Beverage Value: ★★★☆☆</p>
                     </div>
                     <p class="userReview col-12">9:30 Club is a cavernous space that is well-worn. It is ugly outside and not terribly attractive inside. Still, it's a great place to hear music - excellent bands, top-notch sound and lighting, and very engaged crowds.</p>
                 </div>
@@ -160,10 +162,12 @@
                 <div class="oneReview">
                     <p class="userName row">Joanne MusicLover</p>
                     <div class="row userRatings">
-                        <p class="userSound col-6">Sound Quality: ★★★☆☆</p>
-                        <p class="userVenue col-6">Venue Quality: ★★★☆☆</p>
-                        <p class="userMusic col-6">Music Quality: ★★★★☆</p>
-                        <p class="userOther col-6">Food/Beverage Quality: ★★☆☆☆</p>
+                        <p class="userSound col-6">Listening Experience: ★★★★☆</p>
+                        <p class="userVenue col-6">Venue Feel: ★★★☆☆</p>
+                        <p class="userMusic col-6">Music Value: ★★★★☆</p>
+                        <p class="userOther col-6">Band Quality: ★★★★★</p>
+                        <p class="userOther col-6">Food/Beverage Quality: ★★★☆☆</p>
+                        <p class="userOther col-6">Food/Beverage Value: ★★☆☆☆</p>
                     </div>
                     <p class="userReview col-12">I want to like 9:30 Club because it's such a DC institution. But it feels to me like they've been resting on their laurels for far too long and have let the place go. I'd much rather go to a newer place, like Anthem or Union Stage. They do still pull in some great bands, though.</p>
                 </div>
@@ -189,26 +193,213 @@
             </div>
 
             <div class="row userRatings">
+                <form class="rating">
+                   Listening experience
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+                <form class="rating">
+                    Venue Feel
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+                <form class="rating">
+                    Music Value
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+                <form class="rating">
+                    Band quality
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+                <form class="rating">
+                    Food/drink quality
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+                <form class="rating">
+                    Food/drink value
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </label>
+                </form>
+            </div>
+<!--                <textarea rows="4" cols ="50"></textarea>-->
+               <div class="row commentBox">
+                <textarea>Type your review</textarea>
+            </div>
+               <div class = "row commentButtons">
+                <button>Delete/Cancel Review</button><button>Submit Review</button>
 
-
-
-
-                <span class="starRating">
-                    <input id="rating5" type="radio" name="rating" value="5">
-                    <label for="rating5">5</label>
-                    <input id="rating4" type="radio" name="rating" value="4">
-                    <label for="rating4">4</label>
-                    <input id="rating3" type="radio" name="rating" value="3">
-                    <label for="rating3">3</label>
-                    <input id="rating2" type="radio" name="rating" value="2">
-                    <label for="rating2">2</label>
-                    <input id="rating1" type="radio" name="rating" value="1">
-                    <label for="rating1">1</label>
-                </span>
-
-
-
-
+                <!--
 
                 <p class="userSound col-6">Sound Quality: ☆☆☆☆☆</p>
                 <p class="userVenue col-6">Venue Quality: ☆☆☆☆☆</p>
@@ -216,6 +407,7 @@
                 <p class="userOther col-6">Food/Beverage Quality: ☆☆☆☆☆</p>
                 <textarea>Must look up how to click on rating and have rating submit something.  Keep or hide "back to search page"?  Need to also create sign-in page if not signed in.  Have reviewer name in marquee?</textarea>
                 <button>Submit Review</button><button>Exit w/o Reviewing</button>
+-->
             </div>
         </div>
 

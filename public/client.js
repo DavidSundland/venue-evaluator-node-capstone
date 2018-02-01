@@ -104,7 +104,11 @@ function listVenues() {
         } else {
             description = testVenueList[x].Description;
         }
-        $("#listBox").append(`<p class="oneVenue"><a href="${testVenueList[x].Website}" class="venueName">${testVenueList[x].Venue_Name}</a> - <span class="address">${testVenueList[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button></p>`);
+        $("#listBox").append(`<p class="oneVenue" id="venue${x}"><a href="${testVenueList[x].Website}" class="venueName">${testVenueList[x].Venue_Name}</a> - <span class="address">${testVenueList[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button></p>`);
+//        let venueId = "venue" + x;
+//        let storageName = "object" + x;
+//        let dataLoc = $(venueId)[0];
+//        jQuery.data(dataLoc, storageName, testVenueList[x]);
     }
 }
 
@@ -135,6 +139,11 @@ function listVenues() {
 //map: map
 //});
 //}
+
+$(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
+    console.log('New star rating: ' + this.value);
+});
+
 
 $(clickVenue);
 $(clickClose);
