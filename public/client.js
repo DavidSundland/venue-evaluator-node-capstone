@@ -25,6 +25,12 @@ function raiseCurtain() {
     $(".curtainMain").delay(1000).slideUp(4000);
 }
 
+function leaveReview() {
+    $('.listBox').on('click', 'button', viewVenue);
+    $('.venueBox').on('click', '#reviewButton', function () {
+        $('#leaveReview').addClass('venueVisible');
+    });
+}
 
 function listVenues() {
     let testVenueList = [{
@@ -133,3 +139,4 @@ $(clickVenue);
 $(clickClose);
 $(raiseCurtain);
 $(listVenues);
+$(leaveReview);

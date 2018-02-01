@@ -41,11 +41,17 @@
 
         <div class="row resultsBox">
             <div class="col-12">
-                <h2 class="venueList">Your Venues</h2>
-                <p class="textBlock">Venues in Washington, DC, that offer live music are listed below. The list view is sorted in order of overall review score. In the map view, hover over a pin for the venue name, or click on the pin for more information. If you would like to narrow the list of results, set your search parameters in the "Your Preferences" box farther down on the page.</p>
+                <h2 class="venueList">DC Music Venues</h2>
+                <p class="textBlock">Venues in Washington, DC, that offer live music are listed below. The list view is sorted in order of overall review score. In the map view, hover over a pin for the venue name, or click on the pin for more information. If you would like to narrow the list of results, type a venue name below or set your search parameters in the "Your Preferences" box farther down on the page.</p>
+            </div>
+            <div class="col-5 venueLimiter searchDescriptionTitle">Limit Results by Venue Name:</div>
+            <div class="col-7 venueLimiter">
+                <input type="text" id="nameSearch" onkeyup="searchNames()" placeholder="Type all or part of venue name">
             </div>
             <div class="col-7 listHolder">
-                <div class="paddingAdder"></div>
+                <div class="paddingAdder scrollbarExtender">
+                    <h3>Your List</h3>
+                </div>
                 <div class="listBox" id="listBox">
 
                     <p class="oneVenue"><a href="#" class="venueName">701 Restaurant</a> - <span class="address">701 Pennsylvania Ave. NW</span><br><span class="description"> 701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience....</span><button>More Info</button></p>
@@ -54,113 +60,15 @@
                     <p class="oneVenue"><a href="#" class="venueName">American University - Greenberg</a> - <span class="address">4200 Wisconsin Ave. NW</span><br><span class="description">American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion....</span><button>More Info</button></p>
 
                 </div>
-                <div class="paddingAdder"></div>
+                <div class="paddingAdder scrollbarExtender"></div>
 
             </div>
             <div class="col-5 mapBox">
+                <div class="paddingAdder">
+                    <h3>Your Map</h3>
+                </div>
                 <div id="map"></div>
 
-                <script>
-                    <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
-
-                    function clickVenue() {
-                        console.log("In viewVenue");
-                        $('.listBox').on('click', 'button', viewVenue);
-                    }
-
-
-                    function viewVenue() {
-                        $('.jsHide').addClass("venueVisible");
-                        var venueLoc = {
-                            lat: 38.9179969, // MAKE A VARIABLE THAT IS TIED TO DATABASE / 'THIS'
-                            lng: -77.023692
-                        };
-                    }
-
-                    function initMap() {
-                        let testVenueList = [{
-                            "Venue_Name": "701 Restaurant",
-                            "Primary_Genre": "Potpourri",
-                            "Website": "http://701restaurant.com/about/live-jazz/",
-                            "Google_Map_URL": "https://goo.gl/maps/seWMAXmPyKP2",
-                            "Latitude": 38.894292,
-                            "Longitude": -77.022442,
-                            "Full_Address": "701 Pennsylvania Ave. NW, Washington, DC 20004",
-                            "Street_Address": "701 Pennsylvania Ave. NW",
-                            "City": "Washington",
-                            "State": "DC",
-                            "Zip": 20004,
-                            "Description": "701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience. Menus reflect an inventive approach to Contemporary Continental Cuisine. 701 also offers a bar with a vast selection of culinary treats and signature cocktails, and a recently renovated 'back lounge.' During the warmer months, the patio provides a pleasant view of the Navy Memorial's cascading fountains and the National Archives. Live piano is provided in the evening, Thursday through Saturday.",
-                            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/701.jpg?raw=true"
-                        }, {
-                            "Venue_Name": "9:30 Club",
-                            "Primary_Genre": "Rock & Pop",
-                            "Website": "http://www.930.com/",
-                            "Google_Map_URL": "https://goo.gl/maps/EbAXTg6iEvE2",
-                            "Latitude": 38.9179969,
-                            "Longitude": -77.0258807,
-                            "Full_Address": "815 V St. NW, Washington, DC 20001",
-                            "Street_Address": "815 V St. NW",
-                            "City": "Washington",
-                            "State": "DC",
-                            "Zip": 20001,
-                            "Description": "9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar 'Nightclub of the Year' honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District's premier venue for nationally known touring acts.",
-                            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true"
-                        }, {
-                            "Venue_Name": "Museum of American Art",
-                            "Primary_Genre": "Classical",
-                            "Website": "http://www.si.edu/Events/Calendar/?trumbaEmbed=filter1%3D_%26-index%26filterfield1%3D11153#/?i=2",
-                            "Google_Map_URL": "https://goo.gl/maps/LqZXy3Q9DxJ2",
-                            "Latitude": 38.8978609,
-                            "Longitude": -77.0251306,
-                            "Full_Address": "800 G St. NW, Washington, DC 20001",
-                            "Street_Address": "800 G St. NW",
-                            "City": "Washington",
-                            "State": "DC",
-                            "Zip": 20001,
-                            "Description": "The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building's lower level, and the Kogod Courtyard, a covered space in the center of the building. Monthly concerts are also held in the American Art Museum's Luce Center.  In addition to music, public programming includes lectures, films, theater and dance performances.",
-                            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/american-art.jpg?raw=true"
-                        }, {
-                            "Venue_Name": "American University - Greenberg",
-                            "Primary_Genre": "Classical",
-                            "Website": "http://american.tix.com",
-                            "Google_Map_URL": "https://goo.gl/maps/QFPcdRVHZg62",
-                            "Latitude": 38.9434072,
-                            "Longitude": -77.0798043,
-                            "Full_Address": "4200 Wisconsin Ave. NW, Washington, DC 20016",
-                            "Street_Address": "4200 Wisconsin Ave. NW",
-                            "City": "Washington",
-                            "State": "DC",
-                            "Zip": 20016,
-                            "Description": "American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion. Its mission is to provide American University and the local community a venue for live performances in music, theatre and dance. It is the primary performance space for AU's Performing Arts Department.",
-                            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/greenberg.jpg?raw=true"
-                        }];
-                        var mapCenter = {
-                            lat: 38.9222375,
-                            lng: -77.0093275
-                        };
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 12,
-                            center: mapCenter
-                        });
-                        var markers = [];
-                        for (let x = 0; x < testVenueList.length; x++) {
-                            let coord = {
-                                "lat": testVenueList[x].Latitude,
-                                "lng": testVenueList[x].Longitude
-                            };
-                            console.log("coords = ", coord);
-                            markers.push(new google.maps.Marker({
-                                position: coord,
-                                map: map,
-                                title: testVenueList[x].Venue_Name
-                            }));
-                            markers[x].addListener('click', viewVenue);
-                        }
-                    }
-                </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
-                </script>
             </div>
         </div>
 
@@ -201,12 +109,8 @@
                     </select>
                 </div>
             </div>
-            <h3>Limit Results by Venue Name:</h3>
-            <div class="selectCenterer">
-                <input type="text" id="nameSearch" onkeyup="searchNames()" placeholder="Type all or part of venue name">
-            </div>
             <div class="col-12 searchDescriptions">
-                <p><span class = "searchDescriptionTitle">Venue Type*:</span> Would you prefer a formal concert experience - people focused on the music, while keeping conversations to a minimum? A music-first experience where it's OK to chat and walk around? Or would you prefer that music be in the background, with eating, drinking, or socializing as the primary activity?</p>
+                <p><span class="searchDescriptionTitle">*Venue Type:</span> Would you prefer a formal concert experience - people focused on the music, while keeping conversations to a minimum? A music-first experience where it's OK to chat and walk around? Or would you prefer that music be in the background, with eating, drinking, or socializing as the primary activity?</p>
             </div>
         </div>
 
@@ -268,6 +172,32 @@
         </div>
         <button id="closeVenue" class="jsHide">Back to Search Page</button>
 
+        <div class="reviewBox" id="leaveReview">
+            <div class="row venueHeader">
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+                <div>
+                    <p class="marqueeText">NOW REVIEWING:</p>
+                </div>
+                <div>
+                    <h1 class="marqueeText">9:30 CLUB</h1>
+                </div>
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+            </div>
+
+            <div class="row userRatings">
+                <p class="userSound col-6">Sound Quality: ☆☆☆☆☆</p>
+                <p class="userVenue col-6">Venue Quality: ☆☆☆☆☆</p>
+                <p class="userMusic col-6">Music Quality: ☆☆☆☆☆</p>
+                <p class="userOther col-6">Food/Beverage Quality: ☆☆☆☆☆</p>
+                <textarea>Must look up how to click on rating and have rating submit something.  Keep or hide "back to search page"?  Need to also create sign-in page if not signed in.  Have reviewer name in marquee?</textarea>
+                <button>Submit Review</button><button>Exit w/o Reviewing</button>
+            </div>
+        </div>
+
 
         <!--        <img id="concertGoers" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/concert-foreground.png?raw=true">-->
         <footer role="contentinfo">
@@ -278,6 +208,108 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <script>
+        <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
+
+        function clickVenue() {
+            console.log("In viewVenue");
+            $('.listBox').on('click', 'button', viewVenue);
+        }
+
+
+        function viewVenue() {
+            $('.jsHide').addClass("venueVisible");
+            var venueLoc = {
+                lat: 38.9179969, // MAKE A VARIABLE THAT IS TIED TO DATABASE / 'THIS'
+                lng: -77.023692
+            };
+        }
+
+        function initMap() {
+            let testVenueList = [{
+                "Venue_Name": "701 Restaurant",
+                "Primary_Genre": "Potpourri",
+                "Website": "http://701restaurant.com/about/live-jazz/",
+                "Google_Map_URL": "https://goo.gl/maps/seWMAXmPyKP2",
+                "Latitude": 38.894292,
+                "Longitude": -77.022442,
+                "Full_Address": "701 Pennsylvania Ave. NW, Washington, DC 20004",
+                "Street_Address": "701 Pennsylvania Ave. NW",
+                "City": "Washington",
+                "State": "DC",
+                "Zip": 20004,
+                "Description": "701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience. Menus reflect an inventive approach to Contemporary Continental Cuisine. 701 also offers a bar with a vast selection of culinary treats and signature cocktails, and a recently renovated 'back lounge.' During the warmer months, the patio provides a pleasant view of the Navy Memorial's cascading fountains and the National Archives. Live piano is provided in the evening, Thursday through Saturday.",
+                "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/701.jpg?raw=true"
+            }, {
+                "Venue_Name": "9:30 Club",
+                "Primary_Genre": "Rock & Pop",
+                "Website": "http://www.930.com/",
+                "Google_Map_URL": "https://goo.gl/maps/EbAXTg6iEvE2",
+                "Latitude": 38.9179969,
+                "Longitude": -77.0258807,
+                "Full_Address": "815 V St. NW, Washington, DC 20001",
+                "Street_Address": "815 V St. NW",
+                "City": "Washington",
+                "State": "DC",
+                "Zip": 20001,
+                "Description": "9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar 'Nightclub of the Year' honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District's premier venue for nationally known touring acts.",
+                "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true"
+            }, {
+                "Venue_Name": "Museum of American Art",
+                "Primary_Genre": "Classical",
+                "Website": "http://www.si.edu/Events/Calendar/?trumbaEmbed=filter1%3D_%26-index%26filterfield1%3D11153#/?i=2",
+                "Google_Map_URL": "https://goo.gl/maps/LqZXy3Q9DxJ2",
+                "Latitude": 38.8978609,
+                "Longitude": -77.0251306,
+                "Full_Address": "800 G St. NW, Washington, DC 20001",
+                "Street_Address": "800 G St. NW",
+                "City": "Washington",
+                "State": "DC",
+                "Zip": 20001,
+                "Description": "The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building's lower level, and the Kogod Courtyard, a covered space in the center of the building. Monthly concerts are also held in the American Art Museum's Luce Center.  In addition to music, public programming includes lectures, films, theater and dance performances.",
+                "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/american-art.jpg?raw=true"
+            }, {
+                "Venue_Name": "American University - Greenberg",
+                "Primary_Genre": "Classical",
+                "Website": "http://american.tix.com",
+                "Google_Map_URL": "https://goo.gl/maps/QFPcdRVHZg62",
+                "Latitude": 38.9434072,
+                "Longitude": -77.0798043,
+                "Full_Address": "4200 Wisconsin Ave. NW, Washington, DC 20016",
+                "Street_Address": "4200 Wisconsin Ave. NW",
+                "City": "Washington",
+                "State": "DC",
+                "Zip": 20016,
+                "Description": "American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion. Its mission is to provide American University and the local community a venue for live performances in music, theatre and dance. It is the primary performance space for AU's Performing Arts Department.",
+                "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/greenberg.jpg?raw=true"
+            }];
+            var mapCenter = {
+                lat: 38.9222375,
+                lng: -77.0093275
+            };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: mapCenter
+            });
+            var markers = [];
+            for (let x = 0; x < testVenueList.length; x++) {
+                let coord = {
+                    "lat": testVenueList[x].Latitude,
+                    "lng": testVenueList[x].Longitude
+                };
+                console.log("coords = ", coord);
+                markers.push(new google.maps.Marker({
+                    position: coord,
+                    map: map,
+                    title: testVenueList[x].Venue_Name
+                }));
+                markers[x].addListener('click', viewVenue);
+            }
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
+    </script>
+
     <!-- For getting lat & long from address -->
     <script type="text/javascript " src="https://maps.google.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ"></script>
     <script src="client.js "></script>

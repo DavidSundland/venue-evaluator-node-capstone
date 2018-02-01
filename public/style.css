@@ -75,7 +75,7 @@ body {
 */
 
 .curtainMain {
-    z-index: 200;
+    z-index: 300;
     width: 100%;
     height: 105%;
     position: fixed;
@@ -88,7 +88,7 @@ body {
     right: 0;
     top: 0;
     height: 100%;
-    z-index: 201;
+    z-index: 301;
 }
 
 .curtainLeft {
@@ -97,7 +97,7 @@ body {
     left: 0;
     top: 0;
     height: 100%;
-    z-index: 201;
+    z-index: 301;
 }
 
 .curtainTop {
@@ -106,7 +106,7 @@ body {
     top: 0;
     width: 100%;
     height: 60px;
-    z-index: 202;
+    z-index: 302;
 }
 
 header {
@@ -200,6 +200,7 @@ h2 {
     padding: 0 30px 30px 30px;
     font-size: .9em;
 }
+
 .searchDescriptionTitle {
     color: #FEAB67;
 }
@@ -208,15 +209,30 @@ h2 {
     padding: 20px;
 }
 
-.listHolder {
+.venueLimiter {
+    text-align: center;
+    padding: 30px;
+}
+
+.listHolder,
+.mapBox {
     border-top: 7px dotted #fed9ba;
     /* creates solid lines inside & outside of dotted border */
     box-shadow: inset 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767;
     padding: 0;
 }
 
-.paddingAdder {  /* adds padding to top and bottom of venue list even when list is scrolled, and visually extends scrollbar */
-    height: 30px;
+.paddingAdder {
+    height: 60px;
+}
+
+.paddingAdder h3 {
+    padding: 10px 30px;
+    color: #FE6767;
+    font-size: 1.1em;
+}
+
+.scrollbarExtender {
     border-right: 16px #f1f1f1 solid;
 }
 
@@ -226,11 +242,15 @@ h2 {
     height: 400px;
     overflow-y: scroll;
     padding: 30px;
+    border-top: 1px solid #FE6767;
 }
-
 
 .listBox p {
     padding-bottom: 20px;
+}
+
+#map {
+    padding: 0 10px;
 }
 
 .address {
@@ -286,7 +306,8 @@ button#closeVenue:hover {
     text-shadow: 0 0 1px white;
 }
 
-.jsHide {
+.jsHide,
+.reviewBox {
     display: none;
 }
 
@@ -297,7 +318,8 @@ button#closeVenue:hover {
     z-index: 401;
 }
 
-.venueBox {
+.venueBox,
+.reviewBox {
     width: 100%;
     height: 100%;
     padding: 20px 5%;
@@ -306,7 +328,11 @@ button#closeVenue:hover {
     left: 0;
     overflow: auto;
     background-color: black;
+}
+
+.venueBox {
     z-index: 101;
+
 }
 
 .venueVisible {
@@ -373,6 +399,10 @@ hr {
     padding: 0 40px;
 }
 
+.reviewBox {
+    z-index: 201;
+    position: fixed;
+}
 
 footer {
     /*    position: fixed;*/
