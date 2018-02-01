@@ -135,6 +135,7 @@ function listVenues() {
 //map: map
 //});
 //}
+
 $(clickVenue);
 $(clickClose);
 $(raiseCurtain);
