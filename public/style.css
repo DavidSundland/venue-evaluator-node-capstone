@@ -417,8 +417,12 @@ hr {
     padding: 0 40px;
 }
 
-#userReviews {
-    z-index: 1001;
+#userReviews p {
+    margin: 10px;
+}
+
+#userReviews p:first-child {
+    margin-top: 30px;
 }
 
 .reviewBox {
@@ -428,6 +432,10 @@ hr {
 
 .userRatings form {
     margin-top: 20px;
+}
+
+.commentBox {
+    margin-bottom: 30px;
 }
 
 /* STYLES FOR POSTING RATINGS */

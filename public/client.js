@@ -38,8 +38,8 @@ function rateVenue() {
         console.log("clicked");
         let ratingClicked = $(this).attr("value");
         console.log(ratingClicked);
-        let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, get color from parent */
-        let newColor = "yellow";
+        let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, so get base color from parent instead */
+        let newColor = "#86034D";
         if (ratingClicked === "5") {
             $(this).parent().find(".value1").css("color", newColor);
             $(this).parent().find(".value2").css("color", newColor);
