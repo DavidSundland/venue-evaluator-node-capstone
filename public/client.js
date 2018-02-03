@@ -32,6 +32,48 @@ function leaveReview() {
     });
 }
 
+function rateVenue() {
+    console.log("in rateVenue;")
+    $("#userReviews").on('click', '.star', function () {
+        console.log("clicked");
+        let ratingClicked = $(this).attr("value");
+        console.log(ratingClicked);
+        let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, get color from parent */
+        let newColor = "yellow";
+        if (ratingClicked === "5") {
+            $(this).parent().find(".value1").css("color", newColor);
+            $(this).parent().find(".value2").css("color", newColor);
+            $(this).parent().find(".value3").css("color", newColor);
+            $(this).parent().find(".value4").css("color", newColor);
+            $(this).parent().find(".value5").css("color", newColor);
+        } else if (ratingClicked === "4") {
+            $(this).parent().find(".value1").css("color", newColor);
+            $(this).parent().find(".value2").css("color", newColor);
+            $(this).parent().find(".value3").css("color", newColor);
+            $(this).parent().find(".value4").css("color", newColor);
+            $(this).parent().find(".value5").css("color", oldColor);
+        } else if (ratingClicked === "3") {
+            $(this).parent().find(".value1").css("color", newColor);
+            $(this).parent().find(".value2").css("color", newColor);
+            $(this).parent().find(".value3").css("color", newColor);
+            $(this).parent().find(".value4").css("color", oldColor);
+            $(this).parent().find(".value5").css("color", oldColor);
+        } else if (ratingClicked === "2") {
+            $(this).parent().find(".value1").css("color", newColor);
+            $(this).parent().find(".value2").css("color", newColor);
+            $(this).parent().find(".value3").css("color", oldColor);
+            $(this).parent().find(".value4").css("color", oldColor);
+            $(this).parent().find(".value5").css("color", oldColor);
+        } else {
+            $(this).parent().find(".value1").css("color", newColor);
+            $(this).parent().find(".value2").css("color", oldColor);
+            $(this).parent().find(".value3").css("color", oldColor);
+            $(this).parent().find(".value4").css("color", oldColor);
+            $(this).parent().find(".value5").css("color", oldColor);
+        }
+    });
+}
+
 function listVenues() {
     let testVenueList = [{
         "Venue_Name": "701 Restaurant",
@@ -105,10 +147,10 @@ function listVenues() {
             description = testVenueList[x].Description;
         }
         $("#listBox").append(`<p class="oneVenue" id="venue${x}"><a href="${testVenueList[x].Website}" class="venueName">${testVenueList[x].Venue_Name}</a> - <span class="address">${testVenueList[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button></p>`);
-//        let venueId = "venue" + x;
-//        let storageName = "object" + x;
-//        let dataLoc = $(venueId)[0];
-//        jQuery.data(dataLoc, storageName, testVenueList[x]);
+        //        let venueId = "venue" + x;
+        //        let storageName = "object" + x;
+        //        let dataLoc = $(venueId)[0];
+        //        jQuery.data(dataLoc, storageName, testVenueList[x]);
     }
 }
 
@@ -150,3 +192,4 @@ $(clickClose);
 $(raiseCurtain);
 $(listVenues);
 $(leaveReview);
+$(rateVenue);
