@@ -401,12 +401,12 @@ hr {
 
 .userName {
     color: #CC5297;
+    font-size: 1.3em;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.userSound,
-.userVenue,
-.userMusic,
-.userOther {
+.userRatings p {
     padding: 0 20px;
     margin: 0;
     color: #FEAB67;
@@ -414,7 +414,7 @@ hr {
 
 .userReview {
     text-align: left;
-    padding: 0 40px;
+    padding: 25px 6%;
 }
 
 #userReviews p {

@@ -58,6 +58,7 @@
                     <p class="oneVenue"><a href="#" class="venueName">9:30 Club</a> - <span class="address">815 V St. NW</span><br><span class="description">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly....</span><button>More Info</button></p>
                     <p class="oneVenue"><a href="#" class="venueName">Museum of American Art</a> - <span class="address">800 G St. NW</span><br><span class="description">The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building’s lower level, and the Kogod Courtyard, a covered space in the center of the building....</span><button>More Info</button></p>
                     <p class="oneVenue"><a href="#" class="venueName">American University - Greenberg</a> - <span class="address">4200 Wisconsin Ave. NW</span><br><span class="description">American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion....</span><button>More Info</button></p>
+                    <!-- *mark* -->
 
                 </div>
                 <div class="paddingAdder scrollbarExtender"></div>
@@ -123,13 +124,13 @@
                     <p class="marqueeText">INTRODUCING:</p>
                 </div>
                 <div>
-                    <h1 class="marqueeText">9:30 CLUB</h1>
+                    <h1 class="marqueeText" id="venueMarquee">9:30 CLUB</h1>
                 </div>
                 <div>
                     <p class="hideMe">HIDE ME</p>
                 </div>
             </div>
-            <div class="row venueInfo">
+            <div class="row venueInfo" id="venueInfo">
                 <div class="col-6">
                     <img src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true">
 
@@ -145,7 +146,7 @@
                 </div>
             </div>
             <hr>
-            <div class="reviews">
+            <div class="reviews" id="reviews">
                 <h2>Reviews</h2>
                 <div class="oneReview">
                     <p class="userName row">Joe ConcertGoer</p>
@@ -448,11 +449,75 @@
 
 
         function viewVenue() {
-            $('.jsHide').addClass("venueVisible");
-            var venueLoc = {
+            let fakeReviews = [{
+                "userName": "Joe ConcertGoer",
+                "userListening": 5,
+                "userFeel": 4,
+                "userMusicValue": 4,
+                "userMusicQuality": 3,
+                "userFoodQuality": 3,
+                "userFoodValue": 2,
+                "userReview": "9:30 Club is a cavernous space that is well-worn. It is ugly outside and not terribly attractive inside. Still, it's a great place to hear music - excellent bands, top-notch sound and lighting, and very engaged crowds."
+            }, {
+                "userName": "Joanne MusicLover",
+                "userListening": 4,
+                "userFeel": 3,
+                "userMusicValue": 3,
+                "userMusicQuality": 5,
+                "userFoodQuality": 2,
+                "userFoodValue": 1,
+                "userReview": "I want to like 9:30 Club because it's such a DC institution. But it feels to me like they've been resting on their laurels for far too long and have let the place go. I'd much rather go to a newer place, like Anthem or Union Stage. They do still pull in some great bands, though."
+            }]
+            let venueLoc = {
                 lat: 38.9179969, // MAKE A VARIABLE THAT IS TIED TO DATABASE / 'THIS'
                 lng: -77.023692
             };
+            let stars = [
+                '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
+                '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
+                '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
+                '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>',
+                '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>'
+            ]
+            let venueName = $(this).parent().find(".venueName")[0].innerHTML;
+            let venueLink = $(this).parent().find("a")[0].href;
+            let venueAddress = $(this).parent().find(".address")[0].innerHTML;
+            let venueDesc = $(this).parent().find(".description")[0].innerHTML;
+            let venuePic = $(this).parent().find(".picUrl")[0].value;
+            let venueDescription = $(this).parent().find(".fullDesc")[0].value;
+//            console.log(venueName, venueLink, venueAddress, venueDesc, venuePic, venueDescription);
+            $("#venueMarquee").html(venueName.toUpperCase());
+            $("#venueInfo").html(`
+            <div class="col-6">
+                <img src="${venuePic}">
+                <iframe width="80%" height="400px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=${venueName}, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
+            </div>
+            <div class="col-6">
+                <h3 class="venueNameHeader"><a href="${venueLink}">${venueName}</a></h3>
+                    <hr>
+                    <p class="venueAddress">${venueAddress}</p>
+            <p class="venueDescription">${venueDescription}</p>
+                <button id="reviewButton">Leave a Review!</button>
+        </div>`);
+            $('#reviews').html(`<h2>Reviews</h2>`);
+            for (let x = 0; x < fakeReviews.length; x++) {
+                $('#reviews').append(`
+                    <div class="oneReview">
+                        <p class="userName row">${fakeReviews[x].userName}</p>
+                        <div class="row userRatings">
+                            <p class="col-6">Listening Experience: ${stars[fakeReviews[x].userListening-1]}</p>
+                            <p class="col-6">Venue Feel: ${stars[fakeReviews[x].userFeel-1]}</p>
+                            <p class="col-6">Music Value: ${stars[fakeReviews[x].userMusicValue-1]}</p>
+                            <p class="col-6">Band Quality: ${stars[fakeReviews[x].userMusicQuality-1]}</p>
+                            <p class="col-6">Food/Beverage Quality: ${stars[fakeReviews[x].userFoodQuality-1]}</p>
+                            <p class="col-6">Food/Beverage Value: ${stars[fakeReviews[x].userFoodValue-1]}</p>
+                        </div>
+                        <p class="userReview row">${fakeReviews[x].userReview}</p>
+                    </div>
+                    <hr>
+            `)
+            }
+            $('.jsHide').addClass("venueVisible");
         }
 
         function initMap() {

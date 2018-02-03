@@ -29,6 +29,8 @@ function leaveReview() {
     $('.listBox').on('click', 'button', viewVenue);
     $('.venueBox').on('click', '#reviewButton', function () {
         $('#leaveReview').addClass('venueVisible');
+        $('#closeVenue').removeClass('venueVisible');
+        /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN
     });
 }
 
@@ -146,7 +148,7 @@ function listVenues() {
         } else {
             description = testVenueList[x].Description;
         }
-        $("#listBox").append(`<p class="oneVenue" id="venue${x}"><a href="${testVenueList[x].Website}" class="venueName">${testVenueList[x].Venue_Name}</a> - <span class="address">${testVenueList[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button></p>`);
+        $("#listBox").append(`<p class="oneVenue" id="venue${x}"><a href="${testVenueList[x].Website}" class="venueName">${testVenueList[x].Venue_Name}</a> - <span class="address">${testVenueList[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${testVenueList[x].Image_URL}"><input type="hidden" class = "fullDesc" value="${testVenueList[x].Description}"></p>`);
         //        let venueId = "venue" + x;
         //        let storageName = "object" + x;
         //        let dataLoc = $(venueId)[0];
