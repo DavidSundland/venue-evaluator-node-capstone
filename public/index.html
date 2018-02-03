@@ -433,7 +433,7 @@
         <!--        <img id="concertGoers" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/concert-foreground.png?raw=true">-->
         <footer role="contentinfo">
             <div class="left">© David Sundland</div>
-            <div class="right"><a href="https://github.com/DavidSundland" target="_none"><i class="fa fa-github" aria-hidden="true"></i></a><a href="https://www.linkedin.com/in/david-sundland" target="_none"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="mailto:dsundland@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></div>
+            <div class="right"><a href="https://github.com/DavidSundland" target="_none"><i class="fab fa-github"></i></a> <a href="https://www.linkedin.com/in/david-sundland" target="_none"><i class="fab fa-linkedin"></i></a><a href="mailto:dsundland@gmail.com"><i class="far fa-envelope"></i></a></div>
         </footer>
 
     </main>
@@ -485,7 +485,7 @@
             let venueDesc = $(this).parent().find(".description")[0].innerHTML;
             let venuePic = $(this).parent().find(".picUrl")[0].value;
             let venueDescription = $(this).parent().find(".fullDesc")[0].value;
-//            console.log(venueName, venueLink, venueAddress, venueDesc, venuePic, venueDescription);
+            //            console.log(venueName, venueLink, venueAddress, venueDesc, venuePic, venueDescription);
             $("#venueMarquee").html(venueName.toUpperCase());
             $("#venueInfo").html(`
             <div class="col-6">
@@ -598,7 +598,9 @@
                     map: map,
                     title: testVenueList[x].Venue_Name
                 }));
-                markers[x].addListener('click', viewVenue);
+                markers[x].addListener('click', function() {
+                    console.log($(this)[0].title);
+                });
             }
         }
     </script>

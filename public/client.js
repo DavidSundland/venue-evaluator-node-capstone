@@ -30,7 +30,7 @@ function leaveReview() {
     $('.venueBox').on('click', '#reviewButton', function () {
         $('#leaveReview').addClass('venueVisible');
         $('#closeVenue').removeClass('venueVisible');
-        /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN
+        /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
     });
 }
 
