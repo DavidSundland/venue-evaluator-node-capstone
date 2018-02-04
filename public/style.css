@@ -226,6 +226,12 @@ h2 {
 .venueLimiter {
     text-align: center;
     padding: 30px;
+    font-size: 1.2em;
+}
+
+#nameSearch {
+    width: 90%;
+    font-size: .7em;
 }
 
 .listHolder,
@@ -239,13 +245,28 @@ h2 {
 .paddingAdder {
     height: 60px;
     background-color: #161616;
-    border: 1px solid #FE6767;
+}
+
+.paLeft {
+    border-left: 1px solid #FE6767;
+}
+
+.paRight {
+    border-right: 1px solid #FE6767;
+}
+
+.paTop {
+    border-top: 1px solid #FE6767;
+}
+
+.paBottom {
+    border-bottom: 1px solid #FE6767;
 }
 
 .paddingAdder h3 {
     padding: 10px 30px;
     color: #FE6767;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .scrollbarExtender {
