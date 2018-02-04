@@ -305,6 +305,10 @@ button:hover {
     background-color: #038503;
 }
 
+#reviewButton {
+    margin-bottom: 30px;
+}
+
 .jsHide,
 .reviewBox {
     display: none;
@@ -312,8 +316,8 @@ button:hover {
 
 #closeVenue {
     position: fixed;
-    top: 50px;
-    right: 50px;
+    top: 40px;
+    right: 40px;
     z-index: 401;
 }
 
@@ -473,13 +477,44 @@ input {
     padding-left: 10px;
 }
 
+
 @media (max-width: 1300px) {
     #map {
         width: 100%;
         margin: 0;
     }
+    .curtainLeft,
+    .curtainRight {
+        max-width: 10%;
+    }
 }
 
+/* Goes from multi-column to single column at 1150 px */
+
+@media (max-width: 1150px) {
+    .paRight {
+        border-left: 1px solid #FE6767;
+    }
+    #map {
+        width: 92%;
+        margin: 4%;
+    }
+    .paddingAdder:not(.paLeft) {
+        background-color: #202020;
+    }
+    .venueLimiter {
+        padding-top: 0;
+    }
+    .textBlock {
+        padding-bottom: 50px;
+    }
+    .venueAddress {
+        padding: 20px 80px;
+    }
+    .venueDescription {
+        padding: 20px 80px;
+    }
+}
 
 @media only screen and (max-width: 640px) {
     footer {
@@ -496,5 +531,3 @@ input {
         display: none;
     }
 }
-
-
