@@ -478,7 +478,7 @@ input {
 }
 
 
-@media (max-width: 1300px) {
+@media only screen and (max-width: 1300px) {
     #map {
         width: 100%;
         margin: 0;
@@ -491,7 +491,7 @@ input {
 
 /* Goes from multi-column to single column at 1150 px */
 
-@media (max-width: 1150px) {
+@media only screen and (max-width: 1150px) {
     .paRight {
         border-left: 1px solid #FE6767;
     }
@@ -509,10 +509,31 @@ input {
         padding-bottom: 50px;
     }
     .venueAddress {
-        padding: 20px 80px;
+        padding: 20px 5%;
     }
     .venueDescription {
-        padding: 20px 80px;
+        padding: 20px 5%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    body {
+        font-size: 20px;
+    }
+    #closeVenue {
+        top: auto;
+        bottom: 40px;
+        right: 0;
+        left: 0;
+        margin-right: auto;
+        margin-left: auto;
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    body {
+        line-height: 1.3;
     }
 }
 
