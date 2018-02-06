@@ -1,19 +1,19 @@
 {
-  "name": "venue_e-valuator",
-  "version": "1.0.0",
-  "description": "Provides information about Washington, DC, venues that offer live music and allows users to leave music-focused reviews",
-  "main": "config.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DavidSundland/venue-evaluator-node-capstone.git"
-  },
-  "keywords": [
+    "name": "venue_e-valuator",
+    "version": "1.0.0",
+    "description": "Provides information about Washington, DC, venues that offer live music and allows users to leave music-focused reviews",
+    "main": "config.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DavidSundland/venue-evaluator-node-capstone.git"
+    },
+    "keywords": [
     "washington",
     "dc",
     "live",
@@ -22,13 +22,36 @@
     "reviews",
     "venues"
   ],
-  "author": "David Sundland",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DavidSundland/venue-evaluator-node-capstone/issues"
-  },
-  "homepage": "https://github.com/DavidSundland/venue-evaluator-node-capstone#readme",
-  "dependencies": {
-    "express": "^4.16.2"
-  }
+    "author": "David Sundland",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DavidSundland/venue-evaluator-node-capstone/issues"
+    },
+    "homepage": "https://github.com/DavidSundland/venue-evaluator-node-capstone#readme",
+    "dependencies": {
+        "bcrypt": "^0.8.7",
+        "bcryptjs": "^2.3.0",
+        "body-parser": "^1.15.2",
+        "cors": "^2.8.4",
+        "express": "^4.14.0",
+        "isomorphic-fetch": "^2.2.1",
+        "moment": "^2.18.1",
+        "mongodb": "^2.2.9",
+        "mongoose": "^4.5.10",
+        "passport": "^0.3.2",
+        "passport-http": "^0.3.0",
+        "react": "^15.3.1",
+        "react-dom": "^15.3.1",
+        "react-fontawesome": "^1.6.1",
+        "react-redux": "^4.4.5",
+        "redux": "^3.6.0",
+        "redux-thunk": "^2.2.0",
+        "unirest": "^0.5.1"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-http": "^3.0.0",
+        "faker": "^3.1.0",
+        "mocha": "^3.2.0"
+    }
 }

@@ -293,6 +293,16 @@ button {
     box-shadow: 1px 1px white;
 }
 
+
+input {
+    width: 50%;
+    box-shadow: px 2px 2px black inset;
+    /* ADJUST COLOR ONCE COLOR PALATTE FINALIZED */
+    height: 35px;
+    margin: 5px 5% 10px 5%;
+    padding-left: 10px;
+}
+
 .listBox button {
     font-size: .8em;
     padding: 5px 8px;
@@ -310,7 +320,8 @@ button:hover {
 }
 
 .jsHide,
-.reviewBox {
+.reviewBox,
+.login {
     display: none;
 }
 
@@ -322,7 +333,8 @@ button:hover {
 }
 
 .venueBox,
-.reviewBox {
+.reviewBox,
+.login {
     width: 100%;
     height: 100%;
     padding: 20px 5%;
@@ -333,9 +345,35 @@ button:hover {
     background-color: black;
 }
 
-.venueBox {
+.venueBox,
+.login {
     z-index: 101;
+}
 
+.login form {
+    padding-top: 60px;
+}
+
+.login form div {
+    margin-bottom: 20px;
+}
+
+.loginLabel {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.loginInput {
+    text-align: left;
+}
+
+.login input {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.login button {
+    margin: 30px;
 }
 
 .venueVisible {
@@ -467,17 +505,6 @@ form {
     text-align: center;
 }
 
-
-input {
-    width: 50%;
-    box-shadow: 2px 2px 2px black inset;
-    /* ADJUST COLOR ONCE COLOR PALATTE FINALIZED */
-    height: 35px;
-    margin: 5px 5% 10px 5%;
-    padding-left: 10px;
-}
-
-
 @media only screen and (max-width: 1300px) {
     #map {
         width: 100%;
@@ -513,6 +540,17 @@ input {
     }
     .venueDescription {
         padding: 20px 5%;
+    }
+    .loginLabel {
+        text-align: center;
+        padding-right: 0;
+    }
+    .loginInput {
+        text-align: center;
+    }
+    .login input {
+        margin-right: 20px;
+        /* match margin-left */
     }
 }
 

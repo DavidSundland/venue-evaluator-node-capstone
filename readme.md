@@ -24,7 +24,7 @@ As a user, I want an overview about each venue that interests me so that I can d
 * Users can leave their own reviews, including providing ratings in pre-selected categories and a text box in which detailed comments can be written.
 
 ## Working Prototye
-A live example of the project can be found at: (insert link)
+A live example of the project can be found at: https://venue-evaluator.herokuapp.com/
 Screenshots to be provided at a later date.
 
 ## Functionality

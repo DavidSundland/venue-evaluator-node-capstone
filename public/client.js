@@ -26,10 +26,15 @@ function raiseCurtain() {
 }
 
 function leaveReview() {
-    $('.listBox').on('click', 'button', viewVenue);
+    $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
+    let tempBoo = true; // REPLACE THIS ONCE USER LOG-IN FUNCTIONAL
     $('.venueBox').on('click', '#reviewButton', function () {
-        $('#leaveReview').addClass('venueVisible');
         $('#closeVenue').removeClass('venueVisible');
+        if (tempBoo) {
+            $('.login').addClass('venueVisible');
+        } else {
+            $('#leaveReview').addClass('venueVisible');
+        }
         /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
     });
 }
@@ -187,6 +192,50 @@ function listVenues() {
 $(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
     console.log('New star rating: ' + this.value);
 });
+
+//
+//<input name="userName" placeholder="username">
+//    <input name="password" placeholder="password">
+//        <input name = "passwordConfirm" placeholder="password confirm">
+
+$('#login').on('submit', function (event) {
+    event.preventDefault();
+    const uname = $('input[name="userName"]').val();
+    const pw = $('input[name="password"]').val();
+    const confirmPw = $('input[name="passwordConfirm"]').val();
+    if (pw !== confirmPw) {
+        alert('Passwords must match!');
+    } else {
+        const newUserObject = {
+            username: uname,
+            password: pw
+        };
+        // will assign a value to variable 'user' in signin step below
+        // AJAX call to send form data up to server/DB and create new user
+        $.ajax({
+                type: 'POST',
+                url: '/users/create',
+                dataType: 'json',
+                data: JSON.stringify(newUserObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                //            newUserToggle = true;
+                //            alert('Thanks for signing up! You may now sign in with your username and password.');
+                //            showSignInPage();
+                console.log(result)
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+            });
+    };
+});
+
+
+
+
 
 
 $(clickVenue);
