@@ -334,6 +334,7 @@
         }
 
         function initMap() {
+            $.getJSON('/venues', function (res) {
             let testVenueList = [{
                 "Venue_Name": "701 Restaurant",
                 "Primary_Genre": "Potpourri",
@@ -400,21 +401,21 @@
                 center: mapCenter
             });
             var markers = [];
-            for (let x = 0; x < testVenueList.length; x++) {
+            for (let x = 0; x < res.length; x++) {
                 let coord = {
-                    "lat": testVenueList[x].Latitude,
-                    "lng": testVenueList[x].Longitude
+                    "lat": res[x].Latitude,
+                    "lng": res[x].Longitude
                 };
                 console.log("coords = ", coord);
                 markers.push(new google.maps.Marker({
                     position: coord,
                     map: map,
-                    title: testVenueList[x].Venue_Name,
+                    title: res[x].Venue_Name,
                     extraInfo: {
-                        "venueLink": testVenueList[x].Website,
-                        "venueAddress": testVenueList[x].Street_Address,
-                        "venueDescription": testVenueList[x].Description,
-                        "venuePic": testVenueList[x].Image_URL
+                        "venueLink": res[x].Website,
+                        "venueAddress": res[x].Street_Address,
+                        "venueDescription": res[x].Description,
+                        "venuePic": res[x].Image_URL
                     }
                 }));
                 console.log("got to line 611");
@@ -425,6 +426,7 @@
                     renderVenue(testVenueList[x].Venue_Name, testVenueList[x].Website, testVenueList[x].Street_Address, testVenueList[x].Description, testVenueList[x].Image_URL);
                 });
             }
+            });
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
