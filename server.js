@@ -10,6 +10,9 @@ const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const express = require('express');
 const app = express();
+const {
+    venueInfo
+} = require('./models');
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
@@ -54,7 +57,7 @@ function closeServer() {
 
 
 // log the http layer
-//app.use(morgan('common'));
+//app.use(morgan('common'));  // removed Morgan from dependencies due to NPM install issues (can "npm install --save morgan" if morgan needed)
 
 app.use(express.static('public'));
 
@@ -65,6 +68,8 @@ app.get('/', (req, res) => {
 
 app.use('/reviews', reviewsRouter);
 
+
+// Create new user
 app.post('/users/create', (req, res) => {
     let username = req.body.username;
     username = username.trim();
@@ -101,6 +106,58 @@ app.post('/users/create', (req, res) => {
         });
     });
 });
+
+// Sign a new user in
+app.post('/signin', function (req, res) {
+    const user = req.body.username;
+    const pw = req.body.password;
+    User
+        .findOne({
+            username: req.body.username
+        }, function (err, items) {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+            if (!items) {
+                // bad username
+                return res.status(401).json({
+                    message: "Not found!"
+                });
+            } else {
+                items.validatePassword(req.body.password, function (err, isValid) {
+                    if (err) {
+                        console.log('There was an error validating the password.');
+                    }
+                    if (!isValid) {
+                        return res.status(401).json({
+                            message: "Not found"
+                        });
+                    } else {
+                        var logInTime = new Date();
+                        console.log("User logged in: " + req.body.username + ' at ' + logInTime);
+                        return res.json(items);
+                    }
+                });
+            };
+        });
+});
+
+app.get('/venues', (req, res) => {
+    venueInfo
+        .find()
+        .then(venues => {
+            res.json(venues.map(venue => venue.serialize()));
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({
+                error: 'something went terribly wrong'
+            });
+        });
+});
+
 
 
 // MISC ------------------------------------------

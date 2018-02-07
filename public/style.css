@@ -321,6 +321,7 @@ button:hover {
 
 .jsHide,
 .reviewBox,
+.newUser,
 .login {
     display: none;
 }
@@ -334,6 +335,7 @@ button:hover {
 
 .venueBox,
 .reviewBox,
+.newUser,
 .login {
     width: 100%;
     height: 100%;
@@ -346,15 +348,18 @@ button:hover {
 }
 
 .venueBox,
+.newUser,
 .login {
     z-index: 101;
 }
 
-.login form {
+.login form,
+.newUser form {
     padding-top: 60px;
 }
 
-.login form div {
+.login form div,
+.newUser form div {
     margin-bottom: 20px;
 }
 

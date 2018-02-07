@@ -22,28 +22,33 @@ function clickClose() {
 }
 
 function raiseCurtain() {
-    $(".curtainMain").delay(1000).slideUp(4000);
+    $(".curtainMain").delay(1000).slideUp(3000);
 }
 
 function leaveReview() {
     console.log("just opened leaveReview");
     $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
     $('.venueBox').on('click', '#reviewButton', showReview);
+    $('.login').on('click', '#newUserButton', createNewUser);
 }
 
-function showReview(tempBoo) { // get rid of tempBoo parameter once test for logged in is created !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if (tempBoo === undefined) {
-        let tempBoo = true;
-    } // REPLACE THIS ONCE USER LOG-IN FUNCTIONAL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    $('#closeVenue').removeClass('venueVisible');
-    if (tempBoo) {
-        console.log("in leaveReview and tempBoo true")
+function showReview() { // DECIDE IF LOGGEDIN VALUE NEEDS TO CONTINUE TO BE PASSED...
+    let loggedIn = false; // RESET/CHANGE/DELETE THIS AFTER DONE TESTING...
+    $('#closeVenue').removeClass('venueVisible'); // Hide close venue button
+    if (!loggedIn) {
+        console.log("in showReview and loggedIn false")
         $('.login').addClass('venueVisible');
     } else {
         $('#leaveReview').addClass('venueVisible');
-        console.log("in leaveReview and tempBoo false")
+        console.log("in showReview and loggedIn true")
     }
     /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
+}
+
+function createNewUser(event) {
+    event.preventDefault(); // otherwise page reloads when this function starts
+    $('.login').removeClass('venueVisible');
+    $('.newUser').addClass('venueVisible');
 }
 
 function rateVenue() {
@@ -88,7 +93,12 @@ function rateVenue() {
     });
 }
 
+// app.get('/venues-with-all-ratings'
+
 function listVenues() {
+    $.getJSON('/venues', function (res) {
+        console.log("logging results", res);
+    });
     let testVenueList = [{
         "Venue_Name": "701 Restaurant",
         "Primary_Genre": "Potpourri",
@@ -200,12 +210,10 @@ $(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES
     console.log('New star rating: ' + this.value);
 });
 
-//
-//<input name="userName" placeholder="username">
-//    <input name="password" placeholder="password">
-//        <input name = "passwordConfirm" placeholder="password confirm">
 
-$('#login').on('submit', function (event) {
+// Code to create new user:
+
+$('#newUser').on('submit', function (event) {
     event.preventDefault();
     const uname = $('input[name="userName"]').val();
     const pw = $('input[name="password"]').val();
@@ -238,9 +246,8 @@ $('#login').on('submit', function (event) {
                 $('input[name="userName"]').val(""); // clear the input fields
                 $('input[name="password"]').val("");
                 $('input[name="passwordConfirm"]').val("");
-                $('.login').removeClass('venueVisible');
+                $('.newUser').removeClass('venueVisible');
                 showReview(tempBoo); // ONCE LOG-IN CREATED, TAKE USER TO LOG-IN SCREEN
-
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -251,9 +258,88 @@ $('#login').on('submit', function (event) {
 });
 
 
+//<div class="login">
+//    <div class="row venueHeader">
+//        <div>
+//        <p class="hideMe">HIDE ME</p>
+//</div>
+//<div>
+//            <p class="hideMe">HIDE ME</p>
+//</div>
+//<div>
+//                <p class="marqueeText">LOG IN!</p>
+//</div>
+//<div>
+//                    <p class="hideMe">HIDE ME</p>
+//</div>
+//</div>
+//<form id="login">
+//    <div class="row">
+//        <div class="col-6 loginLabel">Username:</div>
+//<div class="col-6 loginInput"><input name="signinUserName" placeholder="testuser"></div>
+//</div>
+//<div class="row">
+//    <div class="col-6 loginLabel">Password:</div>
+//<div class="col-6 loginInput"><input name="signinPassword" placeholder="testpassword"></div>
+//</div>
+//<div class="row">
+//    <button type="submit">Submit</button><button id="cancelLogin">Cancel</button>
+//        </div>
+//</form>
+//</div>
 
 
+// Code to log user in:
 
+$('#login').on('click', '#loginClicked', function (event) {
+    event.preventDefault();
+    // AJAX call to validate login info and sign user in
+    const inputUname = $('input[name="signinUserName"]').val();
+    const inputPw = $('input[name="signinPassword"]').val();
+    // check for spaces, empty, undefined
+    if ((!inputUname) || (inputUname.length < 1) || (inputUname.indexOf(' ') > 0)) {
+        alert('Invalid username');
+    } else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
+        alert('Invalid password');
+    } else {
+        const unamePwObject = {
+            username: inputUname,
+            password: inputPw
+        };
+        user = inputUname;
+        $.ajax({
+                type: "POST",
+                url: "/signin",
+                dataType: 'json',
+                data: JSON.stringify(unamePwObject),
+                contentType: 'application/json'
+            })
+            .done(function (result) {
+                // show the signout link in header as soon as user is signed in
+                //            $('#js-signout-link').show();
+                //            if (newUserToggle === true) {
+                //                showAddPage();
+                //            } else {
+                //                showHomePage();
+                //            }
+                alert("Hey, that worked!  Now we just need to figure out what to do with you next!")
+                console.log(result);
+                $('input[name="signinUserName"]').val("");
+                $('input[name="signinPassword"]').val("");
+            })
+            .fail(function (jqXHR, error, errorThrown) {
+                console.log(jqXHR);
+                console.log(error);
+                console.log(errorThrown);
+                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+            });
+    };
+});
+
+//db.getCollection('venues-with-all-ratings').find({})
+//$.getJSON('mongodb://admin:admin@ds211558.mlab.com:11558/venue-evaluator/venues-with-all-ratings', function (res) {
+//    console.log("In getJSON", res);
+//});
 
 $(clickVenue);
 $(clickClose);

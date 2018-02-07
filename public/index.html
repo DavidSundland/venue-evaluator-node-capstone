@@ -139,7 +139,7 @@
         </div>
         <button id="closeVenue" class="jsHide">Back to Search Page</button>
 
-        <div class="login">
+        <div class="newUser">
             <div class="row venueHeader">
                 <div>
                     <p class="hideMe">HIDE ME</p>
@@ -154,7 +154,7 @@
                     <p class="hideMe">HIDE ME</p>
                 </div>
             </div>
-            <form id="login">
+            <form id="newUser">
                 <div class="row">
                     <div class="col-6 loginLabel">Username:</div>
                     <div class="col-6 loginInput"><input name="userName" placeholder="testuser"></div>
@@ -168,9 +168,43 @@
                     <div class="col-6 loginInput"><input name="passwordConfirm" placeholder="testpassword"></div>
                 </div>
                 <div class="row">
-                    <button type="submit">Submit</button><button id="cancelLogin">Cancel</button>
+                    <button type="submit">Submit</button><button id="cancelNewUser">Cancel</button>
                 </div>
             </form>
+        </div>
+
+        <div class="login">
+            <div class="row venueHeader">
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+                <div>
+                    <p class="marqueeText">LOG IN!</p>
+                </div>
+                <div>
+                    <p class="hideMe">HIDE ME</p>
+                </div>
+            </div>
+            <form id="login">
+                <div class="row">
+                    <div class="col-6 loginLabel">Username:</div>
+                    <div class="col-6 loginInput"><input name="signinUserName" placeholder="testuser"></div>
+                </div>
+                <div class="row">
+                    <div class="col-6 loginLabel">Password:</div>
+                    <div class="col-6 loginInput"><input name="signinPassword" placeholder="testpassword"></div>
+                </div>
+                <div class="row">
+                    <button id="loginClicked" type="submit">Submit</button>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-6"><button id="cancelLogin">Cancel</button></div>
+                <div class="col-6"><button id="newUserButton">New User?</button></div>
+            </div>
         </div>
 
         <div class="reviewBox" id="leaveReview">

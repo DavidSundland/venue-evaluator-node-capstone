@@ -42,33 +42,111 @@ const reviewSchema = mongoose.Schema({
     }
 });
 
+const venueSchema = mongoose.Schema({
+    "_id": {
+        type: String,
+        required: true
+    },
+    "Venue_Name_Long": {
+        type: String,
+        required: true
+    },
+    "Venue_Name": {
+        type: String,
+        required: true
+    },
+    "Primary_Genre": {
+        type: String,
+        required: true
+    },
+    "Website": {
+        type: String,
+        required: true
+    },
+    "Google_Map_URL": {
+        type: String,
+        required: true
+    },
+    "Latitude": {
+        type: Number,
+        required: true
+    },
+    "Longitude": {
+        type: Number,
+        required: true
+    },
+    "Full_Address": {
+        type: String,
+        required: true
+    },
+    "Street_Address": {
+        type: String,
+        required: true
+    },
+    "City": {
+        type: String,
+        required: true
+    },
+    "State": {
+        type: String,
+        required: true
+    },
+    "Zip": {
+        type: String,
+        required: true
+    },
+    "Description": {
+        type: String,
+        required: true
+    },
+    "Image_URL": {
+        type: String,
+        required: true
+    },
+    "Venue Type": {
+        type: String,
+        required: true
+    },
+    "Venue Size": {
+        type: String,
+        required: true
+    },
+    "Free?": {
+        type: Boolean,
+        required: true
+    },
+    "Ticketed?": {
+        type: Boolean,
+        required: true
+    }
+}, {
+    collection: 'venues-with-all-ratings'
+});
+//});  USE IF COLLECTION THING DOESN'T WORK
 
-//// this virtual grabs the most recent grade for a restaurant.  ****UPDATE!!! ****
-//restaurantSchema.virtual('grade').get(function () {
-//    const gradeObj = this.grades.sort((a, b) => {
-//        return b.date - a.date
-//    })[0] || {};
-//    return gradeObj.grade;
-//});
-
-// this is an *instance method* which will be available on all instances  *****UPDATE!!! ****
-// of the model. This method will be used to return an object that only
-// exposes *some* of the fields we want from the underlying data
-//restaurantSchema.methods.serialize = function () {
-//
-//    return {
-//        id: this._id,
-//        name: this.name,
-//        cuisine: this.cuisine,
-//        borough: this.borough,
-//        grade: this.grade,
-//        address: this.addressString
-//    };
-//}
+venueSchema.methods.serialize = function () {
+    return {
+        id: this._id,
+        Venue_Name_Long: this.Venue_Name_Long,
+        Venue_Name: this.Venue_Name,
+        Website: this.Website,
+        Latitude: this.Latitude,
+        Longitude: this.Longitude,
+        Street_Address: this.Street_Address,
+        Description: this.Description,
+        Image_URL: this.Image_URL,
+        Venue_Type: this["Venue Type"],
+        Venue_Size: this["Venue Size"],
+        Free: this["Free?"],
+        Ticketed: this["Ticketed?"]
+    };
+};
 
 
 const Review = mongoose.model('Review', reviewSchema);
+const venueInfo = mongoose.model('venueInfo', venueSchema);
 
 module.exports = {
-    Review
+    Review,
+    venueInfo
 };
