@@ -26,17 +26,24 @@ function raiseCurtain() {
 }
 
 function leaveReview() {
+    console.log("just opened leaveReview");
     $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
-    let tempBoo = true; // REPLACE THIS ONCE USER LOG-IN FUNCTIONAL
-    $('.venueBox').on('click', '#reviewButton', function () {
-        $('#closeVenue').removeClass('venueVisible');
-        if (tempBoo) {
-            $('.login').addClass('venueVisible');
-        } else {
-            $('#leaveReview').addClass('venueVisible');
-        }
-        /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
-    });
+    $('.venueBox').on('click', '#reviewButton', showReview);
+}
+
+function showReview(tempBoo) { // get rid of tempBoo parameter once test for logged in is created !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (tempBoo === undefined) {
+        let tempBoo = true;
+    } // REPLACE THIS ONCE USER LOG-IN FUNCTIONAL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    $('#closeVenue').removeClass('venueVisible');
+    if (tempBoo) {
+        console.log("in leaveReview and tempBoo true")
+        $('.login').addClass('venueVisible');
+    } else {
+        $('#leaveReview').addClass('venueVisible');
+        console.log("in leaveReview and tempBoo false")
+    }
+    /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
 }
 
 function rateVenue() {
@@ -205,6 +212,10 @@ $('#login').on('submit', function (event) {
     const confirmPw = $('input[name="passwordConfirm"]').val();
     if (pw !== confirmPw) {
         alert('Passwords must match!');
+    } else if (uname.length === 0) {
+        alert('You must enter a username!');
+    } else if (pw.length < 6) {
+        alert('Your password must have at least 6 characters!');
     } else {
         const newUserObject = {
             username: uname,
@@ -221,9 +232,15 @@ $('#login').on('submit', function (event) {
             })
             .done(function (result) {
                 //            newUserToggle = true;
-                //            alert('Thanks for signing up! You may now sign in with your username and password.');
-                //            showSignInPage();
-                console.log(result)
+                alert('Thanks for signing up! You may now sign in with your username and password.');
+                let tempBoo = false; // GET RID OF THIS PARAMETER ONCE TEST FOR LOGGED IN IS CREATED FOR leaveReview FUNCTION
+                console.log(result);
+                $('input[name="userName"]').val(""); // clear the input fields
+                $('input[name="password"]').val("");
+                $('input[name="passwordConfirm"]').val("");
+                $('.login').removeClass('venueVisible');
+                showReview(tempBoo); // ONCE LOG-IN CREATED, TAKE USER TO LOG-IN SCREEN
+
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);

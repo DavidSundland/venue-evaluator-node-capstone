@@ -54,7 +54,7 @@ function closeServer() {
 
 
 // log the http layer
-app.use(morgan('common'));
+//app.use(morgan('common'));
 
 app.use(express.static('public'));
 
