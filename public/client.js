@@ -1,3 +1,5 @@
+let LOGGEDIN = false;
+
 function searchNames() {
     var input, venueList, venueNames, a, i;
     input = document.getElementById("nameSearch").value.toUpperCase();
@@ -18,6 +20,9 @@ function clickClose() {
     $('#closeVenue').click(function () {
         console.log('clicked');
         $('.jsHide').removeClass('venueVisible');
+        $('.login').removeClass('venueVisible');
+        $('.newUser').removeClass('venueVisible');
+        $('#leaveReview').removeClass('venueVisible');
     });
 }
 
@@ -30,17 +35,28 @@ function leaveReview() {
     $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
     $('.venueBox').on('click', '#reviewButton', showReview);
     $('.login').on('click', '#newUserButton', createNewUser);
+    $('#leaveReview').on('click', '#skipReview', function () {
+        console.log("clicked");
+        $('#leaveReview').removeClass('venueVisible');
+        $('.jsHide').addClass("venueVisible");
+    });
+    $('.login').on('click', '#cancelLogin', function () {
+        console.log("clicked");
+        $('.login').removeClass('venueVisible');
+        $('.jsHide').addClass("venueVisible");
+    });
+    $('.newUser').on('click', '#cancelNewUser', function () {
+        $('.newUser').removeClass('venueVisible');
+        $('.jsHide').addClass("venueVisible");
+    });
 }
 
-function showReview() { // DECIDE IF LOGGEDIN VALUE NEEDS TO CONTINUE TO BE PASSED...
-    let loggedIn = false; // RESET/CHANGE/DELETE THIS AFTER DONE TESTING...
+function showReview() {
     $('#closeVenue').removeClass('venueVisible'); // Hide close venue button
-    if (!loggedIn) {
-        console.log("in showReview and loggedIn false")
+    if (!LOGGEDIN) {
         $('.login').addClass('venueVisible');
     } else {
         $('#leaveReview').addClass('venueVisible');
-        console.log("in showReview and loggedIn true")
     }
     /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
 }
@@ -259,37 +275,6 @@ $('#newUser').on('submit', function (event) {
 });
 
 
-//<div class="login">
-//    <div class="row venueHeader">
-//        <div>
-//        <p class="hideMe">HIDE ME</p>
-//</div>
-//<div>
-//            <p class="hideMe">HIDE ME</p>
-//</div>
-//<div>
-//                <p class="marqueeText">LOG IN!</p>
-//</div>
-//<div>
-//                    <p class="hideMe">HIDE ME</p>
-//</div>
-//</div>
-//<form id="login">
-//    <div class="row">
-//        <div class="col-6 loginLabel">Username:</div>
-//<div class="col-6 loginInput"><input name="signinUserName" placeholder="testuser"></div>
-//</div>
-//<div class="row">
-//    <div class="col-6 loginLabel">Password:</div>
-//<div class="col-6 loginInput"><input name="signinPassword" placeholder="testpassword"></div>
-//</div>
-//<div class="row">
-//    <button type="submit">Submit</button><button id="cancelLogin">Cancel</button>
-//        </div>
-//</form>
-//</div>
-
-
 // Code to log user in:
 
 $('#login').on('click', '#loginClicked', function (event) {
@@ -316,17 +301,20 @@ $('#login').on('click', '#loginClicked', function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                // show the signout link in header as soon as user is signed in
+                // show the signout link in header as soon as user is signed in  DO I WANT TO HAVE THIS OPTION?
                 //            $('#js-signout-link').show();
                 //            if (newUserToggle === true) {
                 //                showAddPage();
                 //            } else {
                 //                showHomePage();
                 //            }
-                alert("Hey, that worked!  Now we just need to figure out what to do with you next!")
-                console.log(result);
+                LOGGEDIN = true;
                 $('input[name="signinUserName"]').val("");
                 $('input[name="signinPassword"]').val("");
+                $('#closeVenue').addClass('venueVisible'); // Hide close venue button
+                $('.login').removeClass('venueVisible');
+                $('#leaveReview').addClass('venueVisible');
+
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
