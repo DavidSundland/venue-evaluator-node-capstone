@@ -47,10 +47,14 @@ function watchButtons() {
     });
 }
 
-function showReview() {
+function showReview(venueNameFromLogin) {
     $('#closeVenue').removeClass('venueVisible'); // Hide close venue button
     let venueName = $(this).attr("title");
-    $('#reviewMarquee').html(venueName);
+    if (venueName === undefined) { // if 'this' is undefined, then got to this function via login
+        venueName = venueNameFromLogin;
+    }
+    console.log(venueName, typeof venueName);
+    $('#reviewMarquee').html(venueName.toUpperCase());
     $('#reviewMarquee').attr("title", venueName); // store venue name in marquee
     if (!LOGGEDIN) {
         $('.login').addClass('venueVisible');
@@ -161,8 +165,9 @@ function rateVenue() {
                 })
                 .done(function (result) {
                     console.log("new review posted:", result);
-                    alert(`Thank you for reviewing $(venueName), $(USERNAME)!`);
-                    getOneVenue(newReviewObject.venueName); // *MARK*
+                    alert(`Thank you for reviewing ${venueName}, ${USERNAME}!`);
+                    getOneVenue(newReviewObject.venueName);
+                    $('.login').removeClass('venueVisible');
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -229,7 +234,8 @@ function listVenues() {
 
 function getOneVenue(venueName) {
     $.getJSON('/locations/onevenue/' + venueName, function (res) {
-        console.log(res);
+        console.log(res, res.results, res.results.website, res.results.streetaddress);
+        renderVenue(res.results.venuename, res.results.website, res.results.streetaddress, res.results.description, res.results.imageurl);
     });
 }
 
@@ -270,13 +276,12 @@ $('#newUser').on('submit', function (event) {
             .done(function (result) {
                 //            newUserToggle = true;
                 alert('Thanks for signing up! You may now sign in with your username and password.');
-                let tempBoo = false; // GET RID OF THIS PARAMETER ONCE TEST FOR LOGGED IN IS CREATED FOR leaveReview FUNCTION
                 console.log(result);
                 $('input[name="userName"]').val(""); // clear the input fields
                 $('input[name="password"]').val("");
                 $('input[name="passwordConfirm"]').val("");
                 $('.newUser').removeClass('venueVisible');
-                showReview(tempBoo); // ONCE LOG-IN CREATED, TAKE USER TO LOG-IN SCREEN
+                showReview();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
@@ -322,13 +327,14 @@ $('#login').on('click', '#loginClicked', function (event) {
                 //            }
                 LOGGEDIN = true;
                 USERNAME = user;
-                alert(`Welcome, $(user)!  You're now logged in!`);
+                alert(`Welcome, ${user}!  You're now logged in!`);
                 $('input[name="signinUserName"]').val("");
                 $('input[name="signinPassword"]').val("");
                 //                $('#closeVenue').addClass('venueVisible'); // Show close venue button
                 $('.login').removeClass('venueVisible');
                 //                $('#leaveReview').addClass('venueVisible');
-                showReview();
+                let venueName = $('#reviewMarquee').attr("title");
+                showReview(venueName);
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
