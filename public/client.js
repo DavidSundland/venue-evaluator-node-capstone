@@ -65,7 +65,7 @@ function rateVenue() {
     let listeningExperience = 0;
     let venueFeel = 0;
     let musicValue = 0;
-    let bandQuality = 0;
+    let musicQuality = 0;
     let foodQuality = 0;
     let foodValue = 0;
     $('#leaveReview').on('click', '#skipReview', function () {
@@ -79,17 +79,17 @@ function rateVenue() {
         let ratingClicked = $(this).attr("value");
         console.log(ratingClicked);
         if (categoryClicked === "listeningExperience") {
-            listeningExperience = ratingClicked
+            listeningExperience = ratingClicked;
         } else if (categoryClicked === "venueFeel") {
-            venueFeel = ratingClicked
+            venueFeel = ratingClicked;
         } else if (categoryClicked === "musicValue") {
-            musicValue = ratingClicked
-        } else if (categoryClicked === "bandQuality") {
-            bandQuality = ratingClicked
+            musicValue = ratingClicked;
+        } else if (categoryClicked === "musicQuality") {
+            musicQuality = ratingClicked;
         } else if (categoryClicked === "foodQuality") {
-            foodQuality = ratingClicked
+            foodQuality = ratingClicked;
         } else {
-            foodValue = ratingClicked
+            foodValue = ratingClicked;
         }
         let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, so get base color from parent instead */
         let newColor = "#86034D";
@@ -126,25 +126,28 @@ function rateVenue() {
         }
     });
     $(".commentButtons").on('click', '#submitReview', function () {
-        if (listeningExperience === 0 || venueFeel === 0 || musicValue === 0 || bandQuality === 0) {
+        if (listeningExperience === 0 || venueFeel === 0 || musicValue === 0 || musicQuality === 0) {
             alert("You can't leave any of the first four star fields blank!");
         } else {
             event.preventDefault();
-            let review = $("#userComments").val();
-            const newReviewObject = { // Need to figure out how to pull username and venueId or venueName
+            let userReview = $("#userComments").val().trim();
+            if (userReview.length === 0) {
+                userReview = " ";
+            }
+            const newReviewObject = {
+                venueName: "9:30 Club",
                 userName: "Joe ConcertGoer",
                 listeningExperience: listeningExperience,
                 venueFeel: venueFeel,
                 musicValue: musicValue,
-                bandQuality: bandQuality,
+                musicQuality: musicQuality,
                 foodQuality: foodQuality,
                 foodValue: foodValue,
-                review: review,
-                venueName: "9:30 Club"
+                userReview: userReview
             };
             $.ajax({
                     type: 'POST',
-                    url: '/reviews/create',
+                    url: '/new/create',
                     dataType: 'json',
                     data: JSON.stringify(newReviewObject),
                     contentType: 'application/json'
@@ -159,13 +162,35 @@ function rateVenue() {
                 });
             // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
         }
-        console.log(listeningExperience, venueFeel, musicValue, bandQuality, foodQuality, foodValue);
+        console.log(listeningExperience, venueFeel, musicValue, musicQuality, foodQuality, foodValue);
     });
 }
 
-$.getJSON('/cats', function (res) {
-    console.log("logging results", res)
-});
+//$.getJSON('/cats', function (res) {
+//    console.log("logging results", res)
+//});
+//
+//function newCat() {
+//    let heresacat = {
+//        name: "Mittens",
+//        color: "tan"
+//    };
+//    $.ajax({
+//            type: 'POST',
+//            url: '/new/create',
+//            dataType: 'json',
+//            data: JSON.stringify(heresacat),
+//            contentType: 'application/json'
+//        })
+//        .done(function (result) {
+//            console.log("meow!")
+//        })
+//        .fail(function (jqXHR, error, errorThrown) {
+//            console.log(jqXHR);
+//            console.log(error);
+//            console.log(errorThrown);
+//        });
+//}
 
 function listVenues() {
     $.getJSON('/locations', function (res) {
@@ -303,3 +328,4 @@ $(raiseCurtain);
 $(listVenues);
 $(watchButtons);
 $(rateVenue);
+//$(newCat);

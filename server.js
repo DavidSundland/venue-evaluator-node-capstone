@@ -183,28 +183,47 @@ app.get('/cats', function (req, res) {
         });
 });
 
+//app.post('/new/create', (req, res) => {
+//    let name = req.body.name;
+//    let color = req.body.color;
+//    Cat.create({
+//        name,
+//        color
+//    }, (err, item) => {
+//        if (err) {
+//            return res.status(500).json({
+//                message: 'Infernal Server Error'
+//            });
+//        }
+//        if (item) {
+//            console.log(`Cat created:  ${name}, ${color}.`);
+//            return res.json(item);
+//        }
+//    });
+//});
+
 //create new review
-app.post('/reviews/create', (req, res) => {
-    let userName = req.body.userName.trim();
+app.post('/new/create', (req, res) => {
+    let venueName = req.body.venueName;
+    let userName = req.body.userName;
     let listeningExperience = req.body.listeningExperience;
     let venueFeel = req.body.venueFeel;
     let musicValue = req.body.musicValue;
-    let bandQuality = req.body.bandQuality;
+    let musicQuality = req.body.musicQuality;
     let foodQuality = req.body.foodQuality;
     let foodValue = req.body.foodValue;
-    let review = req.body.review;
-    let venueName = req.body.venueName;
+    let userReview = req.body.userReview;
 
     Review.create({
+        venueName,
         userName,
         listeningExperience,
         venueFeel,
         musicValue,
-        bandQuality,
+        musicQuality,
         foodQuality,
         foodValue,
-        review,
-        venueName
+        userReview
     }, (err, item) => {
         if (err) {
             return res.status(500).json({
@@ -212,7 +231,7 @@ app.post('/reviews/create', (req, res) => {
             });
         }
         if (item) {
-            console.log(`Review for ${venueId} by ${userName} added.`);
+            console.log(`Review for ${venueName} by ${userName} added.`);
             return res.json(item);
         }
     });

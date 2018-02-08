@@ -228,7 +228,7 @@
                 <p id="listeningExperience">Listening Experience: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="venueFeel">Venue Feel: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="musicValue">Music Value: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
-                <p id="bandQuality">Quality of Musician(s): <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
+                <p id="musicQuality">Quality of Musician(s): <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="foodQuality">Food/Drink Quality: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="foodValue">Food/Drink Value: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
             </div>
@@ -336,63 +336,6 @@
 
         function initMap() {
             $.getJSON('/locations', function(res) {
-                let testVenueList = [{
-                    "Venue_Name": "701 Restaurant",
-                    "Primary_Genre": "Potpourri",
-                    "Website": "http://701restaurant.com/about/live-jazz/",
-                    "Google_Map_URL": "https://goo.gl/maps/seWMAXmPyKP2",
-                    "Latitude": 38.894292,
-                    "Longitude": -77.022442,
-                    "Full_Address": "701 Pennsylvania Ave. NW, Washington, DC 20004",
-                    "Street_Address": "701 Pennsylvania Ave. NW",
-                    "City": "Washington",
-                    "State": "DC",
-                    "Zip": 20004,
-                    "Description": "701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience. Menus reflect an inventive approach to Contemporary Continental Cuisine. 701 also offers a bar with a vast selection of culinary treats and signature cocktails, and a recently renovated 'back lounge.' During the warmer months, the patio provides a pleasant view of the Navy Memorial's cascading fountains and the National Archives. Live piano is provided in the evening, Thursday through Saturday.",
-                    "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/701.jpg?raw=true"
-                }, {
-                    "Venue_Name": "9:30 Club",
-                    "Primary_Genre": "Rock & Pop",
-                    "Website": "http://www.930.com/",
-                    "Google_Map_URL": "https://goo.gl/maps/EbAXTg6iEvE2",
-                    "Latitude": 38.9179969,
-                    "Longitude": -77.0258807,
-                    "Full_Address": "815 V St. NW, Washington, DC 20001",
-                    "Street_Address": "815 V St. NW",
-                    "City": "Washington",
-                    "State": "DC",
-                    "Zip": 20001,
-                    "Description": "9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar 'Nightclub of the Year' honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District's premier venue for nationally known touring acts.",
-                    "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true"
-                }, {
-                    "Venue_Name": "Museum of American Art",
-                    "Primary_Genre": "Classical",
-                    "Website": "http://www.si.edu/Events/Calendar/?trumbaEmbed=filter1%3D_%26-index%26filterfield1%3D11153#/?i=2",
-                    "Google_Map_URL": "https://goo.gl/maps/LqZXy3Q9DxJ2",
-                    "Latitude": 38.8978609,
-                    "Longitude": -77.0251306,
-                    "Full_Address": "800 G St. NW, Washington, DC 20001",
-                    "Street_Address": "800 G St. NW",
-                    "City": "Washington",
-                    "State": "DC",
-                    "Zip": 20001,
-                    "Description": "The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building's lower level, and the Kogod Courtyard, a covered space in the center of the building. Monthly concerts are also held in the American Art Museum's Luce Center.  In addition to music, public programming includes lectures, films, theater and dance performances.",
-                    "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/american-art.jpg?raw=true"
-                }, {
-                    "Venue_Name": "American University - Greenberg",
-                    "Primary_Genre": "Classical",
-                    "Website": "http://american.tix.com",
-                    "Google_Map_URL": "https://goo.gl/maps/QFPcdRVHZg62",
-                    "Latitude": 38.9434072,
-                    "Longitude": -77.0798043,
-                    "Full_Address": "4200 Wisconsin Ave. NW, Washington, DC 20016",
-                    "Street_Address": "4200 Wisconsin Ave. NW",
-                    "City": "Washington",
-                    "State": "DC",
-                    "Zip": 20016,
-                    "Description": "American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion. Its mission is to provide American University and the local community a venue for live performances in music, theatre and dance. It is the primary performance space for AU's Performing Arts Department.",
-                    "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/greenberg.jpg?raw=true"
-                }];
                 var mapCenter = {
                     lat: 38.9222375,
                     lng: -77.0093275
@@ -402,15 +345,15 @@
                     center: mapCenter
                 });
                 var markers = [];
-                for (let x = 0; x < res.length; x++) {
+                for (let x = 0; x < res.results.length; x++) {
                     let coord = {
-                        "lat": res[x].latitude,
-                        "lng": res[x].longitude
+                        "lat": Number(res.results[x].latitude),
+                        "lng": Number(res.results[x].longitude)
                     };
                     markers.push(new google.maps.Marker({
                         position: coord,
                         map: map,
-                        title: res[x].venuename
+                        title: res.results[x].venuename
                         //,                        extraInfo: {  // Not necessary?
                         //                            "venueLink": res[x].website,
                         //                            "venueAddress": res[x].streetaddress,
@@ -422,7 +365,7 @@
                     //                markers[x].addListener('click', renderVenue(testVenueList[x].Venue_Name, testVenueList[x].Website, testVenueList[x].Street_Address, testVenueList[x].Description + "Google Maps sent me", testVenueList[x].Image_URL));
                     markers[x].addListener('click', function() { /* Note - calling renderVenue directly (instead of w/ anon fn) caused renderVenue to be called w/o click */
                         console.log("Google map clicked");
-                        renderVenue(res[x].venuename, res[x].website, res[x].streetaddress, res[x].description, res[x].imageurl);
+                        renderVenue(res.results[x].venuename, res.results[x].website, res.results[x].streetaddress, res.results[x].description, res.results[x].imageurl);
                     });
                 }
             });
