@@ -167,6 +167,26 @@ app.get('/locations', function (req, res) {
         });
 });
 
+app.get('/locations/onevenue/:venName', function (req, res) {
+    const {
+        venName
+    } = req.params;
+    console.log("venName:", venName);
+    //    Location
+    //        .find()
+    //        .then(function (results) {
+    //        res.json({
+    //            results
+    //        });
+    //    })
+    //        .catch(function (err) {
+    //        console.error(err);
+    //        res.status(500).json({
+    //            message: 'Internal server error'
+    //        });
+    //    });
+});
+
 app.get('/cats', function (req, res) {
     Cat
         .find()

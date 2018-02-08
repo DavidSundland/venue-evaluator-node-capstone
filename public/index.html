@@ -217,7 +217,7 @@
                     <p class="marqueeText">NOW REVIEWING:</p>
                 </div>
                 <div>
-                    <h1 class="marqueeText">9:30 CLUB</h1>
+                    <p class="marqueeText" id="reviewMarquee"></p>
                 </div>
                 <div>
                     <p class="hideMe">HIDE ME</p>
@@ -259,14 +259,10 @@
 
 
         function viewVenue() {
-            let venueLoc = {
-                lat: 38.9179969, // MAKE A VARIABLE THAT IS TIED TO DATABASE / 'THIS'
-                lng: -77.023692
-            };
             let venueName = $(this).parent().find(".venueName")[0].innerHTML;
             let venueLink = $(this).parent().find("a")[0].href;
             let venueAddress = $(this).parent().find(".address")[0].innerHTML;
-            let venueDesc = $(this).parent().find(".description")[0].innerHTML;
+            //            let venueDesc = $(this).parent().find(".description")[0].innerHTML;
             let venuePic = $(this).parent().find(".picUrl")[0].value;
             let venueDescription = $(this).parent().find(".fullDesc")[0].value;
             renderVenue(venueName, venueLink, venueAddress, venueDescription, venuePic);
@@ -310,7 +306,7 @@
 <hr>
 <p class="venueAddress">${venueAddress}</p>
 <p class="venueDescription">${venueDescription}</p>
-<button id="reviewButton">Leave a Review!</button>
+<button id="reviewButton" title="${venueName}">Leave a Review!</button>
         </div>`);
             $('#reviews').html(`<h2>Reviews</h2>`);
             for (let x = 0; x < fakeReviews.length; x++) {

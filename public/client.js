@@ -1,5 +1,7 @@
 let LOGGEDIN = false;
+let USERNAME = "";
 
+// narrows list of venues based upon typed name
 function searchNames() {
     var input, venueList, venueNames, a, i;
     input = document.getElementById("nameSearch").value.toUpperCase();
@@ -18,7 +20,7 @@ function searchNames() {
 
 function clickClose() {
     $('#closeVenue').click(function () {
-        console.log('clicked');
+        //        console.log('clicked');
         $('.jsHide').removeClass('venueVisible');
         $('.login').removeClass('venueVisible');
         $('.newUser').removeClass('venueVisible');
@@ -35,7 +37,7 @@ function watchButtons() {
     $('.venueBox').on('click', '#reviewButton', showReview);
     $('.login').on('click', '#newUserButton', createNewUser);
     $('.login').on('click', '#cancelLogin', function () {
-        console.log("clicked");
+        //        console.log("clicked");
         $('.login').removeClass('venueVisible');
         $('.jsHide').addClass("venueVisible");
     });
@@ -47,10 +49,14 @@ function watchButtons() {
 
 function showReview() {
     $('#closeVenue').removeClass('venueVisible'); // Hide close venue button
+    let venueName = $(this).attr("title");
+    $('#reviewMarquee').html(venueName);
+    $('#reviewMarquee').attr("title", venueName); // store venue name in marquee
     if (!LOGGEDIN) {
         $('.login').addClass('venueVisible');
     } else {
         $('#leaveReview').addClass('venueVisible');
+        //        console.log("REVIEW MARQUEE TITLE IS:  ", $('#reviewMarquee').attr("title"));
     }
     /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
 }
@@ -69,15 +75,15 @@ function rateVenue() {
     let foodQuality = 0;
     let foodValue = 0;
     $('#leaveReview').on('click', '#skipReview', function () {
-        console.log("clicked");
+        //        console.log("clicked");
         $('#leaveReview').removeClass('venueVisible');
         $('.jsHide').addClass("venueVisible");
     }); // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
     $("#userReviews").on('click', '.star', function () {
         let categoryClicked = $(this).parent().attr("id");
-        console.log(categoryClicked, "clicked");
+        //        console.log(categoryClicked, "clicked");
         let ratingClicked = $(this).attr("value");
-        console.log(ratingClicked);
+        //        console.log(ratingClicked);
         if (categoryClicked === "listeningExperience") {
             listeningExperience = ratingClicked;
         } else if (categoryClicked === "venueFeel") {
@@ -130,13 +136,14 @@ function rateVenue() {
             alert("You can't leave any of the first four star fields blank!");
         } else {
             event.preventDefault();
+            let venueName = $('#reviewMarquee').attr("title");
             let userReview = $("#userComments").val().trim();
             if (userReview.length === 0) {
                 userReview = " ";
             }
             const newReviewObject = {
-                venueName: "9:30 Club",
-                userName: "Joe ConcertGoer",
+                venueName: venueName,
+                userName: USERNAME,
                 listeningExperience: listeningExperience,
                 venueFeel: venueFeel,
                 musicValue: musicValue,
@@ -153,7 +160,9 @@ function rateVenue() {
                     contentType: 'application/json'
                 })
                 .done(function (result) {
-                    console.log("new review posted");
+                    console.log("new review posted:", result);
+                    alert(`Thank you for reviewing $(venueName), $(USERNAME)!`);
+                    getOneVenue(newReviewObject.venueName); // *MARK*
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -162,7 +171,7 @@ function rateVenue() {
                 });
             // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
         }
-        console.log(listeningExperience, venueFeel, musicValue, musicQuality, foodQuality, foodValue);
+        //        console.log(listeningExperience, venueFeel, musicValue, musicQuality, foodQuality, foodValue);
     });
 }
 
@@ -218,10 +227,17 @@ function listVenues() {
     });
 }
 
+function getOneVenue(venueName) {
+    $.getJSON('/locations/onevenue/' + venueName, function (res) {
+        console.log(res);
+    });
+}
 
-$(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
-    console.log('New star rating: ' + this.value);
-});
+
+//
+//$(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
+//    console.log('New star rating: ' + this.value);
+//});
 
 
 // Code to create new user:
@@ -305,12 +321,14 @@ $('#login').on('click', '#loginClicked', function (event) {
                 //                showHomePage();
                 //            }
                 LOGGEDIN = true;
+                USERNAME = user;
+                alert(`Welcome, $(user)!  You're now logged in!`);
                 $('input[name="signinUserName"]').val("");
                 $('input[name="signinPassword"]').val("");
-                $('#closeVenue').addClass('venueVisible'); // Hide close venue button
+                //                $('#closeVenue').addClass('venueVisible'); // Show close venue button
                 $('.login').removeClass('venueVisible');
-                $('#leaveReview').addClass('venueVisible');
-
+                //                $('#leaveReview').addClass('venueVisible');
+                showReview();
             })
             .fail(function (jqXHR, error, errorThrown) {
                 console.log(jqXHR);
