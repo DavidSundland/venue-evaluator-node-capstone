@@ -1,5 +1,7 @@
 const User = require('./models/user');
-const reviewsRouter = require('./reviewsRouter');
+const Review = require('./models/reviews');
+const Location = require('./models/locations');
+const Cat = require('./models/cats')
 const bodyParser = require('body-parser');
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -10,12 +12,11 @@ const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
 const express = require('express');
 const app = express();
-const {
-    venueInfo
-} = require('./models');
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
+
+console.log("re-started");
 
 mongoose.Promise = global.Promise;
 
@@ -60,14 +61,6 @@ function closeServer() {
 //app.use(morgan('common'));  // removed Morgan from dependencies due to NPM install issues (can "npm install --save morgan" if morgan needed)
 
 app.use(express.static('public'));
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
-});
-
-
-app.use('/reviews', reviewsRouter);
-
 
 // Create new user
 app.post('/users/create', (req, res) => {
@@ -144,18 +137,85 @@ app.post('/signin', function (req, res) {
         });
 });
 
-app.get('/venues', (req, res) => {
-    venueInfo
+// get list of venues from db
+//app.get('/venues', (req, res) => {
+//    Venues
+//        .find()
+//        .then(results => {
+//            res.json(results.map(item => item.serialize()));
+//        })
+//        .catch(err => {
+//            console.error(err);
+//            res.status(500).json({
+//                error: 'something went terribly wrong'
+//            });
+//        });
+//});
+app.get('/locations', function (req, res) {
+    Location
         .find()
-        .then(venues => {
-            res.json(venues.map(venue => venue.serialize()));
+        .then(function (results) {
+            res.json({
+                results
+            });
         })
-        .catch(err => {
+        .catch(function (err) {
             console.error(err);
             res.status(500).json({
-                error: 'something went terribly wrong'
+                message: 'Internal server error'
             });
         });
+});
+
+app.get('/cats', function (req, res) {
+    Cat
+        .find()
+        .then(function (results) {
+            res.json({
+                results
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
+//create new review
+app.post('/reviews/create', (req, res) => {
+    let userName = req.body.userName.trim();
+    let listeningExperience = req.body.listeningExperience;
+    let venueFeel = req.body.venueFeel;
+    let musicValue = req.body.musicValue;
+    let bandQuality = req.body.bandQuality;
+    let foodQuality = req.body.foodQuality;
+    let foodValue = req.body.foodValue;
+    let review = req.body.review;
+    let venueName = req.body.venueName;
+
+    Review.create({
+        userName,
+        listeningExperience,
+        venueFeel,
+        musicValue,
+        bandQuality,
+        foodQuality,
+        foodValue,
+        review,
+        venueName
+    }, (err, item) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Infernal Server Error'
+            });
+        }
+        if (item) {
+            console.log(`Review for ${venueId} by ${userName} added.`);
+            return res.json(item);
+        }
+    });
 });
 
 

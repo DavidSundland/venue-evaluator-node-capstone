@@ -30,16 +30,10 @@ function raiseCurtain() {
     $(".curtainMain").delay(1000).slideUp(3000);
 }
 
-function leaveReview() {
-    console.log("just opened leaveReview");
+function watchButtons() {
     $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
     $('.venueBox').on('click', '#reviewButton', showReview);
     $('.login').on('click', '#newUserButton', createNewUser);
-    $('#leaveReview').on('click', '#skipReview', function () {
-        console.log("clicked");
-        $('#leaveReview').removeClass('venueVisible');
-        $('.jsHide').addClass("venueVisible");
-    });
     $('.login').on('click', '#cancelLogin', function () {
         console.log("clicked");
         $('.login').removeClass('venueVisible');
@@ -68,11 +62,35 @@ function createNewUser(event) {
 }
 
 function rateVenue() {
-    console.log("in rateVenue;")
-    $("#userReviews").on('click', '.star', function () {
+    let listeningExperience = 0;
+    let venueFeel = 0;
+    let musicValue = 0;
+    let bandQuality = 0;
+    let foodQuality = 0;
+    let foodValue = 0;
+    $('#leaveReview').on('click', '#skipReview', function () {
         console.log("clicked");
+        $('#leaveReview').removeClass('venueVisible');
+        $('.jsHide').addClass("venueVisible");
+    }); // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
+    $("#userReviews").on('click', '.star', function () {
+        let categoryClicked = $(this).parent().attr("id");
+        console.log(categoryClicked, "clicked");
         let ratingClicked = $(this).attr("value");
         console.log(ratingClicked);
+        if (categoryClicked === "listeningExperience") {
+            listeningExperience = ratingClicked
+        } else if (categoryClicked === "venueFeel") {
+            venueFeel = ratingClicked
+        } else if (categoryClicked === "musicValue") {
+            musicValue = ratingClicked
+        } else if (categoryClicked === "bandQuality") {
+            bandQuality = ratingClicked
+        } else if (categoryClicked === "foodQuality") {
+            foodQuality = ratingClicked
+        } else {
+            foodValue = ratingClicked
+        }
         let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, so get base color from parent instead */
         let newColor = "#86034D";
         if (ratingClicked === "5") {
@@ -107,75 +125,55 @@ function rateVenue() {
             $(this).parent().find(".value5").css("color", oldColor);
         }
     });
+    $(".commentButtons").on('click', '#submitReview', function () {
+        if (listeningExperience === 0 || venueFeel === 0 || musicValue === 0 || bandQuality === 0) {
+            alert("You can't leave any of the first four star fields blank!");
+        } else {
+            event.preventDefault();
+            let review = $("#userComments").val();
+            const newReviewObject = { // Need to figure out how to pull username and venueId or venueName
+                userName: "Joe ConcertGoer",
+                listeningExperience: listeningExperience,
+                venueFeel: venueFeel,
+                musicValue: musicValue,
+                bandQuality: bandQuality,
+                foodQuality: foodQuality,
+                foodValue: foodValue,
+                review: review,
+                venueName: "9:30 Club"
+            };
+            $.ajax({
+                    type: 'POST',
+                    url: '/reviews/create',
+                    dataType: 'json',
+                    data: JSON.stringify(newReviewObject),
+                    contentType: 'application/json'
+                })
+                .done(function (result) {
+                    console.log("new review posted");
+                })
+                .fail(function (jqXHR, error, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(error);
+                    console.log(errorThrown);
+                });
+            // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
+        }
+        console.log(listeningExperience, venueFeel, musicValue, bandQuality, foodQuality, foodValue);
+    });
 }
 
-// app.get('/venues-with-all-ratings'
+$.getJSON('/cats', function (res) {
+    console.log("logging results", res)
+});
 
 function listVenues() {
-    $.getJSON('/venues', function (res) {
-        console.log("logging results", res);
-
-        let testVenueList = [{
-            "Venue_Name": "701 Restaurant",
-            "Primary_Genre": "Potpourri",
-            "Website": "http://701restaurant.com/about/live-jazz/",
-            "Google_Map_URL": "https://goo.gl/maps/seWMAXmPyKP2",
-            "Latitude": 38.894292,
-            "Longitude": -77.022442,
-            "Full_Address": "701 Pennsylvania Ave. NW, Washington, DC 20004",
-            "Street_Address": "701 Pennsylvania Ave. NW",
-            "City": "Washington",
-            "State": "DC",
-            "Zip": 20004,
-            "Description": "701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience. Menus reflect an inventive approach to Contemporary Continental Cuisine. 701 also offers a bar with a vast selection of culinary treats and signature cocktails, and a recently renovated 'back lounge.' During the warmer months, the patio provides a pleasant view of the Navy Memorial's cascading fountains and the National Archives. Live piano is provided in the evening, Thursday through Saturday.",
-            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/701.jpg?raw=true"
-}, {
-            "Venue_Name": "9:30 Club",
-            "Primary_Genre": "Rock & Pop",
-            "Website": "http://www.930.com/",
-            "Google_Map_URL": "https://goo.gl/maps/EbAXTg6iEvE2",
-            "Latitude": 38.9179969,
-            "Longitude": -77.0258807,
-            "Full_Address": "815 V St. NW, Washington, DC 20001",
-            "Street_Address": "815 V St. NW",
-            "City": "Washington",
-            "State": "DC",
-            "Zip": 20001,
-            "Description": "9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly. It has won multiple Billboard Touring Awards and Pollstar 'Nightclub of the Year' honors, and was rated as the #1 Big Room in America by Rolling Stone Magazine Online. It has long been the District's premier venue for nationally known touring acts.",
-            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/930.jpg?raw=true"
-}, {
-            "Venue_Name": "Museum of American Art",
-            "Primary_Genre": "Classical",
-            "Website": "http://www.si.edu/Events/Calendar/?trumbaEmbed=filter1%3D_%26-index%26filterfield1%3D11153#/?i=2",
-            "Google_Map_URL": "https://goo.gl/maps/LqZXy3Q9DxJ2",
-            "Latitude": 38.8978609,
-            "Longitude": -77.0251306,
-            "Full_Address": "800 G St. NW, Washington, DC 20001",
-            "Street_Address": "800 G St. NW",
-            "City": "Washington",
-            "State": "DC",
-            "Zip": 20001,
-            "Description": "The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building's lower level, and the Kogod Courtyard, a covered space in the center of the building. Monthly concerts are also held in the American Art Museum's Luce Center.  In addition to music, public programming includes lectures, films, theater and dance performances.",
-            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/american-art.jpg?raw=true"
-}, {
-            "Venue_Name": "American University - Greenberg",
-            "Primary_Genre": "Classical",
-            "Website": "http://american.tix.com",
-            "Google_Map_URL": "https://goo.gl/maps/QFPcdRVHZg62",
-            "Latitude": 38.9434072,
-            "Longitude": -77.0798043,
-            "Full_Address": "4200 Wisconsin Ave. NW, Washington, DC 20016",
-            "Street_Address": "4200 Wisconsin Ave. NW",
-            "City": "Washington",
-            "State": "DC",
-            "Zip": 20016,
-            "Description": "American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion. Its mission is to provide American University and the local community a venue for live performances in music, theatre and dance. It is the primary performance space for AU's Performing Arts Department.",
-            "Image_URL": "https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/greenberg.jpg?raw=true"
-}];
+    $.getJSON('/locations', function (res) {
         $("#listBox").text(""); /* clear existing text, if any */
-        for (let x = 0; x < res.length; x++) {
-            res[x].Description.replace(/\s+/g, ' '); /* eliminate extra spaces, if any */
-            let wordList = res[x].Description.split(" ");
+        for (x = 0; x < res.results.length; x++) {
+            //            console.log("in for/let, key =", key);
+            res.results[x].description.replace(/\s+/g, ' '); /* eliminate extra spaces, if any */
+            let wordList = res.results[x].description.split(" ");
             let maxWords = 30;
             let description = "";
             if (wordList.length > maxWords) {
@@ -184,44 +182,17 @@ function listVenues() {
                 }
                 description += "...";
             } else {
-                description = res[x].Description;
+                description = res.results[x].description;
             }
-            $("#listBox").append(`<p class="oneVenue" id="${res[x].id}"><a href="${res[x].Website}" class="venueName">${res[x].Venue_Name}</a> - <span class="address">${res[x].Street_Address}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res[x].Image_URL}"><input type="hidden" class = "fullDesc" value="${res[x].Description}"></p>`);
+            $("#listBox").append(`<p class="oneVenue" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
             //        let venueId = "venue" + x;
             //        let storageName = "object" + x;
             //        let dataLoc = $(venueId)[0];
             //        jQuery.data(dataLoc, storageName, testVenueList[x]);
-        }
+        };
     });
 }
 
-
-
-
-//function initVenueMap() {
-//    console.log("In initVenueMap");
-//    var venueMap = new google.maps.Map(document.getElementById('venueMap'), {
-//        zoom: 13,
-//        center: venueLoc
-//    });
-//    //    src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap";
-//    var marker = new google.maps.Marker({
-//        position: venueLoc,
-//        map: venueMap,
-//        title: "9:30 Club" // MAKE A VARIABLE
-//    });
-//}
-
-//var marker = new google.maps.Marker({
-//position: uluru,
-//map: map,
-//title: "9:30 Club"
-//});
-//var marker = new google.maps.Marker({
-//position: bob,
-//map: map
-//});
-//}
 
 $(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
     console.log('New star rating: ' + this.value);
@@ -325,14 +296,10 @@ $('#login').on('click', '#loginClicked', function (event) {
     };
 });
 
-//db.getCollection('venues-with-all-ratings').find({})
-//$.getJSON('mongodb://admin:admin@ds211558.mlab.com:11558/venue-evaluator/venues-with-all-ratings', function (res) {
-//    console.log("In getJSON", res);
-//});
 
 $(clickVenue);
 $(clickClose);
 $(raiseCurtain);
 $(listVenues);
-$(leaveReview);
+$(watchButtons);
 $(rateVenue);

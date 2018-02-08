@@ -234,10 +234,10 @@
             </div>
 
             <div class="row commentBox">
-                <textarea maxlength="300" placeholder="Type your review"></textarea>
+                <textarea maxlength="300" placeholder="Type your review" id="userComments"></textarea>
             </div>
             <div class="row commentButtons">
-                <button>Submit Review</button>
+                <button id="submitReview">Submit Review</button>
             </div>
             <button id="skipReview">Delete/Cancel Review</button>
         </div>
@@ -254,7 +254,6 @@
         <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
 
         function clickVenue() {
-            console.log("In viewVenue");
             $('.listBox').on('click', 'button', viewVenue);
         }
 
@@ -336,7 +335,7 @@
         }
 
         function initMap() {
-            $.getJSON('/venues', function(res) {
+            $.getJSON('/locations', function(res) {
                 let testVenueList = [{
                     "Venue_Name": "701 Restaurant",
                     "Primary_Genre": "Potpourri",
@@ -405,33 +404,34 @@
                 var markers = [];
                 for (let x = 0; x < res.length; x++) {
                     let coord = {
-                        "lat": res[x].Latitude,
-                        "lng": res[x].Longitude
+                        "lat": res[x].latitude,
+                        "lng": res[x].longitude
                     };
-                    console.log("coords = ", coord);
                     markers.push(new google.maps.Marker({
                         position: coord,
                         map: map,
-                        title: res[x].Venue_Name,
-                        extraInfo: {
-                            "venueLink": res[x].Website,
-                            "venueAddress": res[x].Street_Address,
-                            "venueDescription": res[x].Description,
-                            "venuePic": res[x].Image_URL
-                        }
+                        title: res[x].venuename
+                        //,                        extraInfo: {  // Not necessary?
+                        //                            "venueLink": res[x].website,
+                        //                            "venueAddress": res[x].streetaddress,
+                        //                            "venueDescription": res[x].description,
+                        //                            "venuePic": res[x].imageurl
+                        //                        }
                     }));
-                    console.log("got to line 611");
                     //                markers[x].addListener('click', renderVenue($(this)[0].title, $(this)[0].extraInfo.venueLink, $(this)[0].extraInfo.venueAddress, $(this)[0].extraInfo.venueDescription, $(this)[0].extraInfo.venuePic));
                     //                markers[x].addListener('click', renderVenue(testVenueList[x].Venue_Name, testVenueList[x].Website, testVenueList[x].Street_Address, testVenueList[x].Description + "Google Maps sent me", testVenueList[x].Image_URL));
                     markers[x].addListener('click', function() { /* Note - calling renderVenue directly (instead of w/ anon fn) caused renderVenue to be called w/o click */
                         console.log("Google map clicked");
-                        renderVenue(res[x].Venue_Name, res[x].Website, res[x].Street_Address, res[x].Description, res[x].Image_URL);
+                        renderVenue(res[x].venuename, res[x].website, res[x].streetaddress, res[x].description, res[x].imageurl);
                     });
                 }
             });
         }
+
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
+
+
     </script>
 
     <!-- For getting lat & long from address -->
