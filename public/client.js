@@ -53,7 +53,6 @@ function showReview(venueNameFromLogin) {
     if (venueName === undefined) { // if 'this' is undefined, then got to this function via login
         venueName = venueNameFromLogin;
     }
-    console.log(venueName, typeof venueName);
     $('#reviewMarquee').html(venueName.toUpperCase());
     $('#reviewMarquee').attr("title", venueName); // store venue name in marquee
     if (!LOGGEDIN) {
@@ -167,7 +166,7 @@ function rateVenue() {
                     console.log("new review posted:", result);
                     alert(`Thank you for reviewing ${venueName}, ${USERNAME}!`);
                     getOneVenue(newReviewObject.venueName);
-                    $('.login').removeClass('venueVisible');
+                    $('#leaveReview').removeClass('venueVisible');
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
