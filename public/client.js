@@ -227,7 +227,7 @@ function listenForFilters() {
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
-        console.log("Partial list of venues?", res);
+        console.log("type", venuetype, "size", venuesize, "free/tick", freeticketed, res);
     });
 }
 

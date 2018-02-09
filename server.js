@@ -240,7 +240,6 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
                 free: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -257,7 +256,6 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
                 ticketed: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -274,7 +272,6 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
                 venuesize: venuesize
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -291,7 +288,6 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
                 venuetype: venuetype
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -305,12 +301,10 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else if (venuetype === "all" && freeticketed === "free") {
         Location
             .find({
-                venuesize: venuesize
-            } && {
+                venuesize: venuesize,
                 free: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -324,12 +318,10 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else if (venuetype === "all") {
         Location
             .find({
-                venuesize: venuesize
-            } && {
+                venuesize: venuesize,
                 ticketed: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -343,12 +335,10 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else if (venuesize === "all" && freeticketed === "free") {
         Location
             .find({
-                venuetype: venuetype
-            } && {
+                venuetype: venuetype,
                 free: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -359,15 +349,13 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
                     message: 'Internal server error'
                 });
             });
-    } else if (venuetype === "all") {
+    } else if (venuesize === "all") {
         Location
             .find({
-                venuetype: venuetype
-            } && {
+                venuetype: venuetype,
                 ticketed: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -381,12 +369,10 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else if (freeticketed === "all") {
         Location
             .find({
-                venuetype: venuetype
-            } && {
+                venuetype: venuetype,
                 venuesize: venuesize
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -400,14 +386,11 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else if (freeticketed === "free") {
         Location
             .find({
-                venuetype: venuetype
-            } && {
-                venuesize: venuesize
-            } && {
+                venuetype: venuetype,
+                venuesize: venuesize,
                 free: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
@@ -421,14 +404,11 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
     } else {
         Location
             .find({
-                venuetype: venuetype
-            } && {
-                venuesize: venuesize
-            } && {
+                venuetype: venuetype,
+                venuesize: venuesize,
                 ticketed: "TRUE"
             })
             .then(function (results) {
-                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
                 res.json({
                     results
                 });
