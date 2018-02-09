@@ -205,6 +205,46 @@ function rateVenue() {
 //        });
 //}
 
+$(getSomeVenues);
+
+function getSomeVenues() {
+    $.getJSON('/venues/partiallist/foodFirst/small/TRUE/FALSE', function (res) {
+        console.log("Partial list of venues?", res);
+    });
+}
+
+//    const newReviewObject = {
+//        venuetype: "foodFirst",
+//        venuesize: "small",
+//        free: "TRUE",
+//        ticketed: "FALSE"
+//    };
+//    $.ajax({
+//            type: 'GET',
+//            url: '/venues/partiallist',
+//            dataType: 'json',
+//            data: JSON.stringify(newReviewObject),
+//            contentType: 'application/json'
+//        })
+//        .done(function (result) {
+//            //            newUserToggle = true;
+//            //        alert('Thanks for signing up! You may now sign in with your username and password.');
+//            console.log(result);
+//            //        $('input[name="userName "]').val("
+//            //"); // clear the input fields
+//            //        $('input[name="password"]').val("");
+//            //        $('input[name="passwordConfirm"]').val("");
+//            //        $('.newUser').removeClass('venueVisible');
+//            //        showReview();
+//        })
+//        .fail(function (jqXHR, error, errorThrown) {
+//            console.log(jqXHR);
+//            console.log(error);
+//            console.log(errorThrown);
+//        });
+//}
+
+
 function listVenues() {
     $.getJSON('/locations', function (res) {
         $("#listBox").text(""); /* clear existing text, if any */

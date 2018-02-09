@@ -216,6 +216,29 @@ app.get('/venuereviews/:venName', function (req, res) {
         });
 });
 
+app.get('/venues/partiallist/:venuetype/:venuesize/:free/:ticketed', function (req, res) {
+    let venuetype = req.params.venuetype;
+    let venuesize = req.params.venuesize;
+    Location
+        .find({
+            venuetype: venuetype
+        } && {
+            venuesize: venuesize
+        })
+        .then(function (results) {
+            console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+            res.json({
+                results
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
 
 app.get('/cats', function (req, res) {
     Cat
