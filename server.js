@@ -216,27 +216,230 @@ app.get('/venuereviews/:venName', function (req, res) {
         });
 });
 
-app.get('/venues/partiallist/:venuetype/:venuesize/:free/:ticketed', function (req, res) {
+app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req, res) {
     let venuetype = req.params.venuetype;
     let venuesize = req.params.venuesize;
-    Location
-        .find({
-            venuetype: venuetype
-        } && {
-            venuesize: venuesize
-        })
-        .then(function (results) {
-            console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
-            res.json({
-                results
+    let freeticketed = req.params.freeticketed;
+    if (venuetype === "all" && venuesize === "all" && freeticketed === "all") {
+        Location
+            .find()
+            .then(function (results) {
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
             });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
+    } else if (venuetype === "all" && venuesize === "all" && freeticketed === "free") {
+        Location
+            .find({
+                free: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
             });
-        });
+    } else if (venuetype === "all" && venuesize === "all") {
+        Location
+            .find({
+                ticketed: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuetype === "all" && freeticketed === "all") {
+        Location
+            .find({
+                venuesize: venuesize
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuesize === "all" && freeticketed === "all") {
+        Location
+            .find({
+                venuetype: venuetype
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuetype === "all" && freeticketed === "free") {
+        Location
+            .find({
+                venuesize: venuesize
+            } && {
+                free: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuetype === "all") {
+        Location
+            .find({
+                venuesize: venuesize
+            } && {
+                ticketed: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuesize === "all" && freeticketed === "free") {
+        Location
+            .find({
+                venuetype: venuetype
+            } && {
+                free: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (venuetype === "all") {
+        Location
+            .find({
+                venuetype: venuetype
+            } && {
+                ticketed: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (freeticketed === "all") {
+        Location
+            .find({
+                venuetype: venuetype
+            } && {
+                venuesize: venuesize
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else if (freeticketed === "free") {
+        Location
+            .find({
+                venuetype: venuetype
+            } && {
+                venuesize: venuesize
+            } && {
+                free: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    } else {
+        Location
+            .find({
+                venuetype: venuetype
+            } && {
+                venuesize: venuesize
+            } && {
+                ticketed: "TRUE"
+            })
+            .then(function (results) {
+                console.log("PARTIAL LIST OF VENUES (HOPEFULLY):", results);
+                res.json({
+                    results
+                });
+            })
+            .catch(function (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: 'Internal server error'
+                });
+            });
+    }
 });
 
 

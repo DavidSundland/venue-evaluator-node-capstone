@@ -205,10 +205,28 @@ function rateVenue() {
 //        });
 //}
 
-$(getSomeVenues);
+$(listenForFilters);
 
-function getSomeVenues() {
-    $.getJSON('/venues/partiallist/foodFirst/small/TRUE/FALSE', function (res) {
+function listenForFilters() {
+    let venuetype = "all";
+    let venuesize = "all";
+    let freeticketed = "all";
+    $("#venueType").change(function () {
+        venuetype = $("#venueType").val();
+        getSomeVenues(venuetype, venuesize, freeticketed);
+    });
+    $("#size").change(function () {
+        venuesize = $("#size").val();
+        getSomeVenues(venuetype, venuesize, freeticketed);
+    });
+    $("#freeTicketed").change(function () {
+        freeticketed = $("#freeTicketed").val();
+        getSomeVenues(venuetype, venuesize, freeticketed);
+    });
+}
+
+function getSomeVenues(venuetype, venuesize, freeticketed) {
+    $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
         console.log("Partial list of venues?", res);
     });
 }
