@@ -381,6 +381,8 @@ $('#newUser').on('submit', function (event) {
         alert('You must enter a username!');
     } else if (pw.length < 6) {
         alert('Your password must have at least 6 characters!');
+    } else if (/\s/.test(uname) || /\s/.test(pw)) {
+        alert("Sorry, usernames & passwords cannot contain spaces!");
     } else {
         const newUserObject = {
             username: uname,

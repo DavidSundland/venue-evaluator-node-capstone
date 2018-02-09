@@ -100,7 +100,7 @@ app.post('/users/create', (req, res) => {
     });
 });
 
-// Sign a new user in
+// Login / sign a user in
 app.post('/signin', function (req, res) {
     const user = req.body.username;
     const pw = req.body.password;
