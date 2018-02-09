@@ -52,7 +52,6 @@ function showReview(venueNameFromLogin) {
     let venueName = $(this).attr("title");
     if (venueName === undefined) { // if 'this' is undefined, then got to this function via login
         venueName = venueNameFromLogin;
-        console.log("%%%%%%%%%%%%%%%%% Got to showReview and venueName had been undefined, now is:", venueName);
     }
     $('#reviewMarquee').html(venueName.toUpperCase());
     $('#reviewMarquee').attr("title", venueName); // store venue name in marquee
@@ -316,6 +315,10 @@ $('#newUser').on('submit', function (event) {
                 $('.login').addClass('venueVisible');
             })
             .fail(function (jqXHR, error, errorThrown) {
+                alert("Uh-oh, something went wrong! Try a different username.");
+                $('input[name="userName"]').val(""); // clear the input fields
+                $('input[name="password"]').val("");
+                $('input[name="passwordConfirm"]').val("");
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
