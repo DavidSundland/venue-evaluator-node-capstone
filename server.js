@@ -151,6 +151,8 @@ app.post('/signin', function (req, res) {
 //            });
 //        });
 //});
+
+// retrieve all of the venues
 app.get('/locations', function (req, res) {
     Location
         .find()
@@ -167,6 +169,7 @@ app.get('/locations', function (req, res) {
         });
 });
 
+// get one venue
 app.get('/locations/onevenue/:venName', function (req, res) {
     const {
         venName
@@ -189,6 +192,30 @@ app.get('/locations/onevenue/:venName', function (req, res) {
             });
         });
 });
+
+app.get('/venuereviews/:venName', function (req, res) {
+    const {
+        venName
+    } = req.params;
+    console.log("This is what I got for venName when retrieving reviews:", venName);
+    Review
+        .find({
+            venueName: venName
+        })
+        .then(function (results) {
+            console.log("RESULTS FROM QUERYING REVIEWS:", results);
+            res.json({
+                results
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
 
 app.get('/cats', function (req, res) {
     Cat

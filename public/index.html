@@ -309,25 +309,29 @@
 <button id="reviewButton" title="${venueName}">Leave a Review!</button>
         </div>`);
             $('#reviews').html(`<h2>Reviews</h2>`);
-            for (let x = 0; x < fakeReviews.length; x++) {
-                $('#reviews').append(`
+            $.getJSON('/venuereviews/' + venueName, function(res) {
+                if (res.results.length === 0) {
+                    $('#reviews').append(`No one has left a review for ${venueName} yet!`);
+                }
+                for (let x = 0; x < res.results.length; x++) {
+                    $('#reviews').append(`
 <div class="oneReview">
-<p class="userName row">${fakeReviews[x].userName}</p>
+<p class="userName row">${res.results[x].userName}</p>
 <div class="row userRatings">
-<p class="col-6">Listening Experience: ${stars[fakeReviews[x].userListening-1]}</p>
-<p class="col-6">Venue Feel: ${stars[fakeReviews[x].userFeel-1]}</p>
-<p class="col-6">Music Value: ${stars[fakeReviews[x].userMusicValue-1]}</p>
-<p class="col-6">Band Quality: ${stars[fakeReviews[x].userMusicQuality-1]}</p>
-<p class="col-6">Food/Beverage Quality: ${stars[fakeReviews[x].userFoodQuality-1]}</p>
-<p class="col-6">Food/Beverage Value: ${stars[fakeReviews[x].userFoodValue-1]}</p>
+<p class="col-6">Listening Experience: ${stars[Number(res.results[x].listeningExperience)-1]}</p>
+<p class="col-6">Venue Feel: ${stars[Number(res.results[x].venueFeel)-1]}</p>
+<p class="col-6">Music Value: ${stars[Number(res.results[x].musicValue)-1]}</p>
+<p class="col-6">Band Quality: ${stars[Number(res.results[x].musicQuality)-1]}</p>
+<p class="col-6">Food/Beverage Quality: ${stars[Number(res.results[x].foodQuality)-1]}</p>
+<p class="col-6">Food/Beverage Value: ${stars[Number(res.results[x].foodValue)-1]}</p>
         </div>
-<p class="userReview row">${fakeReviews[x].userReview}</p>
+<p class="userReview row">${res.results[x].userReview}</p>
         </div>
 <hr>
 `)
-            }
-            $('.jsHide').addClass("venueVisible");
-
+                }
+                $('.jsHide').addClass("venueVisible");
+            });
         }
 
         function initMap() {

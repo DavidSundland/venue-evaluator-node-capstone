@@ -237,7 +237,7 @@ function getOneVenue(venueName) {
         renderVenue(res.results.venuename, res.results.website, res.results.streetaddress, res.results.description, res.results.imageurl);
     });
 }
-
+//$(getReviews("701 Restaurant"));
 
 //
 //$(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
