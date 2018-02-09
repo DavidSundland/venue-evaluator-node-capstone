@@ -169,6 +169,30 @@ app.get('/locations', function (req, res) {
         });
 });
 
+// check to see if user has review for venue
+app.get('/reviews/check/:userName/:venueName', function (req, res) {
+    console.log("$$$$$$$$$$$$ IN GET TO CHECK FOR USER REVIEWS");
+    let userName = req.params.userName;
+    let venueName = req.params.venueName;
+    Review
+        .findOne({
+            venueName: venueName,
+            userName: userName
+        })
+        .then(function (results) {
+            console.log("In get one review, results: ", results);
+            res.json({
+                results
+            });
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Internal server error'
+            });
+        });
+});
+
 // get one venue
 app.get('/locations/onevenue/:venName', function (req, res) {
     const {
@@ -203,7 +227,7 @@ app.get('/venuereviews/:venName', function (req, res) {
             venueName: venName
         })
         .then(function (results) {
-            console.log("RESULTS FROM QUERYING REVIEWS:", results);
+            //            console.log("RESULTS FROM QUERYING REVIEWS:", results);
             res.json({
                 results
             });

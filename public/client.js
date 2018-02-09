@@ -58,7 +58,22 @@ function showReview(venueNameFromLogin) {
     if (!LOGGEDIN) {
         $('.login').addClass('venueVisible');
     } else {
-        $('#leaveReview').addClass('venueVisible');
+        $.getJSON('/reviews/check/' + USERNAME + '/' + venueName, function (res) {
+            if (res === null) {
+                $('#leaveReview').addClass('venueVisible');
+            } else {
+                $('#leaveReview').addClass('venueVisible');
+                console.log(res);
+                rateVenue({
+                    listeningExperience: res.results.listeningExperience,
+                    venueFeel: res.results.venueFeel,
+                    musicValue: res.results.musicValue,
+                    musicQuality: res.results.musicQuality,
+                    foodQuality: res.results.foodQuality,
+                    foodValue: res.results.foodValue
+                }, res.results.userReview, res.results._id);
+            }
+        });
         //        console.log("REVIEW MARQUEE TITLE IS:  ", $('#reviewMarquee').attr("title"));
     }
     /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
@@ -70,13 +85,53 @@ function createNewUser(event) {
     $('.newUser').addClass('venueVisible');
 }
 
-function rateVenue() {
-    let listeningExperience = 0;
-    let venueFeel = 0;
-    let musicValue = 0;
-    let musicQuality = 0;
-    let foodQuality = 0;
-    let foodValue = 0;
+//function rateVenue(listeningExperience, venueFeel, musicValue, musicQuality, foodValue, userReview) {
+function rateVenue(ratingsArray, userReview, reviewId) {
+    let oldColor = $("body").css("color"); /* target color gets changed when clicked, so get base color from body instead */
+    let newColor = "#86034D";
+    if (ratingsArray !== undefined) { // array is ONLY passed if user is logged in and has already left review for venue
+        $("#userComments").html(userReview);
+        Object.keys(ratingsArray).forEach(function (key) {
+            let starId = "#" + key;
+            if (ratingsArray[key] === "5") {
+                $(starId).find(".value1").css("color", newColor);
+                $(starId).find(".value2").css("color", newColor);
+                $(starId).find(".value3").css("color", newColor);
+                $(starId).find(".value4").css("color", newColor);
+                $(starId).find(".value5").css("color", newColor);
+            } else if (ratingsArray[key] === "4") {
+                $(starId).find(".value1").css("color", newColor);
+                $(starId).find(".value2").css("color", newColor);
+                $(starId).find(".value3").css("color", newColor);
+                $(starId).find(".value4").css("color", newColor);
+                $(starId).find(".value5").css("color", oldColor);
+            } else if (ratingsArray[key] === "3") {
+                $(starId).find(".value1").css("color", newColor);
+                $(starId).find(".value2").css("color", newColor);
+                $(starId).find(".value3").css("color", newColor);
+                $(starId).find(".value4").css("color", oldColor);
+                $(starId).find(".value5").css("color", oldColor);
+            } else if (ratingsArray[key] === "2") {
+                $(starId).find(".value1").css("color", newColor);
+                $(starId).find(".value2").css("color", newColor);
+                $(starId).find(".value3").css("color", oldColor);
+                $(starId).find(".value4").css("color", oldColor);
+                $(starId).find(".value5").css("color", oldColor);
+            } else if (ratingsArray[key] === "1") {
+                $(starId).find(".value1").css("color", newColor);
+                $(starId).find(".value2").css("color", oldColor);
+                $(starId).find(".value3").css("color", oldColor);
+                $(starId).find(".value4").css("color", oldColor);
+                $(starId).find(".value5").css("color", oldColor);
+            } else {
+                $(starId).find(".value1").css("color", oldColor);
+                $(starId).find(".value2").css("color", oldColor);
+                $(starId).find(".value3").css("color", oldColor);
+                $(starId).find(".value4").css("color", oldColor);
+                $(starId).find(".value5").css("color", oldColor);
+            }
+        });
+    }
     $('#leaveReview').on('click', '#skipReview', function () {
         //        console.log("clicked");
         $('#leaveReview').removeClass('venueVisible');
@@ -100,8 +155,6 @@ function rateVenue() {
         } else {
             foodValue = ratingClicked;
         }
-        let oldColor = $(this).parent().css("color"); /* target color gets changed when clicked, so get base color from parent instead */
-        let newColor = "#86034D";
         if (ratingClicked === "5") {
             $(this).parent().find(".value1").css("color", newColor);
             $(this).parent().find(".value2").css("color", newColor);

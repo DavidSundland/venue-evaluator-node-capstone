@@ -333,6 +333,14 @@ button:hover {
     z-index: 401;
 }
 
+.star {
+    cursor: pointer;
+}
+
+.star:hover {
+    text-shadow: 0 0 1px white;
+}
+
 .venueBox,
 .reviewBox,
 .newUser,
