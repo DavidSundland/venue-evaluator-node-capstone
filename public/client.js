@@ -59,10 +59,9 @@ function showReview(venueNameFromLogin) {
         $('.login').addClass('venueVisible');
     } else {
         $.getJSON('/reviews/check/' + USERNAME + '/' + venueName, function (res) {
-            if (res === null) {
-                $('#leaveReview').addClass('venueVisible');
+            if (res.results == null || res.results == "null") {
+                rateVenue();
             } else {
-                $('#leaveReview').addClass('venueVisible');
                 console.log(res);
                 rateVenue({
                     listeningExperience: res.results.listeningExperience,
@@ -87,53 +86,76 @@ function createNewUser(event) {
 
 //function rateVenue(listeningExperience, venueFeel, musicValue, musicQuality, foodValue, userReview) {
 function rateVenue(ratingsArray, userReview, reviewId) {
+    $('#leaveReview').addClass('venueVisible');
     let oldColor = $("body").css("color"); /* target color gets changed when clicked, so get base color from body instead */
     let newColor = "#86034D";
-    if (ratingsArray !== undefined) { // array is ONLY passed if user is logged in and has already left review for venue
-        $("#userComments").html(userReview);
-        Object.keys(ratingsArray).forEach(function (key) {
-            let starId = "#" + key;
-            if (ratingsArray[key] === "5") {
-                $(starId).find(".value1").css("color", newColor);
-                $(starId).find(".value2").css("color", newColor);
-                $(starId).find(".value3").css("color", newColor);
-                $(starId).find(".value4").css("color", newColor);
-                $(starId).find(".value5").css("color", newColor);
-            } else if (ratingsArray[key] === "4") {
-                $(starId).find(".value1").css("color", newColor);
-                $(starId).find(".value2").css("color", newColor);
-                $(starId).find(".value3").css("color", newColor);
-                $(starId).find(".value4").css("color", newColor);
-                $(starId).find(".value5").css("color", oldColor);
-            } else if (ratingsArray[key] === "3") {
-                $(starId).find(".value1").css("color", newColor);
-                $(starId).find(".value2").css("color", newColor);
-                $(starId).find(".value3").css("color", newColor);
-                $(starId).find(".value4").css("color", oldColor);
-                $(starId).find(".value5").css("color", oldColor);
-            } else if (ratingsArray[key] === "2") {
-                $(starId).find(".value1").css("color", newColor);
-                $(starId).find(".value2").css("color", newColor);
-                $(starId).find(".value3").css("color", oldColor);
-                $(starId).find(".value4").css("color", oldColor);
-                $(starId).find(".value5").css("color", oldColor);
-            } else if (ratingsArray[key] === "1") {
-                $(starId).find(".value1").css("color", newColor);
-                $(starId).find(".value2").css("color", oldColor);
-                $(starId).find(".value3").css("color", oldColor);
-                $(starId).find(".value4").css("color", oldColor);
-                $(starId).find(".value5").css("color", oldColor);
-            } else {
-                $(starId).find(".value1").css("color", oldColor);
-                $(starId).find(".value2").css("color", oldColor);
-                $(starId).find(".value3").css("color", oldColor);
-                $(starId).find(".value4").css("color", oldColor);
-                $(starId).find(".value5").css("color", oldColor);
-            }
-        });
+    if (userReview === undefined) { // array is ONLY passed if user is logged in and has already left review for venue
+        console.log("MADE IT INTO RATINGSARRAY === UNDEFINED");
+        userReview = ' ';
+        ratingsArray = {
+            listeningExperience: "0",
+            venueFeel: "0",
+            musicValue: "0",
+            musicQuality: "0",
+            foodQuality: "0",
+            foodValue: "0"
+        };
     }
+    console.log("initial value of ratingsArray", ratingsArray);
+    $("#userComments").val(userReview);
+    // change the rating stars colors, as applicable
+    Object.keys(ratingsArray).forEach(function (key) {
+        let starId = "#" + key;
+        if (ratingsArray[key] === "5") {
+            $(starId).find(".value1").css("color", newColor);
+            $(starId).find(".value2").css("color", newColor);
+            $(starId).find(".value3").css("color", newColor);
+            $(starId).find(".value4").css("color", newColor);
+            $(starId).find(".value5").css("color", newColor);
+        } else if (ratingsArray[key] === "4") {
+            $(starId).find(".value1").css("color", newColor);
+            $(starId).find(".value2").css("color", newColor);
+            $(starId).find(".value3").css("color", newColor);
+            $(starId).find(".value4").css("color", newColor);
+            $(starId).find(".value5").css("color", oldColor);
+        } else if (ratingsArray[key] === "3") {
+            $(starId).find(".value1").css("color", newColor);
+            $(starId).find(".value2").css("color", newColor);
+            $(starId).find(".value3").css("color", newColor);
+            $(starId).find(".value4").css("color", oldColor);
+            $(starId).find(".value5").css("color", oldColor);
+        } else if (ratingsArray[key] === "2") {
+            $(starId).find(".value1").css("color", newColor);
+            $(starId).find(".value2").css("color", newColor);
+            $(starId).find(".value3").css("color", oldColor);
+            $(starId).find(".value4").css("color", oldColor);
+            $(starId).find(".value5").css("color", oldColor);
+        } else if (ratingsArray[key] === "1") {
+            $(starId).find(".value1").css("color", newColor);
+            $(starId).find(".value2").css("color", oldColor);
+            $(starId).find(".value3").css("color", oldColor);
+            $(starId).find(".value4").css("color", oldColor);
+            $(starId).find(".value5").css("color", oldColor);
+        } else {
+            $(starId).find(".value1").css("color", oldColor);
+            $(starId).find(".value2").css("color", oldColor);
+            $(starId).find(".value3").css("color", oldColor);
+            $(starId).find(".value4").css("color", oldColor);
+            $(starId).find(".value5").css("color", oldColor);
+        }
+    });
+
     $('#leaveReview').on('click', '#skipReview', function () {
-        //        console.log("clicked");
+        //       reset all values in array before exiting
+        ratingsArray.listeningExperience = "0";
+        ratingsArray.foodQuality = "0";
+        ratingsArray.foodValue = "0";
+        ratingsArray.musicQuality = "0";
+        ratingsArray.musicValue = "0";
+        ratingsArray.userName = "";
+        ratingsArray.userReview = "";
+        userReview = "";
+        //        $("#userComments").html("");
         $('#leaveReview').removeClass('venueVisible');
         $('.jsHide').addClass("venueVisible");
     }); // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
@@ -143,17 +165,17 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         let ratingClicked = $(this).attr("value");
         //        console.log(ratingClicked);
         if (categoryClicked === "listeningExperience") {
-            listeningExperience = ratingClicked;
+            ratingsArray.listeningExperience = ratingClicked;
         } else if (categoryClicked === "venueFeel") {
-            venueFeel = ratingClicked;
+            ratingsArray.venueFeel = ratingClicked;
         } else if (categoryClicked === "musicValue") {
-            musicValue = ratingClicked;
+            ratingsArray.musicValue = ratingClicked;
         } else if (categoryClicked === "musicQuality") {
-            musicQuality = ratingClicked;
+            ratingsArray.musicQuality = ratingClicked;
         } else if (categoryClicked === "foodQuality") {
-            foodQuality = ratingClicked;
+            ratingsArray.foodQuality = ratingClicked;
         } else {
-            foodValue = ratingClicked;
+            ratingsArray.foodValue = ratingClicked;
         }
         if (ratingClicked === "5") {
             $(this).parent().find(".value1").css("color", newColor);
@@ -187,39 +209,55 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             $(this).parent().find(".value5").css("color", oldColor);
         }
     });
+    console.log("value of ratingsArray after click", ratingsArray);
     $(".commentButtons").on('click', '#submitReview', function () {
-        if (listeningExperience === 0 || venueFeel === 0 || musicValue === 0 || musicQuality === 0) {
+        if (ratingsArray[listeningExperience] === "0" || ratingsArray[venueFeel] === "0" || ratingsArray[musicValue] === "0" || ratingsArray[musicQuality] === "0") {
             alert("You can't leave any of the first four star fields blank!");
         } else {
             event.preventDefault();
+            console.log("The array that is gonna be sent: ", ratingsArray);
             let venueName = $('#reviewMarquee').attr("title");
-            let userReview = $("#userComments").val().trim();
+            userReview = $("#userComments").val().trim();
             if (userReview.length === 0) {
                 userReview = " ";
             }
-            const newReviewObject = {
-                venueName: venueName,
-                userName: USERNAME,
-                listeningExperience: listeningExperience,
-                venueFeel: venueFeel,
-                musicValue: musicValue,
-                musicQuality: musicQuality,
-                foodQuality: foodQuality,
-                foodValue: foodValue,
-                userReview: userReview
-            };
+            ratingsArray.userReview = userReview;
+            ratingsArray.venueName = venueName;
+            ratingsArray.userName = USERNAME;
+            //            const newReviewObject = {
+            //                venueName: venueName,
+            //                userName: USERNAME,
+            //                listeningExperience: listeningExperience,
+            //                venueFeel: venueFeel,
+            //                musicValue: musicValue,
+            //                musicQuality: musicQuality,
+            //                foodQuality: foodQuality,
+            //                foodValue: foodValue,
+            //                userReview: userReview
+            //            };
             $.ajax({
                     type: 'POST',
                     url: '/new/create',
                     dataType: 'json',
-                    data: JSON.stringify(newReviewObject),
+                    data: JSON.stringify(ratingsArray),
                     contentType: 'application/json'
                 })
                 .done(function (result) {
                     console.log("new review posted:", result);
                     alert(`Thank you for reviewing ${venueName}, ${USERNAME}!`);
-                    getOneVenue(newReviewObject.venueName);
+                    getOneVenue(ratingsArray.venueName);
                     $('#leaveReview').removeClass('venueVisible');
+                    //       reset all values in array before exiting
+                    ratingsArray.listeningExperience = "0";
+                    ratingsArray.foodQuality = "0";
+                    ratingsArray.foodValue = "0";
+                    ratingsArray.musicQuality = "0";
+                    ratingsArray.musicValue = "0";
+                    ratingsArray.userName = "";
+                    ratingsArray.userReview = "";
+                    userReview = "";
+                    //                    $("#userComments").html("");
+
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -439,6 +477,6 @@ $(clickClose);
 $(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
 $(watchButtons);
 $(listenForFilters);
-$(rateVenue);
+//$(rateVenue);
 $(raiseCurtain);
 //$(newCat);
