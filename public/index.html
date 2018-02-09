@@ -334,8 +334,13 @@
             });
         }
 
-        function initMap() {
-            $.getJSON('/locations', function(res) {
+        function initMap(venuetype, venuesize, freeticketed) {
+            if (venuetype === undefined) { // initially will be a callback with no parameters
+                venuetype = "all";
+                venuesize = "all";
+                freeticketed = "all";
+            }
+            $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function(res) {
                 var mapCenter = {
                     lat: 38.9222375,
                     lng: -77.0093275

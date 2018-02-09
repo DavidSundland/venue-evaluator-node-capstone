@@ -205,7 +205,7 @@ function rateVenue() {
 //        });
 //}
 
-$(listenForFilters);
+
 
 function listenForFilters() {
     let venuetype = "all";
@@ -214,58 +214,32 @@ function listenForFilters() {
     $("#venueType").change(function () {
         venuetype = $("#venueType").val();
         getSomeVenues(venuetype, venuesize, freeticketed);
+        initMap(venuetype, venuesize, freeticketed);
     });
     $("#size").change(function () {
         venuesize = $("#size").val();
         getSomeVenues(venuetype, venuesize, freeticketed);
+        initMap(venuetype, venuesize, freeticketed);
     });
     $("#freeTicketed").change(function () {
         freeticketed = $("#freeTicketed").val();
         getSomeVenues(venuetype, venuesize, freeticketed);
+        initMap(venuetype, venuesize, freeticketed);
     });
 }
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
         console.log("type", venuetype, "size", venuesize, "free/tick", freeticketed, res);
-    });
-}
-
-//    const newReviewObject = {
-//        venuetype: "foodFirst",
-//        venuesize: "small",
-//        free: "TRUE",
-//        ticketed: "FALSE"
-//    };
-//    $.ajax({
-//            type: 'GET',
-//            url: '/venues/partiallist',
-//            dataType: 'json',
-//            data: JSON.stringify(newReviewObject),
-//            contentType: 'application/json'
-//        })
-//        .done(function (result) {
-//            //            newUserToggle = true;
-//            //        alert('Thanks for signing up! You may now sign in with your username and password.');
-//            console.log(result);
-//            //        $('input[name="userName "]').val("
-//            //"); // clear the input fields
-//            //        $('input[name="password"]').val("");
-//            //        $('input[name="passwordConfirm"]').val("");
-//            //        $('.newUser').removeClass('venueVisible');
-//            //        showReview();
-//        })
-//        .fail(function (jqXHR, error, errorThrown) {
-//            console.log(jqXHR);
-//            console.log(error);
-//            console.log(errorThrown);
-//        });
-//}
-
-
-function listVenues() {
-    $.getJSON('/locations', function (res) {
+        //    });
+        //}
+        //  ORIGINALLY PULLED VENUES JUST ONCE AT STARTUP, WITHOUT FILTERS...  IF NOTHING BREAKS HERE, CAN GET RID OF /locations ENDPOINT
+        //function listVenues() {
+        //    $.getJSON('/locations', function (res) {
         $("#listBox").text(""); /* clear existing text, if any */
+        if (res.results.length === 0) {
+            $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
+        }
         for (x = 0; x < res.results.length; x++) {
             //            console.log("in for/let, key =", key);
             res.results[x].description.replace(/\s+/g, ' '); /* eliminate extra spaces, if any */
@@ -405,8 +379,9 @@ $('#login').on('click', '#loginClicked', function (event) {
 
 $(clickVenue);
 $(clickClose);
-$(raiseCurtain);
-$(listVenues);
+$(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
 $(watchButtons);
+$(listenForFilters);
 $(rateVenue);
+$(raiseCurtain);
 //$(newCat);
