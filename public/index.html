@@ -229,13 +229,14 @@
                 <p id="venueFeel">Venue Feel: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="musicValue">Music Value: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
                 <p id="musicQuality">Quality of Musician(s): <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
-                <p id="foodQuality">Food/Drink Quality: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
-                <p id="foodValue">Food/Drink Value: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
+                <p id="foodQuality">Food/Drink Quality*: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
+                <p id="foodValue">Food/Drink Value*: <span class="star" value="1"><i class="fas fa-star value1"></i></span><span class="star" value="2"><i class="fas fa-star value2"></i></span><span class="star" value="3"><i class="fas fa-star value3"></i></span><span class="star" value="4"><i class="fas fa-star value4"></i></span><span class="star" value="5"><i class="fas fa-star value5"></i></span></p>
             </div>
 
             <div class="row commentBox">
                 <textarea maxlength="300" placeholder="Type your review" id="userComments"></textarea>
             </div>
+            <p class="row extraInfo">*If not applicable, just leave these fields blank.</p>
             <div class="row commentButtons">
                 <button id="submitReview">Submit Review</button>
             </div>
@@ -253,9 +254,9 @@
     <script>
         <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
 
-        function clickVenue() {
-            $('.listBox').on('click', 'button', viewVenue);
-        }
+        //        function clickVenue() {
+        //            $('.listBox').on('click', 'button', viewVenue);
+        //        }
 
 
         function viewVenue() {
@@ -269,26 +270,9 @@
         }
 
         function renderVenue(venueName, venueLink, venueAddress, venueDescription, venuePic) {
-            let fakeReviews = [{
-                "userName": "Joe ConcertGoer",
-                "userListening": 5,
-                "userFeel": 4,
-                "userMusicValue": 4,
-                "userMusicQuality": 3,
-                "userFoodQuality": 3,
-                "userFoodValue": 2,
-                "userReview": "9:30 Club is a cavernous space that is well-worn. It is ugly outside and not terribly attractive inside. Still, it's a great place to hear music - excellent bands, top-notch sound and lighting, and very engaged crowds."
-            }, {
-                "userName": "Joanne MusicLover",
-                "userListening": 4,
-                "userFeel": 3,
-                "userMusicValue": 3,
-                "userMusicQuality": 5,
-                "userFoodQuality": 2,
-                "userFoodValue": 1,
-                "userReview": "I want to like 9:30 Club because it's such a DC institution. But it feels to me like they've been resting on their laurels for far too long and have let the place go. I'd much rather go to a newer place, like Anthem or Union Stage. They do still pull in some great bands, though."
-            }];
+            console.log("first line of renderVenue");
             let stars = [
+                'Not rated.',
                 '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
                 '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
                 '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
@@ -297,19 +281,22 @@
             ];
             $("#venueMarquee").html(venueName.toUpperCase());
             $("#venueInfo").html(`
-<div class="col-6">
-<img src="${venuePic}">
-<iframe width="80%" height="400px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=${venueName}, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
-        </div>
-<div class="col-6">
-<h3 class="venueNameHeader"><a href="${venueLink}">${venueName}</a></h3>
-<hr>
-<p class="venueAddress">${venueAddress}</p>
-<p class="venueDescription">${venueDescription}</p>
-<button id="reviewButton" title="${venueName}">Leave a Review!</button>
-        </div>`);
+            <div class="col-6">
+                <img src="${venuePic}">
+                <iframe width="80%" height="400px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=${venueName}, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
+            </div>
+            <div class="col-6">
+                <h3 class="venueNameHeader"><a href="${venueLink}">${venueName}</a></h3>
+                <hr>
+                <p class="venueAddress">${venueAddress}</p>
+                <p class="venueDescription">${venueDescription}</p>
+                <button id="reviewButton" title="${venueName}">Leave a Review!</button>
+            </div>`);
             $('#reviews').html(`<h2>Reviews</h2>`);
+            let tracker = 0;
             $.getJSON('/venuereviews/' + venueName, function(res) {
+                tracker++;
+                console.log(tracker);
                 if (res.results.length === 0) {
                     $('#reviews').append(`No one has left a review for ${venueName} yet!`);
                 }
@@ -318,12 +305,12 @@
 <div class="oneReview">
 <p class="userName row">${res.results[x].userName}</p>
 <div class="row userRatings">
-<p class="col-6">Listening Experience: ${stars[Number(res.results[x].listeningExperience)-1]}</p>
-<p class="col-6">Venue Feel: ${stars[Number(res.results[x].venueFeel)-1]}</p>
-<p class="col-6">Music Value: ${stars[Number(res.results[x].musicValue)-1]}</p>
-<p class="col-6">Band Quality: ${stars[Number(res.results[x].musicQuality)-1]}</p>
-<p class="col-6">Food/Beverage Quality: ${stars[Number(res.results[x].foodQuality)-1]}</p>
-<p class="col-6">Food/Beverage Value: ${stars[Number(res.results[x].foodValue)-1]}</p>
+<p class="col-6">Listening Experience: ${stars[Number(res.results[x].listeningExperience)]}</p>
+<p class="col-6">Venue Feel: ${stars[Number(res.results[x].venueFeel)]}</p>
+<p class="col-6">Music Value: ${stars[Number(res.results[x].musicValue)]}</p>
+<p class="col-6">Band Quality: ${stars[Number(res.results[x].musicQuality)]}</p>
+<p class="col-6">Food/Beverage Quality: ${stars[Number(res.results[x].foodQuality)]}</p>
+<p class="col-6">Food/Beverage Value: ${stars[Number(res.results[x].foodValue)]}</p>
         </div>
 <p class="userReview row">${res.results[x].userReview}</p>
         </div>
