@@ -148,9 +148,9 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             $(starId).find(".value5").css("color", oldColor);
         }
     });
-
     $('#leaveReview').on('click', '#skipReview', function () {
         //       reset all values in array before exiting
+        event.preventDefault();
         ratingsArray.listeningExperience = "0";
         ratingsArray.foodQuality = "0";
         ratingsArray.foodValue = "0";
@@ -164,32 +164,25 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         $('.jsHide').addClass("makeVisible");
     });
     $('#leaveReview').on('click', '#deleteReviewButton', function () {
-        $(".alertBoxContainer").addClass("visibleAlert");
-        $(".alertBox").addClass("visibleAlert");
-        $(".alertBox").html("<p>Are you sure you want to permanently delete your review?</p><br><button id='yes'>Delete Review</button><button id='no'>Don't Delete!</button>");
-        $(".alertBox").on('click', '#no', function () {
-            $(".alertBoxContainer").removeClass("makeVisible");
-            $(".alertBox").removeClass("makeVisible");
-        });
-        $(".alertBox").on('click', '#yes', function () {
-            //       reset all values in array before exiting
-            ratingsArray.listeningExperience = "0";
-            ratingsArray.foodQuality = "0";
-            ratingsArray.foodValue = "0";
-            ratingsArray.musicQuality = "0";
-            ratingsArray.musicValue = "0";
-            ratingsArray.userName = "";
-            ratingsArray.userReview = "";
-            userReview = "";
-            $(".alertBoxContainer").removeClass("visibleAlert");
-            $(".alertBox").removeClass("visibleAlert");
-            $('#leaveReview').removeClass('makeVisible');
-            $('.jsHide').addClass("makeVisible");
-            console.log("Delete button clicked, initial value of reviewId:", reviewId);
-            $.ajax({
-                method: 'DELETE',
-                url: '/delete/' + reviewId //*MARK*//
-            });
+        //        event.preventDefault();
+        myBoolean("Are you sure you want to permanently delete your review?", "Delete Review", "Don't Delete!").then(function (res) {
+            if (res) {
+                ratingsArray.listeningExperience = "0";
+                ratingsArray.foodQuality = "0";
+                ratingsArray.foodValue = "0";
+                ratingsArray.musicQuality = "0";
+                ratingsArray.musicValue = "0";
+                ratingsArray.userName = "";
+                ratingsArray.userReview = "";
+                userReview = "";
+                console.log("Delete button clicked, initial value of reviewId:", reviewId);
+                $.ajax({
+                    method: 'DELETE',
+                    url: '/delete/' + reviewId
+                });
+            } else {
+                console.log("Delete button clicked, but myBoolean returned", myBoo);
+            }
         });
     });
     $("#userReviews").on('click', '.star', function () {
@@ -244,8 +237,9 @@ function rateVenue(ratingsArray, userReview, reviewId) {
     });
     console.log("value of ratingsArray after click", ratingsArray);
     $(".commentButtons").on('click', '#submitReview', function () {
+        event.preventDefault();
         if (ratingsArray.listeningExperience === "0" || ratingsArray.venueFeel === "0" || ratingsArray.musicValue === "0" || ratingsArray.musicQuality === "0") {
-            alert("You can't leave any of the first four star fields blank!");
+            myAlert("You can't leave any of the first four star fields blank!", "oops");
         } else {
             event.preventDefault();
             console.log("The array that is gonna be sent: ", ratingsArray);
@@ -277,10 +271,8 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                 })
                 .done(function (result) {
                     console.log("new review posted:", result);
-                    alert(`Thank you for reviewing ${venueName}, ${USERNAME}!`);
                     getOneVenue(ratingsArray.venueName);
                     $('#leaveReview').removeClass('makeVisible');
-                    //       reset all values in array before exiting
                     ratingsArray.listeningExperience = "0";
                     ratingsArray.foodQuality = "0";
                     ratingsArray.foodValue = "0";
@@ -289,8 +281,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                     ratingsArray.userName = "";
                     ratingsArray.userReview = "";
                     userReview = "";
-                    //                    $("#userComments").html("");
-
+                    myAlert(`Thank you for reviewing ${venueName}, ${USERNAME}!`, 'ok');
                 })
                 .fail(function (jqXHR, error, errorThrown) {
                     console.log(jqXHR);
@@ -298,36 +289,36 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                     console.log(errorThrown);
                 });
             // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
+            //                            }
+            //        console.log(listeningExperience, venueFeel, musicValue, musicQuality, foodQuality, foodValue);
+
         }
-        //        console.log(listeningExperience, venueFeel, musicValue, musicQuality, foodQuality, foodValue);
+
+        //$.getJSON('/cats', function (res) {
+        //    console.log("logging results", res)
+        //});
+        //
+        //function newCat() {
+        //    let heresacat = {
+        //        name: "Mittens",
+        //        color: "tan"
+        //    };
+        //    $.ajax({
+        //            type: 'POST',
+        //            url: '/new/create',
+        //            dataType: 'json',
+        //            data: JSON.stringify(heresacat),
+        //            contentType: 'application/json'
+        //        })
+        //        .done(function (result) {
+        //            console.log("meow!")
+        //        })
+        //        .fail(function (jqXHR, error, errorThrown) {
+        //            console.log(jqXHR);
+        //            console.log(error);
+        //            console.log(errorThrown);
     });
 }
-
-//$.getJSON('/cats', function (res) {
-//    console.log("logging results", res)
-//});
-//
-//function newCat() {
-//    let heresacat = {
-//        name: "Mittens",
-//        color: "tan"
-//    };
-//    $.ajax({
-//            type: 'POST',
-//            url: '/new/create',
-//            dataType: 'json',
-//            data: JSON.stringify(heresacat),
-//            contentType: 'application/json'
-//        })
-//        .done(function (result) {
-//            console.log("meow!")
-//        })
-//        .fail(function (jqXHR, error, errorThrown) {
-//            console.log(jqXHR);
-//            console.log(error);
-//            console.log(errorThrown);
-//        });
-//}
 
 
 
@@ -409,13 +400,13 @@ $('#newUser').on('submit', function (event) {
     const pw = $('input[name="password"]').val();
     const confirmPw = $('input[name="passwordConfirm"]').val();
     if (pw !== confirmPw) {
-        alert('Passwords must match!');
+        myAlert('Passwords must match!', 'ok');
     } else if (uname.length === 0) {
-        alert('You must enter a username!');
+        myAlert('You must enter a username!', 'ok');
     } else if (pw.length < 6) {
-        alert('Your password must have at least 6 characters!');
+        myAlert('Your password must have at least 6 characters!', 'oops');
     } else if (/\s/.test(uname) || /\s/.test(pw)) {
-        alert("Sorry, usernames & passwords cannot contain spaces!");
+        myAlert("Sorry, usernames & passwords cannot contain spaces!", "oops");
     } else {
         const newUserObject = {
             username: uname,
@@ -431,8 +422,7 @@ $('#newUser').on('submit', function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                //            newUserToggle = true;
-                alert('Thanks for signing up! You may now sign in with your username and password.');
+                myAlert(`Thanks for signing up, ${uname}! You may now sign in with your username and password.`, 'ok');
                 console.log(result);
                 $('input[name="userName"]').val(""); // clear the input fields
                 $('input[name="password"]').val("");
@@ -462,9 +452,9 @@ $('#login').on('click', '#loginClicked', function (event) {
     const inputPw = $('input[name="signinPassword"]').val();
     // check for spaces, empty, undefined
     if ((!inputUname) || (inputUname.length < 1) || (inputUname.indexOf(' ') > 0)) {
-        alert('Invalid username');
+        myAlert('You entered an invalid username', 'oops');
     } else if ((!inputPw) || (inputPw.length < 1) || (inputPw.indexOf(' ') > 0)) {
-        alert('Invalid password');
+        myAlert('You entered an invalid password', 'oops');
     } else {
         const unamePwObject = {
             username: inputUname,
@@ -488,7 +478,7 @@ $('#login').on('click', '#loginClicked', function (event) {
                 //            }
                 LOGGEDIN = true;
                 USERNAME = user;
-                alert(`Welcome, ${user}!  You're now logged in!`);
+                myAlert(`Welcome, ${user}!  You're now logged in!`, "ok");
                 $('input[name="signinUserName"]').val("");
                 $('input[name="signinPassword"]').val("");
                 //                $('#closeVenue').addClass('makeVisible'); // Show close venue button
@@ -501,11 +491,63 @@ $('#login').on('click', '#loginClicked', function (event) {
                 console.log(jqXHR);
                 console.log(error);
                 console.log(errorThrown);
-                alert('Invalid username and password combination. Pleae check your username and password and try again.');
+                myAlert('You entered an invalid username and password combination. Pleae check your username and password and try again.', 'oops');
             });
     };
 });
 
+function myAlert(sayThis, choice) {
+    console.log(sayThis, choice);
+    let okChoices = ["Uhh, sure... OK", "Happy to oblige", "Did I have any other choice?", "It seemed the right thing to do", "I was bored", "My cat's breath smells like cat food", "I didn't realize I had a choice", "Hooray?", "Snazzy.", "Well, I'll be!", "Well, ain't that grand!"];
+    let oopsChoices = ["My mouse finger slipped", "I was young, I needed the money", "I was trying to play a cat video", "I did no such thing!", "My cat ran across my keyboard", "The peer pressure got to me", "Somebody else must have done that", "I must have been drunk", "I hit the wrong key", "Don't blame me for that!", "It was an accident", "Don't hold it against me!"];
+    let reasons;
+    if (choice === "oops") {
+        reasons = oopsChoices;
+    } else {
+        reasons = okChoices;
+    }
+    let thisReason = reasons[Math.floor(Math.random() * reasons.length)];
+    console.log("myAlert choice whatnot:", choice, reasons, thisReason);
+    $(".alertBoxContainer").addClass("visibleAlert");
+    $(".alertBox").addClass("visibleAlert");
+    $(".alertBox").html(sayThis + `<br><button id='yes'>${thisReason}</button>`);
+    $(".alertBox").on('click', '#yes', function () {
+        event.preventDefault();
+        $(".alertBoxContainer").removeClass("visibleAlert");
+        $(".alertBox").removeClass("visibleAlert");
+        $(".alertBox").html("");
+    });
+}
+
+function myBoolean(sayThis, buttonOne, buttonTwo) {
+    $(".alertBoxContainer").addClass("visibleAlert");
+    $(".alertBox").addClass("visibleAlert");
+    $(".alertBox").html(`${sayThis}<br><button title='true'>${buttonOne}</button><button title='false'>${buttonTwo}</button>`);
+    return new Promise((resolve, reject) => {
+        $(".alertBox").on('click', 'button', function () {
+            event.preventDefault();
+            $(".alertBoxContainer").removeClass("visibleAlert");
+            $(".alertBox").removeClass("visibleAlert");
+            $(".alertBox").html("");
+            console.log($(this), $(this).attr("title"));
+            resolve($(this).attr("title"));
+        });
+    });
+}
+
+//function myBoolean(sayThis, buttonOne, buttonTwo) {
+//    $(".alertBoxContainer").addClass("visibleAlert");
+//    $(".alertBox").addClass("visibleAlert");
+//    $(".alertBox").html(`${sayThis}<br><button title='true'>${buttonOne}</button><button title='false'>${buttonTwo}</button>`);
+//    $(".alertBox").on('click', 'button', function () {
+//        event.preventDefault();
+//        $(".alertBoxContainer").removeClass("visibleAlert");
+//        $(".alertBox").removeClass("visibleAlert");
+//        $(".alertBox").html("");
+//        console.log($(this), $(this).attr("title"));
+//        return $(this).attr("title");
+//    });
+//}
 
 //$(clickVenue);
 $(clickClose);

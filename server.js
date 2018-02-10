@@ -522,10 +522,11 @@ app.post('/new/create', (req, res) => {
 // deleting an achievement by id
 app.delete('/delete/:id', function (req, res) {
     Review.findByIdAndRemove(req.params.id).exec().then(function () {
+        console.log("Review",req.params.id,"deleted");
         return res.status(204).end();
     }).catch(function (err) {
         return res.status(500).json({
-            message: 'Internal Server Error'
+            message: 'Internal Server Error - review not deleted'
         });
     });
 });
