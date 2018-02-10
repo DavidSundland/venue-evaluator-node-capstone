@@ -63,7 +63,7 @@ body {
 }
 
 .curtainMain {
-    z-index: 300;
+    z-index: 600;
     width: 100%;
     height: 105%;
     position: fixed;
@@ -75,7 +75,7 @@ body {
     right: 0;
     top: 0;
     height: 100%;
-    z-index: 301;
+    z-index: 601;
     max-width: 15%
 }
 
@@ -84,7 +84,7 @@ body {
     left: 0;
     top: 0;
     height: 100%;
-    z-index: 301;
+    z-index: 601;
     max-width: 15%
 }
 
@@ -94,7 +94,7 @@ body {
     top: 0;
     width: 100%;
     height: 60px;
-    z-index: 302;
+    z-index: 602;
 }
 
 header {
@@ -330,7 +330,7 @@ button:hover {
     position: fixed;
     top: 40px;
     right: 40px;
-    z-index: 401;
+    z-index: 701;
 }
 
 .star {
@@ -387,13 +387,6 @@ button:hover {
 
 .login button {
     margin: 30px;
-}
-
-.venueVisible {
-    visibility: visible;
-    display: inline-block;
-    /*    z-index: 100;*/
-    text-align: center;
 }
 
 .venueInfo {
@@ -480,6 +473,37 @@ textarea {
     margin-top: 30px;
 }
 
+.alertBoxContainer {
+    display: none;
+    top: 0;
+    height: 100%;
+    margin: 0%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(255, 20, 147, 0.7);
+    z-index: 500;
+}
+
+.alertBox {
+    display: none;
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    -ms-transform: translate(-50%, -50%);*/
+    /*    transform: translate(-50%, -50%);*/
+    /*    position: relative;*/
+    position: fixed;
+    top: -25%;
+    margin: 25%;
+    height: 50%;
+    width: 50%;
+    background-color: black;
+    text-align: center;
+    padding: 30px;
+    z-index: 501;
+    border: 7px dotted #fed9ba;
+    /* creates solid lines inside & outside of dotted border */
+    box-shadow: inset 0 -1px 0 0 #FE6767, inset 0 1px 0 0 #FE6767, 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767, inset 1px 0 0 0 #FE6767, inset -1px 0 0 0 #FE6767, 1px 0 0 0 #FE6767, -1px 0 0 0 #FE6767;
+}
 
 footer {
     /*    position: fixed;*/
@@ -516,6 +540,18 @@ form {
     width: 100%;
     display: inline-block;
     text-align: center;
+}
+
+.makeVisible {
+    visibility: visible;
+    display: inline-block;
+    /*    z-index: 100;*/
+    text-align: center;
+}
+
+.visibleAlert {
+    visibility: visible;
+    display: block;
 }
 
 @media only screen and (max-width: 1300px) {

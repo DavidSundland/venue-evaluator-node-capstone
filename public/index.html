@@ -240,7 +240,12 @@
             <div class="row commentButtons">
                 <button id="submitReview">Submit Review</button>
             </div>
-            <button id="skipReview">Delete/Cancel Review</button>
+            <button id="skipReview">Cancel Review</button>
+            <div id="deleteReview"></div>
+        </div>
+
+        <div class="alertBoxContainer" class="hideMe">
+            <div class="alertBox" class="hideMe"></div>
         </div>
 
         <footer role="contentinfo">
@@ -317,7 +322,7 @@
 <hr>
 `)
                 }
-                $('.jsHide').addClass("venueVisible");
+                $('.jsHide').addClass("makeVisible");
             });
         }
 

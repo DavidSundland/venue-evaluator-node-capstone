@@ -518,6 +518,20 @@ app.post('/new/create', (req, res) => {
 });
 
 
+// DELETE ----------------------------------------
+// deleting an achievement by id
+app.delete('/delete/:id', function (req, res) {
+    Review.findByIdAndRemove(req.params.id).exec().then(function () {
+        return res.status(204).end();
+    }).catch(function (err) {
+        return res.status(500).json({
+            message: 'Internal Server Error'
+        });
+    });
+});
+
+
+
 
 // MISC ------------------------------------------
 // catch-all endpoint if client makes request to non-existent endpoint

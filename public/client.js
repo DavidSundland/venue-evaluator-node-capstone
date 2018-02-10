@@ -21,10 +21,10 @@ function searchNames() {
 function clickClose() {
     $('#closeVenue').click(function () {
         //        console.log('clicked');
-        $('.jsHide').removeClass('venueVisible');
-        $('.login').removeClass('venueVisible');
-        $('.newUser').removeClass('venueVisible');
-        $('#leaveReview').removeClass('venueVisible');
+        $('.jsHide').removeClass('makeVisible');
+        $('.login').removeClass('makeVisible');
+        $('.newUser').removeClass('makeVisible');
+        $('#leaveReview').removeClass('makeVisible');
     });
 }
 
@@ -38,17 +38,17 @@ function watchButtons() {
     $('.login').on('click', '#newUserButton', createNewUser);
     $('.login').on('click', '#cancelLogin', function () {
         //        console.log("clicked");
-        $('.login').removeClass('venueVisible');
-        $('.jsHide').addClass("venueVisible");
+        $('.login').removeClass('makeVisible');
+        $('.jsHide').addClass("makeVisible");
     });
     $('.newUser').on('click', '#cancelNewUser', function () {
-        $('.newUser').removeClass('venueVisible');
-        $('.jsHide').addClass("venueVisible");
+        $('.newUser').removeClass('makeVisible');
+        $('.jsHide').addClass("makeVisible");
     });
 }
 
 function showReview(venueNameFromLogin) {
-    $('#closeVenue').removeClass('venueVisible'); // Hide close venue button
+    $('#closeVenue').removeClass('makeVisible'); // Hide close venue button
     let venueName = $(this).attr("title");
     if (venueName === undefined) { // if 'this' is undefined, then got to this function via login
         venueName = venueNameFromLogin;
@@ -56,7 +56,7 @@ function showReview(venueNameFromLogin) {
     $('#reviewMarquee').html(venueName.toUpperCase());
     $('#reviewMarquee').attr("title", venueName); // store venue name in marquee
     if (!LOGGEDIN) {
-        $('.login').addClass('venueVisible');
+        $('.login').addClass('makeVisible');
     } else {
         $.getJSON('/reviews/check/' + USERNAME + '/' + venueName, function (res) {
             if (res.results == null || res.results == "null") {
@@ -80,17 +80,18 @@ function showReview(venueNameFromLogin) {
 
 function createNewUser(event) {
     event.preventDefault(); // otherwise page reloads when this function starts
-    $('.login').removeClass('venueVisible');
-    $('.newUser').addClass('venueVisible');
+    $('.login').removeClass('makeVisible');
+    $('.newUser').addClass('makeVisible');
 }
 
 //function rateVenue(listeningExperience, venueFeel, musicValue, musicQuality, foodValue, userReview) {
 function rateVenue(ratingsArray, userReview, reviewId) {
-    $('#leaveReview').addClass('venueVisible');
+    console.log("In rateVenue, initial value of reviewId:", reviewId);
+    $('#leaveReview').addClass('makeVisible');
     let oldColor = $("body").css("color"); /* target color gets changed when clicked, so get base color from body instead */
     let newColor = "#86034D";
     if (userReview === undefined) { // array is ONLY passed if user is logged in and has already left review for venue
-        console.log("MADE IT INTO RATINGSARRAY === UNDEFINED");
+        $("#deleteReview").html(""); // remove 'delete review' button if it exists
         userReview = ' ';
         ratingsArray = {
             listeningExperience: "0",
@@ -100,6 +101,9 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             foodQuality: "0",
             foodValue: "0"
         };
+    } else {
+        $("#skipReview").html("Cancel Changes");
+        $("#deleteReview").html("<button id='deleteReviewButton'>Delete Review</button>");
     }
     console.log("initial value of ratingsArray", ratingsArray);
     $("#userComments").val(userReview);
@@ -156,9 +160,38 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         ratingsArray.userReview = "";
         userReview = "";
         //        $("#userComments").html("");
-        $('#leaveReview').removeClass('venueVisible');
-        $('.jsHide').addClass("venueVisible");
-    }); // HAVE TO ADD FUNCTIONALITY TO RETURN STARS TO ORIGINAL COLOR AND CLEAR VALUES
+        $('#leaveReview').removeClass('makeVisible');
+        $('.jsHide').addClass("makeVisible");
+    });
+    $('#leaveReview').on('click', '#deleteReviewButton', function () {
+        $(".alertBoxContainer").addClass("visibleAlert");
+        $(".alertBox").addClass("visibleAlert");
+        $(".alertBox").html("<p>Are you sure you want to permanently delete your review?</p><br><button id='yes'>Delete Review</button><button id='no'>Don't Delete!</button>");
+        $(".alertBox").on('click', '#no', function () {
+            $(".alertBoxContainer").removeClass("makeVisible");
+            $(".alertBox").removeClass("makeVisible");
+        });
+        $(".alertBox").on('click', '#yes', function () {
+            //       reset all values in array before exiting
+            ratingsArray.listeningExperience = "0";
+            ratingsArray.foodQuality = "0";
+            ratingsArray.foodValue = "0";
+            ratingsArray.musicQuality = "0";
+            ratingsArray.musicValue = "0";
+            ratingsArray.userName = "";
+            ratingsArray.userReview = "";
+            userReview = "";
+            $(".alertBoxContainer").removeClass("visibleAlert");
+            $(".alertBox").removeClass("visibleAlert");
+            $('#leaveReview').removeClass('makeVisible');
+            $('.jsHide').addClass("makeVisible");
+            console.log("Delete button clicked, initial value of reviewId:", reviewId);
+            $.ajax({
+                method: 'DELETE',
+                url: '/delete/' + reviewId //*MARK*//
+            });
+        });
+    });
     $("#userReviews").on('click', '.star', function () {
         let categoryClicked = $(this).parent().attr("id");
         //        console.log(categoryClicked, "clicked");
@@ -211,7 +244,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
     });
     console.log("value of ratingsArray after click", ratingsArray);
     $(".commentButtons").on('click', '#submitReview', function () {
-        if (ratingsArray[listeningExperience] === "0" || ratingsArray[venueFeel] === "0" || ratingsArray[musicValue] === "0" || ratingsArray[musicQuality] === "0") {
+        if (ratingsArray.listeningExperience === "0" || ratingsArray.venueFeel === "0" || ratingsArray.musicValue === "0" || ratingsArray.musicQuality === "0") {
             alert("You can't leave any of the first four star fields blank!");
         } else {
             event.preventDefault();
@@ -246,7 +279,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                     console.log("new review posted:", result);
                     alert(`Thank you for reviewing ${venueName}, ${USERNAME}!`);
                     getOneVenue(ratingsArray.venueName);
-                    $('#leaveReview').removeClass('venueVisible');
+                    $('#leaveReview').removeClass('makeVisible');
                     //       reset all values in array before exiting
                     ratingsArray.listeningExperience = "0";
                     ratingsArray.foodQuality = "0";
@@ -404,8 +437,8 @@ $('#newUser').on('submit', function (event) {
                 $('input[name="userName"]').val(""); // clear the input fields
                 $('input[name="password"]').val("");
                 $('input[name="passwordConfirm"]').val("");
-                $('.newUser').removeClass('venueVisible');
-                $('.login').addClass('venueVisible');
+                $('.newUser').removeClass('makeVisible');
+                $('.login').addClass('makeVisible');
             })
             .fail(function (jqXHR, error, errorThrown) {
                 alert("Uh-oh, something went wrong! Try a different username.");
@@ -458,9 +491,9 @@ $('#login').on('click', '#loginClicked', function (event) {
                 alert(`Welcome, ${user}!  You're now logged in!`);
                 $('input[name="signinUserName"]').val("");
                 $('input[name="signinPassword"]').val("");
-                //                $('#closeVenue').addClass('venueVisible'); // Show close venue button
-                $('.login').removeClass('venueVisible');
-                //                $('#leaveReview').addClass('venueVisible');
+                //                $('#closeVenue').addClass('makeVisible'); // Show close venue button
+                $('.login').removeClass('makeVisible');
+                //                $('#leaveReview').addClass('makeVisible');
                 let venueName = $('#reviewMarquee').attr("title");
                 showReview(venueName);
             })
