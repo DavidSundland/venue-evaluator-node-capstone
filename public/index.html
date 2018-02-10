@@ -53,13 +53,6 @@
                     <h3>Your List</h3>
                 </div>
                 <div class="listBox" id="listBox">
-
-                    <p class="oneVenue"><a href="#" class="venueName">701 Restaurant</a> - <span class="address">701 Pennsylvania Ave. NW</span><br><span class="description"> 701 offers the warmth and charm of a private club and a picturesque setting, providing guests with a truly memorable dining experience....</span><button>More Info</button></p>
-                    <p class="oneVenue"><a href="#" class="venueName">9:30 Club</a> - <span class="address">815 V St. NW</span><br><span class="description">9:30 Club is a standing-only venue with a capacity of 1200 people. It is a state-of-the-art concert space which presents top-name rock, punk, hip-hop and country acts nightly....</span><button>More Info</button></p>
-                    <p class="oneVenue"><a href="#" class="venueName">Museum of American Art</a> - <span class="address">800 G St. NW</span><br><span class="description">The Smithsonian American Art Museum and National Portrait Gallery share the Nan Tucker McEvoy Auditorium, a 346-seat facility located on the building’s lower level, and the Kogod Courtyard, a covered space in the center of the building....</span><button>More Info</button></p>
-                    <p class="oneVenue"><a href="#" class="venueName">American University - Greenberg</a> - <span class="address">4200 Wisconsin Ave. NW</span><br><span class="description">American University operates the off-campus Greenberg Theatre, which principally showcases the university, but which also features guest artists on occasion....</span><button>More Info</button></p>
-                    <!-- *mark* -->
-
                 </div>
                 <div class="paddingAdder paBottom paLeft scrollbarExtender"></div>
 
@@ -202,10 +195,8 @@
                     <button id="loginClicked" type="submit">Submit</button>
                 </div>
             </form>
-            <div class="row">
-                <div class="col-6"><button id="cancelLogin">Cancel</button></div>
-                <div class="col-6"><button id="newUserButton">New User?</button></div>
-            </div>
+            <div class="row"><button id="cancelLogin">Cancel</button></div>
+            <div class="row"><button id="newUserButton">New User?</button></div>
         </div>
 
         <div class="reviewBox" id="leaveReview">
@@ -214,7 +205,7 @@
                     <p class="hideMe">HIDE ME</p>
                 </div>
                 <div>
-                    <p class="marqueeText">NOW REVIEWING:</p>
+                    <p class="marqueeText" id="nowReviewing">NOW REVIEWING:</p>
                 </div>
                 <div>
                     <p class="marqueeText" id="reviewMarquee"></p>
@@ -304,24 +295,26 @@
                 console.log("GET REVIEWS TRACKER: ", tracker);
                 if (res.results.length === 0) {
                     $('#reviews').append(`No one has left a review for ${venueName} yet!`);
+                    $("#reviewButton").html("Leave a Review!");
+                } else {
+                    $("#reviewButton").html("Leave or Edit a Review!");
                 }
                 for (let x = 0; x < res.results.length; x++) {
-                    console.log("# of review results: ", res.results.length);
                     $('#reviews').append(`
-<div class="oneReview">
-<p class="userName row">${res.results[x].userName}</p>
-<div class="row userRatings">
-<p class="col-6">Listening Experience: ${stars[Number(res.results[x].listeningExperience)]}</p>
-<p class="col-6">Venue Feel: ${stars[Number(res.results[x].venueFeel)]}</p>
-<p class="col-6">Music Value: ${stars[Number(res.results[x].musicValue)]}</p>
-<p class="col-6">Band Quality: ${stars[Number(res.results[x].musicQuality)]}</p>
-<p class="col-6">Food/Beverage Quality: ${stars[Number(res.results[x].foodQuality)]}</p>
-<p class="col-6">Food/Beverage Value: ${stars[Number(res.results[x].foodValue)]}</p>
-        </div>
-<p class="userReview row">${res.results[x].userReview}</p>
-        </div>
-<hr>
-`);
+                        <div class="oneReview">
+                            <p class="userName row">${res.results[x].userName}</p>
+                            <div class="row userRatings">
+                                <p class="col-6">Listening Experience: ${stars[Number(res.results[x].listeningExperience)]}</p>
+                                <p class="col-6">Venue Feel: ${stars[Number(res.results[x].venueFeel)]}</p>
+                                <p class="col-6">Music Value: ${stars[Number(res.results[x].musicValue)]}</p>
+                                <p class="col-6">Band Quality: ${stars[Number(res.results[x].musicQuality)]}</p>
+                                <p class="col-6">Food/Beverage Quality: ${stars[Number(res.results[x].foodQuality)]}</p>
+                                <p class="col-6">Food/Beverage Value: ${stars[Number(res.results[x].foodValue)]}</p>
+                            </div>
+                            <p class="userReview row">${res.results[x].userReview}</p>
+                        </div>
+                        <hr>
+                    `);
                 }
                 $('.jsHide').addClass("makeVisible");
             });

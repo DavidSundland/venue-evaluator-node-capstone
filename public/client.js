@@ -13,7 +13,6 @@ function searchNames() {
             venueNames[i].style.display = "";
         } else {
             venueNames[i].style.display = "none";
-
         }
     }
 }
@@ -107,8 +106,10 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             foodValue: "0"
         };
         $("#skipReview").html("Cancel Review");
+        $("#nowReviewing").html("NOW REVIEWING:");
     } else {
         $("#skipReview").html("Cancel Changes");
+        $("#nowReviewing").html("YOUR REVIEW FOR");
         $("#deleteReview").html("<button id='deleteReviewButton'>Delete Review</button>");
     }
     //    console.log("initial value of ratingsArray", ratingsArray);
@@ -327,8 +328,6 @@ function rateVenue(ratingsArray, userReview, reviewId) {
     });
 }
 
-
-
 function listenForFilters() {
     let venuetype = "all";
     let venuesize = "all";
@@ -352,12 +351,6 @@ function listenForFilters() {
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
-        //        console.log("type", venuetype, "size", venuesize, "free/tick", freeticketed, res);
-        //    });
-        //}
-        //  ORIGINALLY PULLED VENUES JUST ONCE AT STARTUP, WITHOUT FILTERS...  IF NOTHING BREAKS HERE, CAN GET RID OF /locations ENDPOINT
-        //function listVenues() {
-        //    $.getJSON('/locations', function (res) {
         $("#listBox").text(""); /* clear existing text, if any */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
@@ -376,7 +369,13 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
             } else {
                 description = res.results[x].description;
             }
-            $("#listBox").append(`<p class="oneVenue" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
+            let altClass
+            if (x % 2 === 0) {
+                altClass = "even"
+            } else {
+                altClass = "odd"
+            }
+            $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
             //        let venueId = "venue" + x;
             //        let storageName = "object" + x;
             //        let dataLoc = $(venueId)[0];
@@ -385,19 +384,13 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
     });
 }
 
+// note - this calls renderVenue, a function which is in the index.html page (due to needs with Google map)
 function getOneVenue(venueName) {
     $.getJSON('/locations/onevenue/' + venueName, function (res) {
-        console.log("About to renderVenue with:", res, res.results, res.results.website, res.results.streetaddress);
+        //        console.log("About to renderVenue with:", res, res.results, res.results.website, res.results.streetaddress);
         renderVenue(res.results.venuename, res.results.website, res.results.streetaddress, res.results.description, res.results.imageurl);
     });
 }
-//$(getReviews("701 Restaurant"));
-
-//
-//$(':radio').change(function () { // NEED TO ADAPT THIS TO ACTUALLY ASSIGN VALUES TO EACH RATING
-//    console.log('New star rating: ' + this.value);
-//});
-
 
 // Code to create new user:
 
@@ -448,7 +441,6 @@ $('#newUser').on('submit', function (event) {
             });
     };
 });
-
 
 // Code to log user in:
 
