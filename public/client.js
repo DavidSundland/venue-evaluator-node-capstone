@@ -45,6 +45,11 @@ function watchButtons() {
         $('.newUser').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });
+    //    $('body').on('click', '#skipReview', function () {
+    //        console.log("SKIPREVIEW BUTTON CLICKED");
+    //        $('#leaveReview').removeClass('makeVisible');
+    //        $('.jsHide').addClass("makeVisible");
+    //    });
 }
 
 function showReview(venueNameFromLogin) {
@@ -101,6 +106,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             foodQuality: "0",
             foodValue: "0"
         };
+        $("#skipReview").html("Cancel Review");
     } else {
         $("#skipReview").html("Cancel Changes");
         $("#deleteReview").html("<button id='deleteReviewButton'>Delete Review</button>");
@@ -148,7 +154,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             $(starId).find(".value5").css("color", oldColor);
         }
     });
-    $('#leaveReview').on('click', '#skipReview', function () {
+    $('body').on('click', '#skipReview', function () {
         //       reset all values in array before exiting
         event.preventDefault();
         ratingsArray.listeningExperience = "0";
@@ -163,10 +169,12 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         $('#leaveReview').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });
-    $('#leaveReview').unbind().on('click', '#deleteReviewButton', function () {
+    $('#leaveReview').unbind().on('click', '#deleteReviewButton', function () { // unbind added to prevent click from firing multiple times
         //        event.preventDefault();
         myBoolean("Are you sure you want to permanently delete your review?", "Delete Review", "Don't Delete!").then(function (res) {
-            if (res) {
+            console.log("result of query re: deleting review:", res);
+            //            let deleteTest = res;
+            if (res === "true") {
                 ratingsArray.listeningExperience = "0";
                 ratingsArray.foodQuality = "0";
                 ratingsArray.foodValue = "0";
@@ -187,6 +195,8 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                         //                        console.log("review deleted:", result);
                         myAlert(`Your review has been deleted.  Pity.`, 'oops');
                     });
+            } else {
+                console.log("delete averted!");
             }
         });
     });
@@ -241,7 +251,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         }
     });
     console.log("value of ratingsArray after click", ratingsArray);
-    $(".commentButtons").unbind().on('click', '#submitReview', function () {
+    $(".commentButtons").unbind().on('click', '#submitReview', function () { // unbind added to prevent click from firing multiple times
         event.preventDefault();
         if (ratingsArray.listeningExperience === "0" || ratingsArray.venueFeel === "0" || ratingsArray.musicValue === "0" || ratingsArray.musicQuality === "0") {
             myAlert("You can't leave any of the first four star fields blank!", "oops");
@@ -256,32 +266,63 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             ratingsArray.userReview = userReview;
             ratingsArray.venueName = venueName;
             ratingsArray.userName = USERNAME;
-            $.ajax({
-                    type: 'POST',
-                    url: '/new/create',
-                    dataType: 'json',
-                    data: JSON.stringify(ratingsArray),
-                    contentType: 'application/json'
-                })
-                .done(function (result) {
-                    console.log("new review posted:", result);
-                    getOneVenue(ratingsArray.venueName);
-                    $('#leaveReview').removeClass('makeVisible');
-                    ratingsArray.listeningExperience = "0";
-                    ratingsArray.foodQuality = "0";
-                    ratingsArray.foodValue = "0";
-                    ratingsArray.musicQuality = "0";
-                    ratingsArray.musicValue = "0";
-                    ratingsArray.userName = "";
-                    ratingsArray.userReview = "";
-                    userReview = "";
-                    myAlert(`Thank you for reviewing ${venueName}, ${USERNAME}!`, 'ok');
-                })
-                .fail(function (jqXHR, error, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(error);
-                    console.log(errorThrown);
-                });
+            if (reviewId === undefined) { // if no reviewId, then is a new review
+                $.ajax({
+                        type: 'POST',
+                        url: '/new/create',
+                        dataType: 'json',
+                        data: JSON.stringify(ratingsArray),
+                        contentType: 'application/json'
+                    })
+                    .done(function (result) {
+                        console.log("new review posted:", result);
+                        getOneVenue(ratingsArray.venueName);
+                        $('#leaveReview').removeClass('makeVisible');
+                        //reset values
+                        ratingsArray.listeningExperience = "0";
+                        ratingsArray.foodQuality = "0";
+                        ratingsArray.foodValue = "0";
+                        ratingsArray.musicQuality = "0";
+                        ratingsArray.musicValue = "0";
+                        ratingsArray.userName = "";
+                        ratingsArray.userReview = "";
+                        userReview = "";
+                        myAlert(`Thank you for reviewing ${venueName}, ${USERNAME}!`, 'ok');
+                    })
+                    .fail(function (jqXHR, error, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(error);
+                        console.log(errorThrown);
+                    });
+            } else {
+                $.ajax({
+                        type: 'PUT',
+                        url: '/review/update/' + reviewId,
+                        dataType: 'json',
+                        data: JSON.stringify(ratingsArray),
+                        contentType: 'application/json'
+                    })
+                    .done(function (result) {
+                        console.log(`Review ${reviewId} updated:`, result);
+                        getOneVenue(ratingsArray.venueName);
+                        $('#leaveReview').removeClass('makeVisible');
+                        // reset values
+                        ratingsArray.listeningExperience = "0";
+                        ratingsArray.foodQuality = "0";
+                        ratingsArray.foodValue = "0";
+                        ratingsArray.musicQuality = "0";
+                        ratingsArray.musicValue = "0";
+                        ratingsArray.userName = "";
+                        ratingsArray.userReview = "";
+                        userReview = "";
+                        myAlert(`You've updated your review for ${venueName}.  Well done, ${USERNAME}!`, 'ok');
+                    })
+                    .fail(function (jqXHR, error, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(error);
+                        console.log(errorThrown);
+                    });
+            }
         }
     });
 }

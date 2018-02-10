@@ -280,6 +280,7 @@ a {
 a:hover {
     color: #aee7f2;
     text-shadow: 0 0 1px white;
+    cursor: pointer;
 }
 
 button {

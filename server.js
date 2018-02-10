@@ -493,7 +493,6 @@ app.post('/new/create', (req, res) => {
     let foodQuality = req.body.foodQuality;
     let foodValue = req.body.foodValue;
     let userReview = req.body.userReview;
-
     Review.create({
         venueName,
         userName,
@@ -517,12 +516,34 @@ app.post('/new/create', (req, res) => {
     });
 });
 
+// PUT --------------------------------------
+// update a review by id
+app.put('/review/update/:id', function (req, res) {
+    let toUpdate = {};
+    let updateableFields = ['listeningExperience', 'foodQuality', 'foodValue', 'musicQuality', 'musicValue', 'userReview'];
+    updateableFields.forEach(function (field) {
+        if (field in req.body) {
+            toUpdate[field] = req.body[field];
+        }
+    });
+    Review
+        .findByIdAndUpdate(req.params.id, {
+            $set: toUpdate
+        }).exec().then(function (achievement) {
+            return res.status(204).end();
+        }).catch(function (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        });
+});
+
 
 // DELETE ----------------------------------------
-// deleting an achievement by id
+// delete a review by id
 app.delete('/delete/:id', function (req, res) {
     Review.findByIdAndRemove(req.params.id).exec().then(function () {
-        console.log("Review",req.params.id,"deleted");
+        console.log("Review", req.params.id, "deleted");
         return res.status(204).end();
     }).catch(function (err) {
         return res.status(500).json({
