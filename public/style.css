@@ -509,18 +509,17 @@ textarea {
 
 .alertBox {
     display: none;
-    /*    top: 50%;*/
-    /*    left: 50%;*/
-    /*    -ms-transform: translate(-50%, -50%);*/
-    /*    transform: translate(-50%, -50%);*/
-    /*    position: relative;*/
     position: fixed;
-    top: -25%;
-    /* Make sure that this still looks OK in Heroku edition ***********$$$$$$$%%%%%%%%%%%!!!!!!!!!! */
-    margin: 25%;
-    height: 50%;
+    /* center box in page */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     width: 50%;
+    height: 50%;
     background-color: black;
+    font-size: 1.5em;
     text-align: center;
     padding: 50px;
     z-index: 501;
@@ -531,6 +530,7 @@ textarea {
 
 .alertBox button {
     margin: 50px;
+    font-size: .8em;
 }
 
 footer {
@@ -629,6 +629,11 @@ form {
         margin-right: 20px;
         /* match margin-left */
     }
+    .alertBox {
+        font-size: 1.4em;
+        width: 55%;
+        height: 55%;
+    }
 }
 
 @media only screen and (max-width: 850px) {
@@ -644,6 +649,15 @@ form {
         margin-left: auto;
         width: 150px;
     }
+    .alertBox {
+        width: 60%;
+        height: 60%;
+        font-size: 1.3em;
+    }
+    #reviews {
+        margin-bottom: 120px;
+        /* to make sure closeVenue button doesn't block bottom of page */
+    }
 }
 
 @media only screen and (max-width: 750px) {
@@ -653,15 +667,26 @@ form {
 }
 
 @media only screen and (max-width: 640px) {
+    body {
+        font-size: 18px;
+    }
     footer {
         margin-right: -40px;
         margin-left: -40px;
         width: calc(100% + 80px);
     }
+    .alertBox {
+        width: 70%;
+        height: 70%;
+        font-size: 1.2em;
+    }
 }
 
 
 @media (max-width: 500px) {
+    body {
+        font-size: 16px;
+    }
     .curtainLeft,
     .curtainRight {
         display: none;
