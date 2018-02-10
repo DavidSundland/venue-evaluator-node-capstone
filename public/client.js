@@ -175,13 +175,18 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                 ratingsArray.userName = "";
                 ratingsArray.userReview = "";
                 userReview = "";
+                $('#leaveReview').removeClass('makeVisible');
+                getOneVenue($('#reviewMarquee').attr("title"));
+                //                $('.jsHide').addClass("makeVisible");
                 console.log("Delete button clicked, initial value of reviewId:", reviewId);
                 $.ajax({
-                    method: 'DELETE',
-                    url: '/delete/' + reviewId
-                });
-            } else {
-                console.log("Delete button clicked, but myBoolean returned", myBoo);
+                        method: 'DELETE',
+                        url: '/delete/' + reviewId
+                    })
+                    .done(function (result) {
+                        console.log("review deleted:", result);
+                        myAlert(`Your review has been deleted.  Pity.`, 'oops');
+                    });
             }
         });
     });
