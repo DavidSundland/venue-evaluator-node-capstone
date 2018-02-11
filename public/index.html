@@ -250,11 +250,6 @@
     <script>
         <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
 
-        //        function clickVenue() {
-        //            $('.listBox').on('click', 'button', viewVenue);
-        //        }
-
-
         function viewVenue() {
             let venueName = $(this).parent().find(".venueName")[0].innerHTML;
             let venueLink = $(this).parent().find("a")[0].href;
@@ -266,7 +261,6 @@
         }
 
         function renderVenue(venueName, venueLink, venueAddress, venueDescription, venuePic) {
-            console.log("first line of renderVenue");
             let stars = [
                 'Not rated.',
                 '<i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>',
@@ -345,15 +339,7 @@
                         position: coord,
                         map: map,
                         title: res.results[x].venuename
-                        //,                        extraInfo: {  // Not necessary?
-                        //                            "venueLink": res[x].website,
-                        //                            "venueAddress": res[x].streetaddress,
-                        //                            "venueDescription": res[x].description,
-                        //                            "venuePic": res[x].imageurl
-                        //                        }
                     }));
-                    //                markers[x].addListener('click', renderVenue($(this)[0].title, $(this)[0].extraInfo.venueLink, $(this)[0].extraInfo.venueAddress, $(this)[0].extraInfo.venueDescription, $(this)[0].extraInfo.venuePic));
-                    //                markers[x].addListener('click', renderVenue(testVenueList[x].Venue_Name, testVenueList[x].Website, testVenueList[x].Street_Address, testVenueList[x].Description + "Google Maps sent me", testVenueList[x].Image_URL));
                     markers[x].addListener('click', function() { /* Note - calling renderVenue directly (instead of w/ anon fn) caused renderVenue to be called w/o click */
                         console.log("Google map clicked");
                         renderVenue(res.results[x].venuename, res.results[x].website, res.results[x].streetaddress, res.results[x].description, res.results[x].imageurl);
