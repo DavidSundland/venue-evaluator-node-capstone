@@ -351,6 +351,7 @@ function listenForFilters() {
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
+        console.log(res);
         $("#listBox").text(""); /* clear existing text, if any */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
