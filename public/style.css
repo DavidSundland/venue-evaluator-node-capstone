@@ -542,7 +542,7 @@ footer {
     margin: 0;
     overflow: auto;
     margin-top: 60px;
-    z-index: 2;
+    z-index: 400;
 }
 
 footer a {
