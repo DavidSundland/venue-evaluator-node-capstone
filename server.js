@@ -102,8 +102,8 @@ app.post('/users/create', (req, res) => {
 
 // Login / sign a user in
 app.post('/signin', function (req, res) {
-    const user = req.body.username;
-    const pw = req.body.password;
+//    const user = req.body.username;
+//    const pw = req.body.password;
     User
         .findOne({
             username: req.body.username
