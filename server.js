@@ -217,11 +217,12 @@ app.get('/locations/onevenue/:venName', function (req, res) {
         });
 });
 
+// get reviews for requested venue
 app.get('/venuereviews/:venName', function (req, res) {
     const {
         venName
     } = req.params;
-    console.log("This is what I got for venName when retrieving reviews:", venName);
+//    console.log("This is what I got for venName when retrieving reviews:", venName);
     Review
         .find({
             venueName: venName
@@ -240,6 +241,7 @@ app.get('/venuereviews/:venName', function (req, res) {
         });
 });
 
+// get list of venues, based upon user-selected filters
 app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req, res) {
     let venuetype = req.params.venuetype;
     let venuesize = req.params.venuesize;
