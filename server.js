@@ -56,9 +56,6 @@ function closeServer() {
 }
 
 
-// log the http layer
-//app.use(morgan('common'));  // removed Morgan from dependencies due to NPM install issues (can "npm install --save morgan" if morgan needed)
-
 app.use(express.static('public'));
 
 // Create new user
@@ -136,20 +133,6 @@ app.post('/signin', function (req, res) {
         });
 });
 
-// get list of venues from db
-//app.get('/venues', (req, res) => {
-//    Venues
-//        .find()
-//        .then(results => {
-//            res.json(results.map(item => item.serialize()));
-//        })
-//        .catch(err => {
-//            console.error(err);
-//            res.status(500).json({
-//                error: 'something went terribly wrong'
-//            });
-//        });
-//});
 
 // retrieve all of the venues
 app.get('/locations', function (req, res) {
