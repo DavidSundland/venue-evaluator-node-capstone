@@ -19,7 +19,6 @@ function searchNames() {
 
 function clickClose() {
     $('#closeVenue').click(function () {
-        //        console.log('clicked');
         $('.jsHide').removeClass('makeVisible');
         $('.login').removeClass('makeVisible');
         $('.newUser').removeClass('makeVisible');
@@ -44,11 +43,6 @@ function watchButtons() {
         $('.newUser').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });
-    //    $('body').on('click', '#skipReview', function () {
-    //        console.log("SKIPREVIEW BUTTON CLICKED");
-    //        $('#leaveReview').removeClass('makeVisible');
-    //        $('.jsHide').addClass("makeVisible");
-    //    });
 }
 
 function showReview(venueNameFromLogin) {
@@ -77,9 +71,7 @@ function showReview(venueNameFromLogin) {
                 }, res.results.userReview, res.results._id);
             }
         });
-        //        console.log("REVIEW MARQUEE TITLE IS:  ", $('#reviewMarquee').attr("title"));
     }
-    /* NOTE - WHEN REVIEW SUBMITTED OR CANCELLED, NEED TO MAKE #CLOSEVENUE BUTTON VISIBLE AGAIN */
 }
 
 function createNewUser(event) {
@@ -88,7 +80,6 @@ function createNewUser(event) {
     $('.newUser').addClass('makeVisible');
 }
 
-//function rateVenue(listeningExperience, venueFeel, musicValue, musicQuality, foodValue, userReview) {
 function rateVenue(ratingsArray, userReview, reviewId) {
     //    console.log("In rateVenue, initial value of reviewId:", reviewId);
     $('#leaveReview').addClass('makeVisible');
@@ -112,9 +103,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         $("#nowReviewing").html("YOUR REVIEW FOR");
         $("#deleteReview").html("<button id='deleteReviewButton'>Delete Review</button>");
     }
-    //    console.log("initial value of ratingsArray", ratingsArray);
     $("#userComments").val(userReview);
-    // change the rating stars colors, as applicable
     Object.keys(ratingsArray).forEach(function (key) {
         let starId = "#" + key;
         if (ratingsArray[key] === "5") {
@@ -166,15 +155,12 @@ function rateVenue(ratingsArray, userReview, reviewId) {
         ratingsArray.userName = "";
         ratingsArray.userReview = "";
         userReview = "";
-        //        $("#userComments").html("");
         $('#leaveReview').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });
     $('#leaveReview').unbind().on('click', '#deleteReviewButton', function () { // unbind added to prevent click from firing multiple times
-        //        event.preventDefault();
         myBoolean("Are you sure you want to permanently delete your review?", "Delete Review", "Don't Delete!").then(function (res) {
             console.log("result of query re: deleting review:", res);
-            //            let deleteTest = res;
             if (res === "true") {
                 ratingsArray.listeningExperience = "0";
                 ratingsArray.foodQuality = "0";
@@ -186,8 +172,6 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                 userReview = "";
                 $('#leaveReview').removeClass('makeVisible');
                 getOneVenue($('#reviewMarquee').attr("title"));
-                //                $('.jsHide').addClass("makeVisible");
-                //                console.log("Delete button clicked, initial value of reviewId:", reviewId);
                 $.ajax({
                         method: 'DELETE',
                         url: '/delete/' + reviewId
@@ -377,10 +361,6 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
                 altClass = "odd"
             }
             $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
-            //        let venueId = "venue" + x;
-            //        let storageName = "object" + x;
-            //        let dataLoc = $(venueId)[0];
-            //        jQuery.data(dataLoc, storageName, testVenueList[x]);
         };
     });
 }
@@ -469,13 +449,6 @@ $('#login').on('click', '#loginClicked', function (event) {
                 contentType: 'application/json'
             })
             .done(function (result) {
-                // show the signout link in header as soon as user is signed in  DO I WANT TO HAVE THIS OPTION?
-                //            $('#js-signout-link').show();
-                //            if (newUserToggle === true) {
-                //                showAddPage();
-                //            } else {
-                //                showHomePage();
-                //            }
                 LOGGEDIN = true;
                 USERNAME = user;
                 myAlert(`Welcome, ${user}!  You're now logged in!`, "ok");
@@ -532,25 +505,8 @@ function myBoolean(sayThis, buttonOne, buttonTwo) {
     });
 }
 
-//function myBoolean(sayThis, buttonOne, buttonTwo) {
-//    $(".alertBoxContainer").addClass("visibleAlert");
-//    $(".alertBox").addClass("visibleAlert");
-//    $(".alertBox").html(`${sayThis}<br><button title='true'>${buttonOne}</button><button title='false'>${buttonTwo}</button>`);
-//    $(".alertBox").on('click', 'button', function () {
-//        event.preventDefault();
-//        $(".alertBoxContainer").removeClass("visibleAlert");
-//        $(".alertBox").removeClass("visibleAlert");
-//        $(".alertBox").html("");
-//        console.log($(this), $(this).attr("title"));
-//        return $(this).attr("title");
-//    });
-//}
-
-//$(clickVenue);
 $(clickClose);
 $(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
 $(watchButtons);
 $(listenForFilters);
-//$(rateVenue);
 $(raiseCurtain);
-//$(newCat);

@@ -1,7 +1,6 @@
 const User = require('./models/user');
 const Review = require('./models/reviews');
 const Location = require('./models/locations');
-const Cat = require('./models/cats')
 const bodyParser = require('body-parser');
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -102,8 +101,8 @@ app.post('/users/create', (req, res) => {
 
 // Login / sign a user in
 app.post('/signin', function (req, res) {
-//    const user = req.body.username;
-//    const pw = req.body.password;
+    //    const user = req.body.username;
+    //    const pw = req.body.password;
     User
         .findOne({
             username: req.body.username
@@ -222,7 +221,7 @@ app.get('/venuereviews/:venName', function (req, res) {
     const {
         venName
     } = req.params;
-//    console.log("This is what I got for venName when retrieving reviews:", venName);
+    //    console.log("This is what I got for venName when retrieving reviews:", venName);
     Review
         .find({
             venueName: venName
@@ -447,42 +446,6 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
             });
     }
 });
-
-
-app.get('/cats', function (req, res) {
-    Cat
-        .find()
-        .then(function (results) {
-            res.json({
-                results
-            });
-        })
-        .catch(function (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Internal server error'
-            });
-        });
-});
-
-//app.post('/new/create', (req, res) => {
-//    let name = req.body.name;
-//    let color = req.body.color;
-//    Cat.create({
-//        name,
-//        color
-//    }, (err, item) => {
-//        if (err) {
-//            return res.status(500).json({
-//                message: 'Infernal Server Error'
-//            });
-//        }
-//        if (item) {
-//            console.log(`Cat created:  ${name}, ${color}.`);
-//            return res.json(item);
-//        }
-//    });
-//});
 
 //create new review
 app.post('/new/create', (req, res) => {

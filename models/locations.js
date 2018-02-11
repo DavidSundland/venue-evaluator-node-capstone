@@ -76,23 +76,6 @@ const locationSchema = new mongoose.Schema({
         required: false
     }
 });
-//
-//venueSchema.methods.serialize = function () {
-//    return {
-//        Venue_Name_Long: this.Venue_Name_Long,
-//        Venue_Name: this.Venue_Name,
-//        Website: this.Website,
-//        Latitude: this.Latitude,
-//        Longitude: this.Longitude,
-//        Street_Address: this.Street_Address,
-//        Description: this.Description,
-//        Image_URL: this.Image_URL,
-//        Venue_Type: this["Venue Type"],
-//        Venue_Size: this["Venue Size"],
-//        Free: this["Free?"],
-//        Ticketed: this["Ticketed?"]
-//    };
-//};
 
 const Location = mongoose.model('Location', locationSchema);
 
