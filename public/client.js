@@ -341,7 +341,7 @@ function listenForFilters() {
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
         console.log(res);
-        $("#listBox").text("<span id='venueListTop'></span>"); /* clear existing text, if any, and add target for scrolltop function */
+        $("#listBox").html("<span id='venueListTop'></span>"); /* clear existing text, if any, and add target for scrolltop function */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
         }
