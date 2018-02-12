@@ -28,15 +28,20 @@ As a user, I want an overview about each venue that interests me so that I can d
 * Users can delete or edit reviews after they have been submitted.
 
 ## Working Prototye
-A live example of the project can be found at: https://venue-evaluator.herokuapp.com/
+A live example of the project can be found at: https://venue-evaluator.herokuapp.com/.
+
+
 Screenshot of landing page:
+
 ![landing page screenshot](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/landing-page-screenshot.jpg?raw=true)
 
 Screenshot of venue page:
-![venue page screenshot](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/review-page-screenshot.jpg?raw=true)
+
+![venue page screenshot](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/venue-page-screenshot.jpg?raw=true)
 
 Screenshot of page for posting a comment:
-![comment page screenshot](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/venue-page-screenshot.jpg?raw=true)
+
+![comment page screenshot](https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/review-page-screenshot.jpg?raw=true)
 
 ## Functionality
 This app's functionality includes:
