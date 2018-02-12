@@ -557,11 +557,11 @@ footer a {
 
 .right {
     float: right;
-    padding: 5px 7% 5px 20px;
+    padding: 5px 12% 5px 20px;
+    /* Need to be sure right margin clears right curtain so icons clickable */
     width: 49%;
     text-align: right;
 }
-
 
 form {
     width: 100%;
@@ -589,6 +589,10 @@ form {
     .curtainLeft,
     .curtainRight {
         max-width: 10%;
+    }
+    .right {
+        padding-right: 8%;
+        /* Need to be sure right margin clears right curtain so icons clickable */
     }
 }
 
@@ -668,11 +672,6 @@ form {
 @media only screen and (max-width: 640px) {
     body {
         font-size: 18px;
-    }
-    footer {
-        margin-right: -40px;
-        margin-left: -40px;
-        width: calc(100% + 80px);
     }
     .alertBox {
         width: 70%;

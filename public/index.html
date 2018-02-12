@@ -34,10 +34,10 @@
             </div>
         </header>
 
-        <img class="curtainLeft" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-left.png?raw=true">
-        <img class="curtainMain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-main.png?raw=true">
-        <img class="curtainRight" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-right.png?raw=true">
-        <img class="curtainTop" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-top.png?raw=true">
+        <img class="curtainLeft" alt="Left Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-left.png?raw=true">
+        <img class="curtainMain" alt="Main Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-main.png?raw=true">
+        <img class="curtainRight" alt="Right Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-right.png?raw=true">
+        <img class="curtainTop" alt="Top Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-top.png?raw=true">
 
         <div class="row resultsBox">
             <div class="col-12">
@@ -272,7 +272,7 @@
             $("#venueMarquee").html(venueName.toUpperCase());
             $("#venueInfo").html(`
             <div class="col-6">
-                <img src="${venuePic}" target="_blank">
+                <img src="${venuePic}" alt="Photo of ${venueName}" target="_blank">
                 <iframe width="80%" height="400px" frameborder="0" style="border:0; clear: both; margin:10px;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBdNRsY4zEYnRfcQ0_ZVVd370D7yuApzhI&amp;q=${venueName}, Washington, DC&amp;maptype=roadmap" allowfullscreen=""></iframe>
             </div>
             <div class="col-6">

@@ -13,9 +13,7 @@ const mongoose = require('mongoose');
 
 // requiring in the js files from this app
 const Venue = require('../models/locations');
-//console.log(Achievement);
 const User = require('../models/user');
-//console.log(User);
 const Review = require('../models/reviews')
 const {
     app,
@@ -104,8 +102,6 @@ function seedReviewData(testVenue) {
     for (let i = 1; i <= 5; i++) {
         seedData.push(makeReview(testVenue));
     }
-    // console.log(seedData);
-    // console.log(Achievement);
     // should return a promise
     return Review.insertMany(seedData);
 }
@@ -280,11 +276,11 @@ describe('Reviews API resource', function () {
         });
     });
 
-        afterEach(function () {
-    return tearDownDb();
-});
+    afterEach(function () {
+        return tearDownDb();
+    });
 
-after(function () {
-    return closeServer();
-});
+    after(function () {
+        return closeServer();
+    });
 });
