@@ -10,12 +10,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
-//const jsdom = require('jsdom');
-//var document = jsdom.jsdom("");
-//var window = document.defaultView;
-//
-//global.window = window
-//global.$ = require('jquery');
 
 // requiring in the js files from this app
 const Venue = require('../models/locations');
@@ -31,9 +25,10 @@ const {
 
 // import databases from ('../config');
 const {
+    DATABASE_URL,
     TEST_DATABASE_URL
 } = require('../config');
-console.log(TEST_DATABASE_URL);
+//console.log(TEST_DATABASE_URL);
 
 // chai
 const should = chai.should();
@@ -104,7 +99,7 @@ function makeReview(testVenue) {
 }
 
 function seedReviewData(testVenue) {
-    console.info('Seeding review data');
+    //    console.info('Seeding review data');
     const seedData = [];
     for (let i = 1; i <= 5; i++) {
         seedData.push(makeReview(testVenue));
@@ -117,63 +112,63 @@ function seedReviewData(testVenue) {
 
 const TESTVENUE = pickOneVenue(); // want to use same venue for all reviews
 
-//describe('Retrieve venues from static db with filters applied ', function () {
-//    before(function () {
-//        return runServer(DATABASE_URL)
-//            .then(console.log('running server for ACTUAL database'))
-//            .catch(err => console.log({
-//                err
-//            }));
-//    });
-//    describe('Retrieve operations', function () {
-//        it('should return an object of venues or a value of null', function (done) {
-//            const filters = generateFilters();
-//            const venuetype = filters[0];
-//            const venuesize = filters[1];
-//            const freeticketed = filters[2];
-//            chai.request(app)
-//                .get('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed)
-//                .end(function (err, res) {
-//                    res.should.have.status(200);
-//                    res.should.be.json;
-//                    done();
-//                });
-//        });
-//        after(function () {
-//            return closeServer();
-//        });
-//    });
-//});
-//
-//describe('Retrieve venues from static db with NO filters applied', function () {
-//
-//    before(function () {
-//        return runServer(DATABASE_URL)
-//            .then(console.log('running server for ACTUAL database'))
-//            .catch(err => console.log({
-//                err
-//            }));
-//    });
-//    describe('Retrieve operations', function () {
-//        it('should return an object of all venues with at least 80 results', function (done) {
-//            const venuetype = "all";
-//            const venuesize = "all";
-//            const freeticketed = "all";
-//            chai.request(app)
-//                .get('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed)
-//                .end(function (err, res) {
-//                    res.should.have.status(200);
-//                    res.should.be.json;
-//                    res.body.should.be.a('object');
-//                    res.body.results.should.have.length.of.at.least(80);
-//                    done();
-//                });
-//        });
-//        after(function () {
-//            return closeServer();
-//        });
-//    });
-//});
+describe('Retrieve venues from static db with filters applied ', function () {
+    before(function () {
+        return runServer(DATABASE_URL)
+            .then(console.log('running server for ACTUAL database'))
+            .catch(err => console.log({
+                err
+            }));
+    });
+    describe('Retrieve operations', function () {
+        it('should return an object of venues or a value of null', function (done) {
+            const filters = generateFilters();
+            const venuetype = filters[0];
+            const venuesize = filters[1];
+            const freeticketed = filters[2];
+            chai.request(app)
+                .get('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed)
+                .end(function (err, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    done();
+                });
+        });
+        after(function () {
+            return closeServer();
+        });
+    });
+});
+
+describe('Retrieve venues from static db with NO filters applied', function () {
+
+    before(function () {
+        return runServer(DATABASE_URL)
+            .then(console.log('running server for ACTUAL database'))
+            .catch(err => console.log({
+                err
+            }));
+    });
+    describe('Retrieve operations', function () {
+        it('should return an object of all venues with at least 80 results', function (done) {
+            const venuetype = "all";
+            const venuesize = "all";
+            const freeticketed = "all";
+            chai.request(app)
+                .get('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed)
+                .end(function (err, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.results.should.have.length.of.at.least(80);
+                    done();
+                });
+        });
+        after(function () {
+            return closeServer();
+        });
+    });
+});
 
 describe('Reviews API resource', function () {
 
@@ -221,7 +216,7 @@ describe('Reviews API resource', function () {
         it('should add a new review', function () {
             const newReview = makeReview();
             newReview.venueName = pickOneVenue();
-            console.log(newReview);
+            //            console.log(newReview);
 
             return chai.request(app)
                 .post('/new/create')
@@ -240,56 +235,76 @@ describe('Reviews API resource', function () {
         });
     });
 
-    //    describe('PUT endpoint', function() {
-    //        it('should update fields sent over', function() {
-    //            const updateData = {
-    //                achieveWhat: 'Picked a peck of pickled peppers',
-    //                achieveWhy: 'To fetch a pail of water'
-    //            };
-    //
-    //            return Achievement
-    //                .findOne()
-    //                .then(function(achievement) {
-    //                updateData.id = achievement.id;
-    //                return chai.request(app)
-    //                    .put(`/achievement/${achievement.id}`)
-    //                    .send(updateData);
-    //            })
-    //                .then(function(res) {
-    //                res.should.have.status(204);
-    //                return Achievement.findById(updateData.id);
-    //            })
-    //                .then(function(achievement) {
-    //                achievement.achieveWhat.should.equal(updateData.achieveWhat);
-    //                achievement.achieveWhy.should.equal(updateData.achieveWhy);
-    //            });
-    //        });
-    //    });
-    //
-    //    describe('DELETE endpoint', function() {
-    //        it('should delete an achievement by ID', function() {
-    //            let achievement;
-    //            return Achievement
-    //                .findOne()
-    //                .then(function(_achievement) {
-    //                achievement = _achievement;
-    //                return chai.request(app).delete(`/achievement/${achievement.id}`);
-    //            })
-    //                .then(function(res) {
-    //                res.should.have.status(204);
-    //                return Achievement.findById(achievement.id);
-    //            })
-    //                .then(function(_achievement) {
-    //                should.not.exist(_achievement);
-    //            });
-    //        });
-    //    });
-    //
-    //    afterEach(function () {
-    //        return tearDownDb();
-    //    });
-
-    after(function () {
-        return closeServer();
+    describe('DELETE endpoint', function () {
+        it('should delete a review by ID', function () {
+            let byeReview;
+            return Review
+                .findOne()
+                .then(function (_byeReview) {
+                    byeReview = _byeReview;
+                    return chai.request(app).delete(`/delete/${byeReview.id}`);
+                })
+                .then(function (res) {
+                    res.should.have.status(204);
+                    return Review.findById(byeReview.id);
+                })
+                .then(function (_byeReview) {
+                    should.not.exist(_byeReview);
+                });
+        });
     });
+
+    //     These tests worked fine.  HOWEVER, even though they did not delete the database, having the venues database accessible by the test.js caused the live DBs to be deleted.
+    //        describe('PUT endpoint', function() {
+    //            it('should update fields sent over', function() {
+    //                const updateData = {
+    //                    achieveWhat: 'Picked a peck of pickled peppers',
+    //                    achieveWhy: 'To fetch a pail of water'
+    //                };
+    //
+    //                return Achievement
+    //                    .findOne()
+    //                    .then(function(achievement) {
+    //                    updateData.id = achievement.id;
+    //                    return chai.request(app)
+    //                        .put(`/achievement/${achievement.id}`)
+    //                        .send(updateData);
+    //                })
+    //                    .then(function(res) {
+    //                    res.should.have.status(204);
+    //                    return Achievement.findById(updateData.id);
+    //                })
+    //                    .then(function(achievement) {
+    //                    achievement.achieveWhat.should.equal(updateData.achieveWhat);
+    //                    achievement.achieveWhy.should.equal(updateData.achieveWhy);
+    //                });
+    //            });
+    //        });
+    //
+    //        describe('DELETE endpoint', function() {
+    //            it('should delete an achievement by ID', function() {
+    //                let achievement;
+    //                return Achievement
+    //                    .findOne()
+    //                    .then(function(_achievement) {
+    //                    achievement = _achievement;
+    //                    return chai.request(app).delete(`/achievement/${achievement.id}`);
+    //                })
+    //                    .then(function(res) {
+    //                    res.should.have.status(204);
+    //                    return Achievement.findById(achievement.id);
+    //                })
+    //                    .then(function(_achievement) {
+    //                    should.not.exist(_achievement);
+    //                });
+    //            });
+    //        });
+
+//    afterEach(function () {
+            //        return tearDownDb();
+            //    });
+            //
+            //    after(function () {
+            //        return closeServer();
+            //    });
 });
