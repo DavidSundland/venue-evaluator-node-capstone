@@ -254,32 +254,31 @@ describe('Reviews API resource', function () {
         });
     });
 
-    //     These tests worked fine.  HOWEVER, even though they did not delete the database, having the venues database accessible by the test.js caused the live DBs to be deleted.
-    //        describe('PUT endpoint', function() {
-    //            it('should update fields sent over', function() {
-    //                const updateData = {
-    //                    achieveWhat: 'Picked a peck of pickled peppers',
-    //                    achieveWhy: 'To fetch a pail of water'
-    //                };
-    //
-    //                return Achievement
-    //                    .findOne()
-    //                    .then(function(achievement) {
-    //                    updateData.id = achievement.id;
-    //                    return chai.request(app)
-    //                        .put(`/achievement/${achievement.id}`)
-    //                        .send(updateData);
-    //                })
-    //                    .then(function(res) {
-    //                    res.should.have.status(204);
-    //                    return Achievement.findById(updateData.id);
-    //                })
-    //                    .then(function(achievement) {
-    //                    achievement.achieveWhat.should.equal(updateData.achieveWhat);
-    //                    achievement.achieveWhy.should.equal(updateData.achieveWhy);
-    //                });
-    //            });
-    //        });
+    describe('PUT endpoint', function () {
+        it('should update fields sent over', function () {
+            const updateData = {
+                userReview: 'The music was so fantastic that I wet my pants! (Just a little.)',
+                musicValue: '5'
+            };
+
+            return Review
+                .findOne()
+                .then(function (review) {
+                    updateData.id = review.id;
+                    return chai.request(app)
+                        .put(`/review/update/${review.id}`)
+                        .send(updateData);
+                })
+                .then(function (res) {
+                    res.should.have.status(204);
+                    return Review.findById(updateData.id);
+                })
+                .then(function (review) {
+                    review.userReview.should.equal(updateData.userReview);
+                    review.musicValue.should.equal(updateData.musicValue);
+                });
+        });
+    });
     //
     //        describe('DELETE endpoint', function() {
     //            it('should delete an achievement by ID', function() {
@@ -300,11 +299,11 @@ describe('Reviews API resource', function () {
     //            });
     //        });
 
-//    afterEach(function () {
-            //        return tearDownDb();
-            //    });
-            //
-            //    after(function () {
-            //        return closeServer();
-            //    });
+    //    afterEach(function () {
+    //        return tearDownDb();
+    //    });
+    //
+    //    after(function () {
+    //        return closeServer();
+    //    });
 });
