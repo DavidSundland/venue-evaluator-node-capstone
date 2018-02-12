@@ -2,18 +2,16 @@ let LOGGEDIN = false;
 let USERNAME = "";
 
 // narrows list of venues based upon typed name
-function searchNames() {
-    var input, venueList, venueNames, a, i;
-    input = document.getElementById("nameSearch").value.toUpperCase();
-    venueList = document.getElementById("listBox");
-    venueNames = venueList.getElementsByTagName("p");
-    for (i = 0; i < venueNames.length; i++) {
-        a = venueNames[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
-            venueNames[i].style.display = "";
-        } else {
-            venueNames[i].style.display = "none";
-        }
+var input, venueList, venueNames, a, i;
+input = document.getElementById("nameSearch").value.toUpperCase();
+venueList = document.getElementById("listBox");
+venueNames = venueList.getElementsByTagName("p");
+for (i = 0; i < venueNames.length; i++) {
+    a = venueNames[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
+        venueNames[i].style.display = "";
+    } else {
+        venueNames[i].style.display = "none";
     }
 }
 
@@ -365,7 +363,7 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
             } else {
                 altClass = "odd"
             }
-            $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
+            $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"><input type="hidden" class = "longName" value="${res.results[x].longvenuename}"></p>`);
         };
         $("#listBox").animate({ //scroll to top of list after list generated
             scrollTop: $('#venueListTop')
