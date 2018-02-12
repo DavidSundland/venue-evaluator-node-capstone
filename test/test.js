@@ -279,31 +279,12 @@ describe('Reviews API resource', function () {
                 });
         });
     });
-    //
-    //        describe('DELETE endpoint', function() {
-    //            it('should delete an achievement by ID', function() {
-    //                let achievement;
-    //                return Achievement
-    //                    .findOne()
-    //                    .then(function(_achievement) {
-    //                    achievement = _achievement;
-    //                    return chai.request(app).delete(`/achievement/${achievement.id}`);
-    //                })
-    //                    .then(function(res) {
-    //                    res.should.have.status(204);
-    //                    return Achievement.findById(achievement.id);
-    //                })
-    //                    .then(function(_achievement) {
-    //                    should.not.exist(_achievement);
-    //                });
-    //            });
-    //        });
 
-    //    afterEach(function () {
-    //        return tearDownDb();
-    //    });
-    //
-    //    after(function () {
-    //        return closeServer();
-    //    });
+        afterEach(function () {
+    return tearDownDb();
+});
+
+after(function () {
+    return closeServer();
+});
 });
