@@ -24,7 +24,7 @@
                 <!-- providing hidden text for spacing AND off-screen text that will be visible to screen readers -->
             </div>
             <div>
-                <p class="marqueeText">VENUE</p>
+                <p class="marqueeText" id="pageTop">VENUE</p>
             </div>
             <div>
                 <p class="marqueeText">E-VALUATOR</p>
@@ -50,6 +50,7 @@
             </div>
             <div class="col-7 listHolder">
                 <div class="paddingAdder paTop paLeft scrollbarExtender">
+                    <!-- Venue list is generated here -->
                     <h3>Your List</h3>
                 </div>
                 <div class="listBox" id="listBox">
@@ -59,6 +60,7 @@
             </div>
             <div class="col-5 mapBox">
                 <div class="paddingAdder paTop paRight">
+                    <!-- Map is created here -->
                     <h3>Your Map</h3>
                 </div>
                 <div id="map"></div>
@@ -347,11 +349,8 @@
                 }
             });
         }
-
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ&callback=initMap">
-
-
     </script>
 
     <!-- For getting lat & long from address -->

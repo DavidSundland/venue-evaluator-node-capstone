@@ -225,8 +225,6 @@ describe('Reviews API resource', function () {
                         'listeningExperience', 'venueFeel', 'musicValue', 'musicQuality', 'userName');
                     res.body.userName.should.equal(newReview.userName);
                     res.body.listeningExperience.should.equal(newReview.listeningExperience.toString());
-
-                    //                return Achievement.findById(res.body.id);
                 })
         });
     });

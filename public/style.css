@@ -551,7 +551,8 @@ footer a {
 
 .left {
     float: left;
-    padding: 5px 20px 5px 7%;
+    padding: 5px 20px 5px 12%;
+    /* Mirror image of .right */
     width: 49%;
 }
 
@@ -593,6 +594,10 @@ form {
     .right {
         padding-right: 8%;
         /* Need to be sure right margin clears right curtain so icons clickable */
+    }
+    .left {
+        padding-left: 8%;
+        /* match .right */
     }
 }
 

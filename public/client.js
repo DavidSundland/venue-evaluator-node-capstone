@@ -27,6 +27,7 @@ function clickClose() {
 }
 
 function raiseCurtain() {
+    window.location.hash = 'pageTop'; // jump to top of page on page load or reload
     $(".curtainMain").delay(1000).slideUp(3000);
 }
 
@@ -340,7 +341,7 @@ function listenForFilters() {
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
         console.log(res);
-        $("#listBox").text(""); /* clear existing text, if any */
+        $("#listBox").text("<span id='venueListTop'></span>"); /* clear existing text, if any, and add target for scrolltop function */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
         }
@@ -366,6 +367,9 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
             }
             $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"></p>`);
         };
+        $("#listBox").animate({ //scroll to top of list after list generated
+            scrollTop: $('#venueListTop')
+        });
     });
 }
 
@@ -508,6 +512,7 @@ function myBoolean(sayThis, buttonOne, buttonTwo) {
         });
     });
 }
+
 
 $(clickClose);
 $(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
