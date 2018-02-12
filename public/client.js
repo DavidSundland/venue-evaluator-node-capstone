@@ -35,11 +35,15 @@ function watchButtons() {
     $('.venueBox').on('click', '#reviewButton', showReview);
     $('.login').on('click', '#newUserButton', createNewUser);
     $('.login').on('click', '#cancelLogin', function () {
-        //        console.log("clicked");
+        $('input[name="signinUserName"]').val("");
+        $('input[name="signinPassword"]').val("");
         $('.login').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });
     $('.newUser').on('click', '#cancelNewUser', function () {
+        $('input[name="userName"]').val(""); // clear the input fields
+        $('input[name="password"]').val("");
+        $('input[name="passwordConfirm"]').val("");
         $('.newUser').removeClass('makeVisible');
         $('.jsHide').addClass("makeVisible");
     });

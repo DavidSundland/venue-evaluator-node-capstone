@@ -153,7 +153,6 @@ app.get('/locations', function (req, res) {
 
 // check to see if user has review for venue
 app.get('/reviews/check/:userName/:venueName', function (req, res) {
-    console.log("$$$$$$$$$$$$ IN GET TO CHECK FOR USER REVIEWS");
     let userName = req.params.userName;
     let venueName = req.params.venueName;
     Review
@@ -180,7 +179,6 @@ app.get('/locations/onevenue/:venName', function (req, res) {
     const {
         venName
     } = req.params;
-    console.log("This is what I got for venName:", venName);
     Location
         .findOne({
             venuename: venName
