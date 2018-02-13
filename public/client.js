@@ -2,16 +2,18 @@ let LOGGEDIN = false;
 let USERNAME = "";
 
 // narrows list of venues based upon typed name
-var input, venueList, venueNames, a, i;
-input = document.getElementById("nameSearch").value.toUpperCase();
-venueList = document.getElementById("listBox");
-venueNames = venueList.getElementsByTagName("p");
-for (i = 0; i < venueNames.length; i++) {
-    a = venueNames[i].getElementsByTagName("a")[0];
-    if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
-        venueNames[i].style.display = "";
-    } else {
-        venueNames[i].style.display = "none";
+function searchNames() {
+    var input, venueList, venueNames, a, i;
+    input = document.getElementById("nameSearch").value.toUpperCase();
+    venueList = document.getElementById("listBox");
+    venueNames = venueList.getElementsByTagName("p");
+    for (i = 0; i < venueNames.length; i++) {
+        a = venueNames[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
+            venueNames[i].style.display = "";
+        } else {
+            venueNames[i].style.display = "none";
+        }
     }
 }
 
