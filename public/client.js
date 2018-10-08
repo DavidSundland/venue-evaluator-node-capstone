@@ -3,19 +3,33 @@ let USERNAME = "";
 
 // narrows list of venues based upon typed name
 function searchNames() {
-    var input, venueList, venueNames, a, i;
-    input = document.getElementById("nameSearch").value.toUpperCase();
-    venueList = document.getElementById("listBox");
-    venueNames = venueList.getElementsByTagName("p");
-    for (i = 0; i < venueNames.length; i++) {
-        a = venueNames[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
-            venueNames[i].style.display = "";
+    let userSearch = $("#nameSearch").val().toUpperCase();
+    let venuePs = $("#listBox").find("p");
+    for (let venueP of venuePs) {
+        let a = venueP.getElementsByTagName("a")[0];
+        // looks at both "short" and "long" name (both "AU - Greenberg" and "American University - Greenberg Theater")
+        if ((a.innerHTML.toUpperCase().indexOf(userSearch) !== -1) || (a.title.toUpperCase().indexOf(userSearch) !== -1)) {
+            venueP.style.display = "";
         } else {
-            venueNames[i].style.display = "none";
+            venueP.style.display = "none";
         }
     }
 }
+
+//function searchNames() {
+//    var input, venueList, venueNames, a;
+//    input = document.getElementById("nameSearch").value.toUpperCase();
+//    venueList = document.getElementById("listBox");
+//    venueNames = venueList.getElementsByTagName("p");
+//    for (let i = 0; i < venueNames.length; i++) {
+//        a = venueNames[i].getElementsByTagName("a")[0];
+//        if (a.innerHTML.toUpperCase().indexOf(input) > -1) {
+//            venueNames[i].style.display = "";
+//        } else {
+//            venueNames[i].style.display = "none";
+//        }
+//    }
+//}
 
 function clickClose() {
     $('#closeVenue').click(function () {
@@ -236,7 +250,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             $(this).parent().find(".value5").css("color", oldColor);
         }
     });
-//    console.log("value of ratingsArray after click", ratingsArray);
+    //    console.log("value of ratingsArray after click", ratingsArray);
     $(".commentButtons").unbind().on('click', '#submitReview', function () { // unbind added to prevent click from firing multiple times
         event.preventDefault();
         if (ratingsArray.listeningExperience === "0" || ratingsArray.venueFeel === "0" || ratingsArray.musicValue === "0" || ratingsArray.musicQuality === "0") {
@@ -358,7 +372,7 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
             } else {
                 altClass = "odd"
             }
-            $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"><input type="hidden" class = "longName" value="${res.results[x].longvenuename}"></p>`);
+            $("#listBox").append(`<p class="oneVenue ${altClass}" id="${res.results[x].venuename}"><a href="${res.results[x].website}" class="venueName" title="${res.results[x].longvenuename}">${res.results[x].venuename}</a> - <span class="address">${res.results[x].streetaddress}</span><br><span class="description">${description}</span><button>More Info</button><input type="hidden" class = "picUrl" value="${res.results[x].imageurl}"><input type="hidden" class = "fullDesc" value="${res.results[x].description}"><input type="hidden" class = "longName" value="${res.results[x].longvenuename}"></p>`);
         };
         $("#listBox").animate({ //scroll to top of list after list generated
             scrollTop: $('#venueListTop')
