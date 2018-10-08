@@ -161,7 +161,7 @@ app.get('/reviews/check/:userName/:venueName', function (req, res) {
             userName: userName
         })
         .then(function (results) {
-            console.log("In get one review, results: ", results);
+//            console.log("In get one review, results: ", results);
             res.json({
                 results
             });
@@ -202,13 +202,11 @@ app.get('/venuereviews/:venName', function (req, res) {
     const {
         venName
     } = req.params;
-    //    console.log("This is what I got for venName when retrieving reviews:", venName);
     Review
         .find({
             venueName: venName
         })
         .then(function (results) {
-            //            console.log("RESULTS FROM QUERYING REVIEWS:", results);
             res.json({
                 results
             });

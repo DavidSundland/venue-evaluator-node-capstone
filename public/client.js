@@ -165,7 +165,6 @@ function rateVenue(ratingsArray, userReview, reviewId) {
     });
     $('#leaveReview').unbind().on('click', '#deleteReviewButton', function () { // unbind added to prevent click from firing multiple times
         myBoolean("Are you sure you want to permanently delete your review?", "Delete Review", "Don't Delete!").then(function (res) {
-            console.log("result of query re: deleting review:", res);
             if (res === "true") {
                 ratingsArray.listeningExperience = "0";
                 ratingsArray.foodQuality = "0";
@@ -182,7 +181,6 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                         url: '/delete/' + reviewId
                     })
                     .done(function (result) {
-                        //                        console.log("review deleted:", result);
                         myAlert(`Your review has been deleted.  Pity.`, 'oops');
                     });
             } else {
@@ -192,9 +190,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
     });
     $("#userReviews").on('click', '.star', function () {
         let categoryClicked = $(this).parent().attr("id");
-        //        console.log(categoryClicked, "clicked");
         let ratingClicked = $(this).attr("value");
-        //        console.log(ratingClicked);
         if (categoryClicked === "listeningExperience") {
             ratingsArray.listeningExperience = ratingClicked;
         } else if (categoryClicked === "venueFeel") {
@@ -240,14 +236,13 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             $(this).parent().find(".value5").css("color", oldColor);
         }
     });
-    console.log("value of ratingsArray after click", ratingsArray);
+//    console.log("value of ratingsArray after click", ratingsArray);
     $(".commentButtons").unbind().on('click', '#submitReview', function () { // unbind added to prevent click from firing multiple times
         event.preventDefault();
         if (ratingsArray.listeningExperience === "0" || ratingsArray.venueFeel === "0" || ratingsArray.musicValue === "0" || ratingsArray.musicQuality === "0") {
             myAlert("You can't leave any of the first four star fields blank!", "oops");
         } else {
             event.preventDefault();
-            //            console.log("The array that is gonna be sent: ", ratingsArray);
             let venueName = $('#reviewMarquee').attr("title");
             userReview = $("#userComments").val().trim();
             if (userReview.length === 0) {
@@ -340,13 +335,11 @@ function listenForFilters() {
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
     $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
-        console.log(res);
         $("#listBox").html("<span id='venueListTop'></span>"); /* clear existing text, if any, and add target for scrolltop function */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
         }
         for (x = 0; x < res.results.length; x++) {
-            //            console.log("in for/let, key =", key);
             res.results[x].description.replace(/\s+/g, ' '); /* eliminate extra spaces, if any */
             let wordList = res.results[x].description.split(" ");
             let maxWords = 30;
@@ -376,7 +369,6 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
 // note - this calls renderVenue, a function which is in the index.html page (due to needs with Google map)
 function getOneVenue(venueName) {
     $.getJSON('/locations/onevenue/' + venueName, function (res) {
-        //        console.log("About to renderVenue with:", res, res.results, res.results.website, res.results.streetaddress);
         renderVenue(res.results.venuename, res.results.website, res.results.streetaddress, res.results.description, res.results.imageurl);
     });
 }
