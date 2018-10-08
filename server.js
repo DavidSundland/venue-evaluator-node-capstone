@@ -429,52 +429,26 @@ app.get('/venues/partiallist/:venuetype/:venuesize/:freeticketed', function (req
 });
 
 //create new review
-//app.post('/new/create', (req, res) => {
-//    let venueName = req.body.venueName;
-//    let userName = req.body.userName;
-//    let listeningExperience = req.body.listeningExperience;
-//    let venueFeel = req.body.venueFeel;
-//    let musicValue = req.body.musicValue;
-//    let musicQuality = req.body.musicQuality;
-//    let foodQuality = req.body.foodQuality;
-//    let foodValue = req.body.foodValue;
-//    let userReview = req.body.userReview;
-//    Review.create({
-//        venueName,
-//        userName,
-//        listeningExperience,
-//        venueFeel,
-//        musicValue,
-//        musicQuality,
-//        foodQuality,
-//        foodValue,
-//        userReview
-//    }, (err, item) => {
-//        if (err) {
-//            return res.status(500).json({
-//                message: 'Infernal Server Error'
-//            });
-//        }
-//        if (item) {
-//            console.log(`Review for ${venueName} by ${userName} added.`);
-//            return res.json(item);
-//        }
-//    });
-//});
-
-
 app.post('/new/create', (req, res) => {
-    //    let venueName = req.body.venueName;
-    //    let userName = req.body.userName;
-    //    let listeningExperience = req.body.listeningExperience;
-    //    let venueFeel = req.body.venueFeel;
-    //    let musicValue = req.body.musicValue;
-    //    let musicQuality = req.body.musicQuality;
-    //    let foodQuality = req.body.foodQuality;
-    //    let foodValue = req.body.foodValue;
-    //    let userReview = req.body.userReview;
+    let venueName = req.body.venueName;
+    let userName = req.body.userName;
+    let listeningExperience = req.body.listeningExperience;
+    let venueFeel = req.body.venueFeel;
+    let musicValue = req.body.musicValue;
+    let musicQuality = req.body.musicQuality;
+    let foodQuality = req.body.foodQuality;
+    let foodValue = req.body.foodValue;
+    let userReview = req.body.userReview;
     Review.create({
-        ...req.body
+        venueName,
+        userName,
+        listeningExperience,
+        venueFeel,
+        musicValue,
+        musicQuality,
+        foodQuality,
+        foodValue,
+        userReview
     }, (err, item) => {
         if (err) {
             return res.status(500).json({
@@ -487,6 +461,7 @@ app.post('/new/create', (req, res) => {
         }
     });
 });
+
 
 // PUT --------------------------------------
 // update a review by id
