@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Venue e-Valautor</title>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Kanit|Montserrat|Open+Sans:600|Quicksand|Raleway|Roboto:700" rel="stylesheet">
-
-        <link href="https://fonts.googleapis.com/css?family=Anton|Arimo|Dhurjati|Fira+Mono|Nova+Mono|Overpass+Mono:300,400|PT+Sans" rel="stylesheet">
-
-        <link rel="icon" href="http://www.districtconcerts.com/wp-content/uploads/2015/09/Favicon_1.png" type="image/png">
-        <link rel="stylesheet" type="text/css" href="grid.css" />
-        <link rel="stylesheet" type="text/css" href="style.css " />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-
-    <body>
         <main role="main">
-            <header role="banner" id="pageTop">
-                <div>
-                    <p class="hideMe">HIDE ME</p>
-                    <h1 class="offScreen">Venue e-Valuator</h1>
-                    <!-- providing hidden text for spacing AND off-screen text that will be visible to screen readers -->
-                </div>
-                <div>
-                    <p class="marqueeText">VENUE</p>
-                </div>
-                <div>
-                    <p class="marqueeText">E-VALUATOR</p>
-                </div>
-                <div>
-                    <p class="hideMe">HIDE ME</p>
-                </div>
-            </header>
-
-            <img class="curtainLeft" alt="Left Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-left.png?raw=true">
-            <img class="curtainMain" alt="Main Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-main.png?raw=true">
-            <img class="curtainRight" alt="Right Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-right.png?raw=true">
-            <img class="curtainTop" alt="Top Curtain" src="https://github.com/DavidSundland/venue-evaluator-node-capstone/blob/master/public/images/curtain-top.png?raw=true">
 
             <div class="row resultsBox">
                 <div class="col-12">
@@ -250,7 +212,6 @@
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
         <script>
-            <!-- These functions added here to ensure they load before Google Maps function tries to call them.  -->
 
                 function viewVenue() {
                 let venueName = $(this).parent().find(".venueName")[0].innerHTML;
@@ -356,13 +317,10 @@
         <!-- For getting lat & long from address -->
         <script type="text/javascript " src="https://maps.google.com/maps/api/js?key=AIzaSyAa9jFz1GClkj8pW9ytY6tB70hVFj1RGYQ"></script>
         <script src="client.js "></script>
-    </body>
-
-</html>
 
 
 
-<!-- BEGINNING OF IMPORTED JAVASCRIPT TO BE INCLUDED WITHIN SCRIPT TAGS -->
+<script>
 
 
 
@@ -893,3 +851,5 @@ $(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
 $(watchButtons);
 $(listenForFilters);
 $(raiseCurtain);
+
+</script>
