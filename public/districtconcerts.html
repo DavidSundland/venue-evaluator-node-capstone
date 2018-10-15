@@ -1,3 +1,824 @@
+<style>
+    /* Color palette - http://paletton.com/#uid=6000u0ksSpBj5vWo2t5vakUDbfR */
+
+    /* -------------------------------------
+    CSS reset
+    Is a short set of CSS rules that resets the styling of all HTML elements to a consistent baseline so the website will look the same on all browsers
+    */
+
+    * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        /*The box-sizing property is used to tell the browser what the sizing properties (width and height) should include border-box.*/
+        box-sizing: border-box;
+        /*reset Chrome user agent styles*/
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-before: 0px;
+        -webkit-padding-after: 0px;
+        -webkit-padding-start: 0px;
+        -webkit-padding-end: 0px;
+        /*reset Firefox user agent styles*/
+        -moz-margin-before: 0px;
+        -moz-margin-after: 0px;
+        -moz-margin-start: 0px;
+        -moz-margin-end: 0px;
+        -moz-padding-before: 0px;
+        -moz-padding-after: 0px;
+        -moz-padding-start: 0px;
+        -moz-padding-end: 0px;
+        /*reset Internet Explorer user agent styles*/
+        -ms-margin-before: 0px;
+        -ms-margin-after: 0px;
+        -ms-margin-start: 0px;
+        -ms-margin-end: 0px;
+        -ms-padding-before: 0px;
+        -ms-padding-after: 0px;
+        -ms-padding-start: 0px;
+        -ms-padding-end: 0px;
+        /*reset Opera user agent styles*/
+        -o-margin-before: 0px;
+        -o-margin-after: 0px;
+        -o-margin-start: 0px;
+        -o-margin-end: 0px;
+        -o-padding-before: 0px;
+        -o-padding-after: 0px;
+        -o-padding-start: 0px;
+        -o-padding-end: 0px;
+    }
+
+    body {
+        /*    margin: 140px 6% 0 6%;*/
+        width: 100%;
+        font-size: 22px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+        background-color: #202020;
+        color: #bdbaba;
+        height: 100%;
+    }
+
+    .curtainMain {
+        z-index: 600;
+        width: 100%;
+        height: 105%;
+        position: fixed;
+        top: 0;
+    }
+
+    .curtainRight {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        z-index: 601;
+        max-width: 15%
+    }
+
+    .curtainLeft {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: 601;
+        max-width: 15%
+    }
+
+    .curtainTop {
+        /* HIDE ON NARROW SCREENS? */
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 60px;
+        z-index: 602;
+    }
+
+    header {
+        width: 100%;
+        margin-top: 20px;
+        left: 0;
+        z-index: 2;
+    }
+
+    header div,
+    .venueHeader div {
+        padding: 0;
+        margin: 0;
+        margin-left: -20%;
+        /* want to go full width behind curtains */
+        text-align: center;
+        border: 1px black solid;
+        background-color: white;
+        width: 140%;
+        line-height: 38px;
+    }
+
+    h1,
+    .marqueeText,
+    .hideMe {
+        font-family: 'Overpass Mono', monospace;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 300;
+        color: black;
+        margin: 4px 0 -5px 0;
+    }
+
+    .hideMe {
+        visibility: hidden;
+    }
+
+    .offScreen {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        color: #E83A3A;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .searchBox,
+    .resultsBox {
+        border: 7px dotted #fed9ba;
+        /* creates solid lines inside & outside of dotted border */
+        box-shadow: inset 0 -1px 0 0 #FE6767, inset 0 1px 0 0 #FE6767, 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767, inset 1px 0 0 0 #FE6767, inset -1px 0 0 0 #FE6767, 1px 0 0 0 #FE6767, -1px 0 0 0 #FE6767;
+        margin: 70px 12%;
+        width: 76%;
+    }
+
+    .commentButtons {
+        margin-top: 20px;
+    }
+
+    .sorter {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .selectCenterer {
+        text-align: center;
+        display: block;
+        margin: 0 auto 50px auto;
+    }
+
+    .selectCenterer select {
+        width: 70%;
+        font-size: .8em;
+        padding: 3px;
+    }
+
+    .searchBox h3 {
+        text-align: center;
+        color: #FEAB67;
+        padding-bottom: 20px;
+    }
+
+    .searchDescriptions {
+        padding: 0 30px 30px 30px;
+        font-size: .85em;
+    }
+
+    .searchDescriptionTitle {
+        color: #FEAB67;
+    }
+
+    .searchDescriptions p {
+        padding-top: 20px;
+    }
+
+    .textBlock {
+        padding: 20px;
+    }
+
+    .venueLimiter {
+        text-align: center;
+        padding: 30px;
+        font-size: 1.2em;
+    }
+
+    #nameSearch {
+        width: 90%;
+        font-size: .7em;
+    }
+
+    .listHolder,
+    .mapBox {
+        border-top: 7px dotted #fed9ba;
+        /* creates solid lines inside & outside of dotted border */
+        box-shadow: inset 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767;
+        padding: 0;
+    }
+
+    .paddingAdder {
+        height: 60px;
+        background-color: #161616;
+    }
+
+    .paLeft {
+        border-left: 1px solid #FE6767;
+    }
+
+    .paRight {
+        border-right: 1px solid #FE6767;
+    }
+
+    .paTop {
+        border-top: 1px solid #FE6767;
+    }
+
+    .paBottom {
+        border-bottom: 1px solid #FE6767;
+    }
+
+    .paddingAdder h3 {
+        padding: 10px 30px;
+        color: #FE6767;
+        font-size: 1.2em;
+    }
+
+    .scrollbarExtender {
+        border-right: 16px #f1f1f1 solid;
+    }
+
+    .listBox {
+        /*    margin-top: 30px;*/
+        /*    margin-bottom: 30px;*/
+        height: 400px;
+        overflow-y: scroll;
+        padding: 30px 16px;
+        /*    border-top: 1px solid #FE6767;*/
+    }
+
+    .listBox p {
+        /*
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 20px;
+        */
+        padding: 10px 20px;
+    }
+
+    .even {
+        background-color: #191919;
+        border-radius: 8px;
+        box-shadow: 2px 2px #333333;
+        /* #242424;*/
+    }
+
+    .odd {
+        margin-top: 2px;
+        background-color: #202020;
+    }
+
+    .address {
+        color: #FEAB67;
+    }
+
+    #map {
+        height: 400px;
+        width: 94%;
+        margin: 0 3%;
+    }
+
+    a {
+        text-decoration: none;
+        color: #5CB2C2;
+    }
+
+    a:hover {
+        color: #aee7f2;
+        text-shadow: 0 0 1px white;
+        cursor: pointer;
+    }
+
+    button {
+        cursor: pointer;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 20px;
+        color: white;
+        background-color: #006500;
+        font-size: .9em;
+        box-shadow: 1px 1px white;
+    }
+
+
+    input {
+        width: 50%;
+        box-shadow: px 2px 2px black inset;
+        /* ADJUST COLOR ONCE COLOR PALATTE FINALIZED */
+        height: 35px;
+        margin: 5px 5% 10px 5%;
+        padding-left: 10px;
+    }
+
+    .listBox button {
+        font-size: .8em;
+        padding: 5px 8px;
+        border-radius: 10px;
+        margin-left: 30px;
+    }
+
+    button:hover {
+        text-shadow: 0 0 1px white;
+        background-color: #038503;
+    }
+
+    #reviewButton {
+        margin-bottom: 30px;
+    }
+
+    .jsHide,
+    .reviewBox,
+    .newUser,
+    .login {
+        display: none;
+    }
+
+    #closeVenue {
+        position: fixed;
+        top: 40px;
+        right: 40px;
+        z-index: 701;
+    }
+
+    .star {
+        cursor: pointer;
+    }
+
+    .star:hover {
+        text-shadow: 0 0 1px white;
+    }
+
+    .venueBox,
+    .reviewBox,
+    .newUser,
+    .login {
+        width: 100%;
+        height: 100%;
+        padding: 20px 5%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: auto;
+        background-color: black;
+    }
+
+    .venueBox,
+    .newUser,
+    .login {
+        z-index: 101;
+    }
+
+    .login form,
+    .newUser form {
+        padding-top: 60px;
+    }
+
+    .newUser form div {
+        margin-bottom: 20px;
+    }
+
+    .loginLabel {
+        text-align: right;
+        padding-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .loginInput {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .login input {
+        margin-left: 20px;
+        text-align: left;
+    }
+
+    .login button {
+        margin: 10px;
+    }
+
+    .venueInfo {
+        margin-top: 50px;
+    }
+
+    .venueInfo img {
+        width: 80%;
+        border-radius: 20px;
+    }
+
+    .venueInfo iframe {
+        border-radius: 20px;
+    }
+
+    .venueNameHeader {
+        font-size: 2.2em;
+    }
+
+    .venueNameHeader a {
+        color: #CC1414;
+    }
+
+    hr {
+        border: #A70404 solid 1px;
+        /*    width: 90%;*/
+    }
+
+    .venueAddress {
+        font-size: 1.3em;
+        color: #FE6767;
+        text-align: left;
+        padding: 0 40px 0 20px;
+    }
+
+    .venueDescription {
+        text-align: left;
+        line-height: 2;
+        padding: 20px;
+    }
+
+    .userName {
+        color: #CC5297;
+        font-size: 1.3em;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .userRatings p {
+        padding: 0 20px;
+        margin: 0;
+        color: #FEAB67;
+    }
+
+    .userReview {
+        text-align: left;
+        padding: 25px 6%;
+    }
+
+    #userReviews p {
+        margin: 10px;
+    }
+
+    #userReviews p:first-child {
+        margin-top: 30px;
+    }
+
+    .reviewBox {
+        z-index: 201;
+        position: fixed;
+    }
+
+    .userRatings form {
+        margin-top: 20px;
+    }
+
+    .commentBox {
+        margin-bottom: 30px;
+    }
+
+    textarea {
+        width: 50%;
+        height: 150px;
+        margin-top: 30px;
+    }
+
+    .alertBoxContainer {
+        display: none;
+        top: 0;
+        height: 100%;
+        margin: 0%;
+        width: 100%;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 500;
+    }
+
+    .alertBox {
+        display: none;
+        position: fixed;
+        /* center box in page */
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 50%;
+        height: 50%;
+        background-color: black;
+        font-size: 1.5em;
+        text-align: center;
+        padding: 50px;
+        z-index: 501;
+        border: 7px dotted #fed9ba;
+        /* creates solid lines inside & outside of dotted border */
+        box-shadow: inset 0 -1px 0 0 #FE6767, inset 0 1px 0 0 #FE6767, 0 1px 0 0 #FE6767, 0 -1px 0 0 #FE6767, inset 1px 0 0 0 #FE6767, inset -1px 0 0 0 #FE6767, 1px 0 0 0 #FE6767, -1px 0 0 0 #FE6767;
+    }
+
+    .alertBox button {
+        margin: 50px;
+        font-size: .8em;
+    }
+
+    footer {
+        /*    position: fixed;*/
+        background-color: #100200;
+        /*    border-top: 10px inset #830e02;*/
+        padding: 10px 0;
+        width: 100%;
+        margin: 0;
+        overflow: auto;
+        margin-top: 60px;
+        z-index: 400;
+    }
+
+    footer a {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .left {
+        float: left;
+        padding: 5px 20px 5px 12%;
+        /* Mirror image of .right */
+        width: 49%;
+    }
+
+    .right {
+        float: right;
+        padding: 5px 12% 5px 20px;
+        /* Need to be sure right margin clears right curtain so icons clickable */
+        width: 49%;
+        text-align: right;
+    }
+
+    form {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .makeVisible {
+        visibility: visible;
+        display: inline-block;
+        /*    z-index: 100;*/
+        text-align: center;
+    }
+
+    .visibleAlert {
+        visibility: visible;
+        display: block;
+    }
+
+    @media only screen and (max-width: 1300px) {
+        #map {
+            width: 100%;
+            margin: 0;
+        }
+        .curtainLeft,
+        .curtainRight {
+            max-width: 10%;
+        }
+        .right {
+            padding-right: 8%;
+            /* Need to be sure right margin clears right curtain so icons clickable */
+        }
+        .left {
+            padding-left: 8%;
+            /* match .right */
+        }
+    }
+
+    /* Goes from multi-column to single column at 1150 px */
+
+    @media only screen and (max-width: 1150px) {
+        .paRight {
+            border-left: 1px solid #FE6767;
+        }
+        #map {
+            width: 92%;
+            margin: 4%;
+        }
+        .paddingAdder:not(.paLeft) {
+            background-color: #202020;
+        }
+        .venueLimiter {
+            padding-top: 0;
+        }
+        .textBlock {
+            padding-bottom: 50px;
+        }
+        .venueAddress {
+            padding: 20px 5%;
+        }
+        .venueDescription {
+            padding: 20px 5%;
+        }
+        .loginLabel {
+            text-align: center;
+            padding-right: 0;
+        }
+        .loginInput {
+            text-align: center;
+        }
+        .login input {
+            margin-right: 20px;
+            /* match margin-left */
+        }
+        .alertBox {
+            font-size: 1.4em;
+            width: 55%;
+            height: 55%;
+        }
+    }
+
+    @media only screen and (max-width: 850px) {
+        body {
+            font-size: 20px;
+        }
+        #closeVenue {
+            top: auto;
+            bottom: 40px;
+            right: 0;
+            left: 0;
+            margin-right: auto;
+            margin-left: auto;
+            width: 150px;
+        }
+        .alertBox {
+            width: 60%;
+            height: 60%;
+            font-size: 1.3em;
+        }
+        #reviews {
+            margin-bottom: 120px;
+            /* to make sure closeVenue button doesn't block bottom of page */
+        }
+    }
+
+    @media only screen and (max-width: 750px) {
+        body {
+            line-height: 1.3;
+        }
+    }
+
+    @media only screen and (max-width: 640px) {
+        body {
+            font-size: 18px;
+        }
+        .alertBox {
+            width: 70%;
+            height: 70%;
+            font-size: 1.2em;
+        }
+    }
+
+
+    @media (max-width: 500px) {
+        body {
+            font-size: 16px;
+        }
+        .curtainLeft,
+        .curtainRight {
+            display: none;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Clearfix */
+
+    .row::before,
+    .row::after {
+        display: table;
+        content: '';
+    }
+
+    .row::after {
+        clear: both;
+    }
+
+    .col-1-no-mobile,
+    .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-5-plus,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-12 {
+        float: left;
+
+        /* Gutters:
+        * Each column is padded by half-a-gutter on each side,
+        *
+        * Half a gutter is 10px, 10/960 (context) = 1.041666%
+        *
+        */
+        padding-left: 1.04166666%;
+        padding-right: 1.04166666%;
+    }
+
+    /* Mobile defaults */
+
+    .col-1-no-mobile .col-2,
+    .col-3,
+    .col-4,
+    .col-5,
+    .col-5-plus,
+    .col-6,
+    .col-7,
+    .col-8,
+    .col-12 {
+        width: 100%;
+    }
+
+    .col-1-no-mobile {
+        display: none;
+    }
+
+
+    /* Non-mobile, grid */
+
+    @media only screen and (min-width: 1150px) {  /* Normally 640px */
+        .col-1-no-mobile {
+            display: inline-block;
+            width: 8.33%;
+        }
+        .col-2 {
+            width: 16.66%;
+        }
+        /* 3 columns, 3/12 in % */
+        .col-3 {
+            width: 25%;
+        }
+
+        /* 4 columns */
+        .col-4 {
+            width: 33.33%;
+        }
+
+        /* 5 columns */
+        .col-5 {
+            width: 41.67%;
+        }
+        /* 5.5 columns */
+        .col-5-plus {
+            display: inline-block;
+            width: 45.83%;
+        }
+        /* 6 columns */
+        .col-6 {
+            width: 50%;
+        }
+
+        /* 7 columns */
+        .col-7 {
+            width: 58.33%;
+        }
+
+        /* 8 columns */
+        .col-8 {
+            width: 66.67%;
+        }
+
+        /* 12 columns */
+        .col-12 {
+            width: 100%;
+        }
+    }
+
+
+</style>
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kanit|Montserrat|Open+Sans:600|Quicksand|Raleway|Roboto:700" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Anton|Arimo|Dhurjati|Fira+Mono|Nova+Mono|Overpass+Mono:300,400|PT+Sans" rel="stylesheet">
+
+
+
 
         <main role="main">
 
@@ -247,7 +1068,7 @@
             </div>`);
                 $('#reviews').html(`<h2>Reviews</h2>`);
                 let tracker = 0;
-                $.getJSON('/venuereviews/' + venueName, function(res) {
+                $.getJSON('https://venue-evaluator.herokuapp.com/venuereviews/' + venueName, function(res) {
                     tracker++;
                     console.log("GET REVIEWS TRACKER: ", tracker);
                     if (res.results.length === 0) {
@@ -283,7 +1104,7 @@
                     venuesize = "all";
                     freeticketed = "all";
                 }
-                $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function(res) {
+                $.getJSON('https://venue-evaluator.herokuapp.com/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function(res) {
                     var mapCenter = {
                         lat: 38.9222375,
                         lng: -77.0093275
@@ -366,13 +1187,9 @@ function clickClose() {
     });
 }
 
-function raiseCurtain() {
-    window.location.hash = 'pageTop'; // jump to top of page on page load or reload
-    $(".curtainMain").delay(1000).slideUp(3000);
-}
 
 function watchButtons() {
-    $('.listBox').on('click', 'button', viewVenue); /* Note - viewVenue function is in index.html */
+    $('.listBox').on('click', 'button', viewVenue);
     $('.venueBox').on('click', '#reviewButton', showReview);
     $('.login').on('click', '#newUserButton', createNewUser);
     $('.login').on('click', '#cancelLogin', function () {
@@ -401,7 +1218,7 @@ function showReview(venueNameFromLogin) {
     if (!LOGGEDIN) {
         $('.login').addClass('makeVisible');
     } else {
-        $.getJSON('/reviews/check/' + USERNAME + '/' + venueName, function (res) {
+        $.getJSON('https://venue-evaluator.herokuapp.com/reviews/check/' + USERNAME + '/' + venueName, function (res) {
             if (res.results == null || res.results == "null") {
                 rateVenue();
             } else {
@@ -518,7 +1335,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
                 getOneVenue($('#reviewMarquee').attr("title"));
                 $.ajax({
                         method: 'DELETE',
-                        url: '/delete/' + reviewId
+                    url: 'https://venue-evaluator.herokuapp.com/delete/' + reviewId
                     })
                     .done(function (result) {
                         myAlert(`Your review has been deleted.  Pity.`, 'oops');
@@ -594,7 +1411,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             if (reviewId === undefined) { // if no reviewId, then is a new review
                 $.ajax({
                         type: 'POST',
-                        url: '/new/create',
+                    url: 'https://venue-evaluator.herokuapp.com/new/create',
                         dataType: 'json',
                         data: JSON.stringify(ratingsArray),
                         contentType: 'application/json'
@@ -622,7 +1439,7 @@ function rateVenue(ratingsArray, userReview, reviewId) {
             } else {
                 $.ajax({
                         type: 'PUT',
-                        url: '/review/update/' + reviewId,
+                    url: 'https://venue-evaluator.herokuapp.com/review/update/' + reviewId,
                         dataType: 'json',
                         data: JSON.stringify(ratingsArray),
                         contentType: 'application/json'
@@ -674,7 +1491,7 @@ function listenForFilters() {
 }
 
 function getSomeVenues(venuetype, venuesize, freeticketed) {
-    $.getJSON('/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
+    $.getJSON('https://venue-evaluator.herokuapp.com/venues/partiallist/' + venuetype + '/' + venuesize + '/' + freeticketed, function (res) {
         $("#listBox").html("<span id='venueListTop'></span>"); /* clear existing text, if any, and add target for scrolltop function */
         if (res.results.length === 0) {
             $("#listBox").append(`<p>No results found!  You'll need to modify your preferences.</p>`);
@@ -708,7 +1525,7 @@ function getSomeVenues(venuetype, venuesize, freeticketed) {
 
 // note - this calls renderVenue, a function which is in the index.html page (due to needs with Google map)
 function getOneVenue(venueName) {
-    $.getJSON('/locations/onevenue/' + venueName, function (res) {
+    $.getJSON('https://venue-evaluator.herokuapp.com/locations/onevenue/' + venueName, function (res) {
         renderVenue(res.results.venuename, res.results.website, res.results.streetaddress, res.results.description, res.results.imageurl);
     });
 }
@@ -737,7 +1554,7 @@ $('#newUser').on('submit', function (event) {
         // AJAX call to send form data up to server/DB and create new user
         $.ajax({
                 type: 'POST',
-                url: '/users/create',
+            url: 'https://venue-evaluator.herokuapp.com/users/create',
                 dataType: 'json',
                 data: JSON.stringify(newUserObject),
                 contentType: 'application/json'
@@ -783,7 +1600,7 @@ $('#login').on('click', '#loginClicked', function (event) {
         user = inputUname;
         $.ajax({
                 type: "POST",
-                url: "/signin",
+            url: "https://venue-evaluator.herokuapp.com/signin",
                 dataType: 'json',
                 data: JSON.stringify(unamePwObject),
                 contentType: 'application/json'
@@ -850,6 +1667,5 @@ $(clickClose);
 $(getSomeVenues("all", "all", "all")); // seed the venue list with no filters
 $(watchButtons);
 $(listenForFilters);
-$(raiseCurtain);
 
 </script>
